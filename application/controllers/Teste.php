@@ -80,7 +80,7 @@ class Teste extends CI_Controller {
 		
 	}
 	
-	public function buscarTodosAlunos ($qtd = 100){
+	public function Alunos ($qtd = 100){
 	
 		#carregar uma model do tipo Aluno
 		$this->load->model('aluno');
@@ -101,6 +101,8 @@ class Teste extends CI_Controller {
 		$model = new Professor();
 		var_dump($model);
 		$model->teste();
+		echo json_encode($model->get_all());
+		
 	}
 	
 	public function areainteresse (){
@@ -110,8 +112,9 @@ class Teste extends CI_Controller {
 		
 		#criar um objeto do tipo Professor
 		$model = new AreaInteresse();
-		var_dump($model);
 		$model->teste();
+		echo json_encode($model->get_all());
+		
 	}
 	
 	public function rest(){
@@ -120,8 +123,6 @@ class Teste extends CI_Controller {
 		
 		#carregar um objeto do tipo Aluno
 		$model = new Aluno();
-		
-		
 		echo json_encode($model->get_all());
 	}
 }
