@@ -3,22 +3,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Teste extends CI_Controller {
 
-	
-	
-	function __construct()
-	{	
-	
+	function __construct(){		
 		parent::__construct();
-		
-     	
-			
 	}
+	
 	public function index()
 	{
+		#Passar um array de objetos para a view
 		$data = array();
 		$arrayName = array('TEste 1','TEste 3','TEste 2');
 		$data['aluno'] = 'Thiago';
-		$data['arrayName'] =$arrayName;  
+		$data['arrayName'] = $arrayName;  
 		$this->load->view('view_teste',$data);
 	}
 	public function home()
@@ -37,14 +32,85 @@ class Teste extends CI_Controller {
 	
 	public function aluno (){
 	
-		$this->load->model('aluno','novo_aluno');
+		#carregar uma model do tipo Aluno
+		$this->load->model('aluno');
 		
-		$novo_aluno->nome = "Novo nome";
-		$novo_aluno->endereco = "Rua de tal";
-		$novo_aluno->nome->id = 90;
-		$novo_aluno->insert();
+		#carregar um objeto do tipo Aluno
+		$model = new Aluno();
+		var_dump($model);
+		$model->teste();
+	}
+	
+	public function inserirAluno (){
+	
+		#carregar uma model do tipo Aluno
+		$this->load->model('aluno');
+		
+		#carregar um objeto do tipo Aluno
+		$model = new Aluno();
+		
+		$model->id = 1;
+		$model->nome = "Thiago";
+		$model->email = "thiago.duarte@outlook.com";
+		$model->insert();
+		
+		$model = new Aluno();
+		$model->id = 2;
+		$model->nome = "João";
+		$model->email = "joao@outlook.com";
+		$model->insert();
+		
+		$model = new Aluno();
+		$model->id = 3;
+		$model->nome = "Jose";
+		$model->email = "jose@outlook.com";
+		$model->insert();
 		
 	}
 	
-
+	public function buscarAluno ($id){
+	
+		#carregar uma model do tipo Aluno
+		$this->load->model('aluno');
+		
+		#carregar um objeto do tipo Aluno
+		$model = new Aluno();
+		$model = (object) $model->get_by_id($id); 
+		var_dump(json_encode($model));
+		
+	}
+	
+	public function buscarTodosAlunos ($qtd = 100){
+	
+		#carregar uma model do tipo Aluno
+		$this->load->model('aluno');
+		
+		#carregar um objeto do tipo Aluno
+		$model = new Aluno();
+		$model = (object) $model->get_all($qtd); 
+		var_dump(json_encode($model));
+		
+	}
+		
+	public function professor (){
+	
+		#Importar uma model do tipo Professor
+		$this->load->model('professor');
+		
+		#criar um objeto do tipo Professor
+		$model = new Professor();
+		var_dump($model);
+		$model->teste();
+	}
+	
+	public function areainteresse (){
+	
+		#Importar uma model do tipo Professor
+		$this->load->model('areainteresse');
+		
+		#criar um objeto do tipo Professor
+		$model = new AreaInteresse();
+		var_dump($model);
+		$model->teste();
+	}
 }

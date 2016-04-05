@@ -1,17 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-#classe padrão
+#classe padrão para a modelagem de dados
 #$autoload['model'] = array('my_model');
 
 class My_Model extends CI_Model {
 	
 	public $id = 0;
-	private $tabela = "";
+	private $tabela = ""; 
   	
 	public function __construct(){
-	   	
 	   	parent::__construct();
-	   	
 	}
 	
 	public function set_tabela($tabela){
@@ -41,7 +39,7 @@ class My_Model extends CI_Model {
 		if (count($result) > 0 ) {
 			return $result[0];
 		}else {
-			return new Usuario();
+			return null();
 		}				
 	}
 			
@@ -74,5 +72,9 @@ class My_Model extends CI_Model {
 	
 	public function conectarDB(){
 		return $this->load->database();
+	}
+	
+	public function teste(){
+		echo "Model ".get_class($this)." esta funcionando !!";
 	}	
 }
