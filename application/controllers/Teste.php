@@ -113,4 +113,15 @@ class Teste extends CI_Controller {
 		var_dump($model);
 		$model->teste();
 	}
+	
+	public function rest(){
+		#carregar uma model do tipo Aluno
+		$this->load->model('aluno');
+		
+		#carregar um objeto do tipo Aluno
+		$model = new Aluno();
+		
+		
+		echo json_encode($model->get_all());
+	}
 }
