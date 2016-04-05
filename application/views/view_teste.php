@@ -13,6 +13,7 @@
 <body>
 <div id="page-wrapper" style="min-height: 616px;">
 <h1>Exemplos de componentes bootstrap</h1>
+<hr>
 <div class="row">
             <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-default">
