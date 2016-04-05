@@ -68,7 +68,7 @@ class Teste extends CI_Controller {
 		
 	}
 	
-	public function buscarAluno ($id){
+	public function buscarAluno ($id = 0){
 	
 		#carregar uma model do tipo Aluno
 		$this->load->model('aluno');
