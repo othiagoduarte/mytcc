@@ -33,6 +33,5 @@ class Professor extends My_Model {
     public function __construct(){
 	   	parent::__construct();
            $this->set_tabela(get_class($this));        
-    }
-    
+    }    
 }

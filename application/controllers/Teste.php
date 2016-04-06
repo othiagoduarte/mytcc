@@ -125,4 +125,15 @@ class Teste extends CI_Controller {
 		$model = new Aluno();
 		echo json_encode($model->get_all());
 	}
+	
+	public function Projeto(){
+		
+		#carregar uma model do tipo Aluno
+		$this->load->model('projeto');
+		
+		#carregar um objeto do tipo Aluno
+		$model = new Projeto();
+		echo json_encode($model->get_all());
+		
+	}
 }
