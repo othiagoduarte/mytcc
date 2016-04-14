@@ -1,3 +1,29 @@
+-- Limpar banco
+
+ALTER TABLE ProfessorAreaInteresse DROP FOREIGN KEY FK_ProfessorAreaInteresse_0;
+ALTER TABLE ProfessorAreaInteresse DROP FOREIGN KEY FK_ProfessorAreaInteresse_1;
+
+ALTER TABLE Projeto DROP FOREIGN KEY FK_Projeto_0;
+ALTER TABLE Projeto DROP FOREIGN KEY FK_Projeto_1;
+ALTER TABLE Projeto DROP FOREIGN KEY FK_Projeto_2;
+
+ALTER TABLE Orientacao DROP FOREIGN KEY FK_Orientacao_0;
+
+DROP TABLE Aluno;
+
+DROP TABLE AreaInteresse;
+
+DROP TABLE Professor;
+
+DROP TABLE ProfessorAreaInteresse;
+
+DROP TABLE Projeto;
+
+DROP TABLE Orientacao;
+
+
+-- Criar banco
+
 CREATE TABLE Aluno (
  id INT NOT NULL AUTO_INCREMENT,
  nome VARCHAR(50) NOT NULL,
@@ -58,6 +84,7 @@ CREATE TABLE Projeto (
  idAreaInteresse INT NOT NULL,
  turno VARCHAR(10) NOT NULL,
  motivoRecusa VARCHAR(500),
+ mensagem VARCHAR(500),
  status VARCHAR(10),
  PRIMARY KEY (id)
 );
