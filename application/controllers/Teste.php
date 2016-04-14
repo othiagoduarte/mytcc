@@ -18,7 +18,13 @@ class Teste extends CI_Controller {
 	}
 	public function home()
 	{
-		echo "View Home";
+		//echo "View Home";
+		$data = array();
+		$arrayName = array('TEste 1','TEste 3','TEste 2');
+		$data['aluno'] = 'Thiago';
+		$data['arrayName'] = $arrayName;  
+		$this->load->view('view_teste',$data);
+		
 	}
 	public function sobre()
 	{
@@ -52,6 +58,7 @@ class Teste extends CI_Controller {
 		$model->id = 1;
 		$model->nome = "Thiago";
 		$model->email = "thiago.duarte@outlook.com";
+		$model->validar();
 		$model->insert();
 		
 		$model = new Aluno();
@@ -136,4 +143,61 @@ class Teste extends CI_Controller {
 		echo json_encode($model->get_all());
 		
 	}
+	
+	public function testeview($id = 0){
+		
+		#carregar uma model do tipo Aluno
+		$this->load->model('aluno');
+		
+		#carregar um objeto do tipo Aluno
+		$bd = new Aluno();
+		
+		$model = (object) $bd->get_by_id($id); 
+		
+		$data = array();
+		
+		$data['msg'] = "Ola ".$model->nome;
+		$data['teste'] = "Tela de login - teste";
+		$data['email'] = $model->email;
+		$this->load->view('teste', $data );	
+	
+	}
+	
+	public function inserirAlunoteste(){
+		
+		$this->load->model('aluno');
+		
+		$novo_aluno = new Aluno();
+		$novo_aluno->nome = "João da silva";
+		$novo_aluno->email = "joao@provedor";
+		$novo_aluno->matricula = 12345679;
+		$novo_aluno->insert();
+		 
+	}
+	public function alterarAlunoteste(){
+		
+		$this->load->model('aluno');
+		
+		$novo_aluno = new Aluno();
+		$novo_aluno->id = 8;
+		$novo_aluno->nome = "Maria da Silva";
+		$novo_aluno->email = "maria@provedor";
+		$novo_aluno->matricula = 12345679;
+		$novo_aluno->update();
+		 
+	}
+	
+	public function login(){
+		
+		var_dump( $this->input->get());
+		
+	}
+	
+	public function prototipo(){
+		
+		$this->load->view('prototipo');
+		
+	}
+	
+	
 }

@@ -17,7 +17,7 @@ class Alunos_model extends CI_Model
 	
 	function remover($id)
 	{
-		$this->db->where('idAluno', $id);
+		$this->db->where('id', $id);
 		$this->db->delete('aluno');
 	}
 }

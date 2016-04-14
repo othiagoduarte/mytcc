@@ -24,10 +24,11 @@ class Aluno extends My_Model {
     public $cidade = "";
     public $estado = "";
     public $bairro = "";
-    
+        
     public function __construct(){
 	   	parent::__construct();
            $this->set_tabela(get_class($this));        
     }
+    
     
 }

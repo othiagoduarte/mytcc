@@ -33,7 +33,7 @@ class Aluno extends CI_Controller {
 		// retira o objeto do formado json
 		$request  =json_decode($postData);
 		// chama o metodo inserir da model aluno p/ inserir os dados no banco
-		$this->model->inserir($request);	
+		$this->model->inserir($request);
 	}
 	
 	public function deletaAluno()

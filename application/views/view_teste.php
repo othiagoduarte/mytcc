@@ -1,22 +1,4 @@
-<html>
-<head>
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="<?php echo base_url("assets/css/bootstrap.min.css")?>">
-	<link rel="stylesheet" href="<?php echo base_url("assets/css/bootstrap-theme.min.css") ?>">
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="<?php echo base_url("assets/js/jquery-2.2.3.min.js") ?>"></script>
-	<script src="<?php echo base_url("assets/js/bootstrap.min.js") ?>"></script>
-	<!-- Carrega o codigo do angular pra buscar os dados -->	
-	<script src="<?php echo base_url("assets/js/angular.min.js") ?>"></script>
-	<!-- Carrega o controlador do angularJS -->
-	<script src="<?php echo base_url("assets/js/alunoCtrl.js") ?>"></script>
-	
-	<title>MyTCC first feature</title>
-</head>
-<body ng-app="myApp" ng-controller="alunosCtrl">
-
-	<?php include('application/views/view_header.php'); ?>
-	
+<div ng-app="myApp" ng-controller="alunosCtrl">
 	<h3>Testando a comunicação entre AngularJS e PHP</h3> <hr>
 	<h4>Lista de alunos cadastrados no banco MYSQL</h4>		
 
@@ -31,12 +13,13 @@
 						<th>Endereço</th>
 						<th>Cidade</th>
 						<th>Estado</th>
-						<th>Bairro</th>						
+						<th>Bairro</th>	
+						<th></th>						
 					</tr>
 				</thead>
 				
 				<tbody ng-repeat="aluno in alunos">
-					<td>{{ aluno.idAluno }}</td>
+					<td>{{ aluno.id }}</td>
 					<td>{{ aluno.nome }}</td>
 					<td>{{ aluno.matricula }}</td>
 					<td>{{ aluno.email }}</td>
@@ -80,5 +63,4 @@
 				<input type="submit" class="btn btn-primary" value="Inserir o Aluno"/> 
 			</div>
 	</form>
-</body>
-</html>
+</div>
