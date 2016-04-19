@@ -3,7 +3,7 @@ app.controller('alunosCtrl', function($scope, $http)
 {	
 	console.log("acessando controlador alunosCtrl...");
 	
-	var url = "http://localhost:8080/mytcc/index.php/aluno/";
+	var url = "http://localhost:8080/mytcc/index.php/alunos/";
 			
 	$http.get(url+"listaAlunos")
     .success(function (data, status, header, config) 

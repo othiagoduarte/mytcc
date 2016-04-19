@@ -1,11 +1,26 @@
 <div ng-app="myApp" ng-controller="alunosCtrl">
-	<h3>Testando a comunicação entre AngularJS e PHP</h3> <hr>
-	<h4>Lista de alunos cadastrados no banco MYSQL</h4>		
-
+	<div class="row">
+		<div class="col-md-8">
+			<h3>Testando a comunicação entre AngularJS e PHP</h3> <hr>
+			<h4>Lista de alunos cadastrados no banco MYSQL</h4>	
+		</div>
+		<div class="col-md-4">
+			<div class="input-group custom-search-form ">
+			
+			<input type="text" class="form-control" placeholder="Search..." ng-model="filtro">
+			<span class="input-group-btn">
+				<button class="btn btn-default" type="button">
+					<i class="fa fa-search"></i>
+				</button>
+			</span>
+		</div>
+		</div>
+	</div>	
+	<br>
 			<table class="table table-striped table-bordered">						
 				<thead>
 					<tr>
-						<th>Id</th>
+						<th>#</th>
 						<th>Nome</th>
 						<th>Matrícula</th>
 						<th>Email</th>
@@ -18,7 +33,7 @@
 					</tr>
 				</thead>
 				
-				<tbody ng-repeat="aluno in alunos">
+				<tbody ng-repeat="aluno in alunos | filter : filtro">
 					<td>{{ aluno.id }}</td>
 					<td>{{ aluno.nome }}</td>
 					<td>{{ aluno.matricula }}</td>

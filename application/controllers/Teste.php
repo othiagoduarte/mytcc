@@ -9,13 +9,9 @@ class Teste extends CI_Controller {
 	
 	public function index()
 	{
-		#Passar um array de objetos para a view
-		$data = array();
-		$arrayName = array('TEste 1','TEste 3','TEste 2');
-		$data['aluno'] = 'Thiago';
-		$data['arrayName'] = $arrayName;  
-		$this->load->view('view_teste',$data);
+		$this->load->view('prototipo');
 	}
+	
 	public function home()
 	{
 		//echo "View Home";

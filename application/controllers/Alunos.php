@@ -2,28 +2,23 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Aluno extends CI_Controller {
+class Alunos extends CI_Controller {
 	
 	function __construct() 
 	{
 		parent::__construct();
 		
-		$this->load->model('Alunos_model', 'model', TRUE);
+		$this->load->model('aluno', 'model', TRUE);
 	}
 	
 	function index()
 	{
-
+		echo "View de cadastro de alunos";
 	}
 	
 	public function listaAlunos ()
 	{		
-		$data = $this->model->listar();
-		
-		$out = array_values($data);
-		
-		$out = json_encode($out);
-		echo ($out);
+		echo json_encode($this->model->get_all());
 	}
 	
 	public function insereAluno()
