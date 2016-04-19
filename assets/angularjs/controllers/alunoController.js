@@ -1,22 +1,33 @@
-var app = angular.module('myApp', []);
-app.controller('alunosCtrl', function($scope, $http) 
+angular.module('mytcc')
+
+// define um controlador dentro do modulo 'myApp' que será chamado la na view
+.controller('alunoController', function($scope, $http) 
 {	
-	console.log("acessando controlador alunosCtrl...");
+	console.log("acessando controlador de alunos...");
 	
+	// uma variavel para usar que indica o caminho padrão da aplicação	
 	var url = "http://localhost:8080/mytcc/index.php/alunos/";
-			
-	$http.get(url+"listaAlunos")
-    .success(function (data, status, header, config) 
+			    
+    /* criando o método listaAluno
+	   usa o metodo get do protocolo http para chamar o metodo 'listaAlunos' do controlador 'aluno_controller'
+	   e atribui o resultado disso a uma variavel aluno que será chamada la na view */
+	$scope.listaAlunos = function()
 	{
-		console.log("metodo GET acessado com sucesso. Status -> "+status);
+		$http.get(url+"listaAlunos")
+		.success(function (data, status, header, config) 
+		{
+			console.log("metodo GET acessado com sucesso. Status -> "+status);
 		
-		$scope.alunos = data;
-	})
-	.error(function (data, status, header, config) 
-	{
-		console.log("método GET com erro. Status -> " +status);
-	})		
+			// atribuindo todos os alunos a uma lista chamada alunos
+			$scope.alunos = data;
+		})
+		.error(function (data, status, header, config) 
+		{
+			console.log("método GET com erro. Status -> " +status);
+		})
+	}		
 	
+	// criando o método adicionaAluno
 	$scope.adicionaAluno = function () 
 	{		
 		console.log("acessando o metodo adicionaAluno...");
@@ -36,6 +47,7 @@ app.controller('alunosCtrl', function($scope, $http)
 		})		
 	};
 	
+	// criando o método removeAluno
 	$scope.removeAluno = function (idAluno)
 	{
 		if(confirm("Você quer mesmo excluir?"))
@@ -55,12 +67,13 @@ app.controller('alunosCtrl', function($scope, $http)
 		}					
 	}
 	
+	// criando o método editaAluno
 	$scope.editaAluno = function ()
 	{
 		console.log("acessando o metodo adicionaAluno...");
 	}
-	
-	
+		
+	// criando uma função que será chamada quando quiseremos limpar o formulário p/ inserir um novo aluno
 	var limpaCampos = function ()
 	{
 		$scope.fAluno = "";

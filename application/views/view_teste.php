@@ -1,4 +1,4 @@
-<div ng-app="myApp" ng-controller="alunosCtrl">
+<div ng-app="mytcc" ng-controller="alunoController">
 	<div class="row">
 		<div class="col-md-8">
 			<h3>Testando a comunicação entre AngularJS e PHP</h3> <hr>
@@ -33,17 +33,19 @@
 					</tr>
 				</thead>
 				
-				<tbody ng-repeat="aluno in alunos | filter : filtro">
-					<td>{{ aluno.id }}</td>
-					<td>{{ aluno.nome }}</td>
-					<td>{{ aluno.matricula }}</td>
-					<td>{{ aluno.email }}</td>
-					<td>{{ aluno.telefone }}</td>
-					<td>{{ aluno.endereco }}</td>
-					<td>{{ aluno.cidade }}</td>
-					<td>{{ aluno.estado }}</td>
-					<td>{{ aluno.bairro }}</td>
-					<td> <input type="submit" class="btn btn-danger" value="[x]" ng-click="removeAluno(aluno.idAluno)"/> </td>
+				<tbody ng-init="alunos = listaAlunos()">
+					<tr ng-repeat="aluno in alunos | filter : filtro">
+						<td>{{ aluno.id }}</td>
+						<td>{{ aluno.nome }}</td>
+						<td>{{ aluno.matricula }}</td>
+						<td>{{ aluno.email }}</td>
+						<td>{{ aluno.telefone }}</td>
+						<td>{{ aluno.endereco }}</td>
+						<td>{{ aluno.cidade }}</td>
+						<td>{{ aluno.estado }}</td>
+						<td>{{ aluno.bairro }}</td>
+						<td> <input type="submit" class="btn btn-danger" value="[x]" ng-click="removeAluno(aluno.idAluno)"/> </td>
+					</tr>
 				</tbody>
 			</table>
 	
