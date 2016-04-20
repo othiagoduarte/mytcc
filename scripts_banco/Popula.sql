@@ -1,3 +1,5 @@
+USE mytcc;
+
 -- Aluno
 
 INSERT INTO Aluno (nome, matricula, email, endereco, telefone, cidade, estado, bairro) VALUES
@@ -46,14 +48,75 @@ INSERT INTO Professor (nome, matricula, email, endereco, telefone, cidade, estad
 
 -- Relaciona Professor com Área de Interesse
 
-INSERT INTO ProfessorAreaInteresse (idAreaInteresse,idProfessor) VALUES
-(1,10),
-(2,9),
-(3,8),
-(4,8),
-(5,6),
-(1,7),
-(2,7),
-(3,8),
-(4,7),
-(5,10);
+INSERT INTO ProfessorAreaInteresse
+SELECT
+	A.id,
+    P.id
+FROM Professor P
+CROSS JOIN AreaInteresse A
+WHERE
+	P.Matricula = '123456'
+    AND A.nomeArea IN (
+		'Desenvolvimento Desktop',
+        'Desenvolvimento Web',
+        'Teste de Software'
+	);
+
+INSERT INTO ProfessorAreaInteresse
+SELECT
+	A.id,
+    P.id
+FROM Professor P
+CROSS JOIN AreaInteresse A
+WHERE
+	P.Matricula = '234567'
+    AND A.nomeArea IN (
+		'Desenvolvimento Desktop',
+		'Desenvolvimento Web',
+		'Banco de Dados',
+		'Gerência de Projetos',
+		'Teste de Software'
+	);
+
+INSERT INTO ProfessorAreaInteresse
+SELECT
+	A.id,
+    P.id
+FROM Professor P
+CROSS JOIN AreaInteresse A
+WHERE
+	P.Matricula = '345678'
+    AND A.nomeArea IN (
+		'Desenvolvimento Desktop',
+		'Desenvolvimento Web',
+		'Teste de Software'
+	);
+
+INSERT INTO ProfessorAreaInteresse
+SELECT
+	A.id,
+    P.id
+FROM Professor P
+CROSS JOIN AreaInteresse A
+WHERE
+	P.Matricula = '456789'
+    AND A.nomeArea IN (
+		'Banco de Dados',
+		'Teste de Software'
+	);
+
+INSERT INTO ProfessorAreaInteresse
+SELECT
+	A.id,
+    P.id
+FROM Professor P
+CROSS JOIN AreaInteresse A
+WHERE
+	P.Matricula = '567890'
+    AND A.nomeArea IN (
+		'Desenvolvimento Desktop',
+		'Desenvolvimento Web',
+		'Banco de Dados',
+		'Gerência de Projetos',
+		'Teste de Software'
+	);

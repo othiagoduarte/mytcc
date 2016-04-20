@@ -1,5 +1,8 @@
+USE mytcc;
+
 -- Limpar banco
 
+/*
 ALTER TABLE ProfessorAreaInteresse DROP FOREIGN KEY FK_ProfessorAreaInteresse_0;
 ALTER TABLE ProfessorAreaInteresse DROP FOREIGN KEY FK_ProfessorAreaInteresse_1;
 
@@ -20,7 +23,7 @@ DROP TABLE ProfessorAreaInteresse;
 DROP TABLE Projeto;
 
 DROP TABLE Orientacao;
-
+*/
 
 -- Criar banco
 
