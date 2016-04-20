@@ -28,7 +28,7 @@ class Professor extends My_Model {
     public $bairro = "";
     public $numVagas = 0;
     public $turnoDia = false;
-    public $turnoNoite = false;
+    public $turnoNoite = false;   
     
     public function __construct(){
 	   	parent::__construct();

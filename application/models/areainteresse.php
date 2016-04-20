@@ -7,13 +7,31 @@ CREATE TABLE AreaInteresse (
 */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class AreaInteresse extends My_Model {
-
+class AreaInteresse extends CI_Model 
+{    
+    
+    function __construct() { parent::__construct(); }
+    
     public $nomeArea = "";
     
-    public function __construct(){
-	   	parent::__construct();
-           $this->set_tabela(get_class($this));        
+    public $professores;
+        
+    public function listar()
+    {
+        $this->db->select('*');
+        $this->db->from('areainteresse');
+        $query = $this->db->get();
+        return $query->result();
+    }
+    
+    public function listarProfessores()
+    {
+        $this->db->select('*');
+        $this->db->from('professor');
+        $this->db->join('professorareainteresse', 'professor.id = professorareainteresse.idProfessor', 'join');
+        
+        $query = $this->db->get();
+        return $query->result();
     }
     
 }

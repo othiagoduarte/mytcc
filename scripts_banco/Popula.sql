@@ -47,13 +47,13 @@ INSERT INTO Professor (nome, matricula, email, endereco, telefone, cidade, estad
 -- Relaciona Professor com Área de Interesse
 
 INSERT INTO ProfessorAreaInteresse (idAreaInteresse,idProfessor) VALUES
-(1,5),
-(2,4),
-(3,3),
-(4,3),
-(5,1),
-(1,3),
-(2,2),
-(3,4),
-(4,2),
-(5,4);
+(1,10),
+(2,9),
+(3,8),
+(4,8),
+(5,6),
+(1,7),
+(2,7),
+(3,8),
+(4,7),
+(5,10);

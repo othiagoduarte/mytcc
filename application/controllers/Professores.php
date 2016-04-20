@@ -19,5 +19,4 @@ class Professores extends CI_Controller {
 		
 		echo json_encode($this->model->get_all());
 	}
-	
 }
