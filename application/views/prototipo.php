@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Blank</h1>
-                    <?php $this->load->view('view_solicitacao')?>
+                    <?php $this->load->view('view_teste')?>
                 <div><!-- /.col-lg-12 -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->

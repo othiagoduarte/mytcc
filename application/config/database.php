@@ -75,9 +75,17 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'm@ster',
-	'password' => 'master',
+	'hostname' => 'localhost',	
+	
+	//Config: Cristiano
+	'username' => 'root',
+	'password' => '',
+	
+	//Config: Tiago/Luiz
+	//'username' => 'm@ster',
+	//'password' => 'master',
+
+		
 	'database' => 'mytcc',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
