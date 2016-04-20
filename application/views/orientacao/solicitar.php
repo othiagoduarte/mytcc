@@ -1,4 +1,4 @@
-<body ng-app="mytcc"" ng-controller="solicitacaoController">
+<body ng-app="mytcc" ng-controller="solicitacaoController">
 <div class="container-fluid">
 <div class="row">
 	<div class="col-md-12">
@@ -76,4 +76,3 @@
 </div>
 
 </body>
-</html>

@@ -13,10 +13,12 @@ class Alunos extends CI_Controller {
 	
 	function index()
 	{
-		echo "View de cadastro de alunos";
+	    $this->load->view('includes/prototipo_header');
+	    $this->load->view('alunos/listar');
+	    $this->load->view('includes/prototipo_footer');
 	}
 	
-	public function listaAlunos ()
+	public function listar ()
 	{		
 		echo json_encode($this->model->get_all());
 	}

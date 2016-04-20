@@ -10,11 +10,6 @@ class Professores extends CI_Controller {
 	
 	}
 	
-	public function index(){
-		
-		echo "View de cadastro";
-	}
-	
 	public function listar(){
 		
 		echo json_encode($this->model->get_all());

@@ -13,7 +13,7 @@ angular.module('mytcc')
 	   e atribui o resultado disso a uma variavel aluno que será chamada la na view */
 	$scope.listaAlunos = function()
 	{
-		$http.get(url+"listaAlunos")
+		$http.get(url+"listar")
 		.success(function (data, status, header, config) 
 		{
 			$log.log("metodo GET acessado com sucesso. Status -> "+status);
