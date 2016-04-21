@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-md-8">
 			<h3>Alunos cadastrados</h3> <hr>
-			<h4><a href="criar">Criar um novo aluno</a></h4>	
+			<h4><a href="<?php echo base_url('alunos/criar') ?>">Criar um novo aluno</a></h4>	
 		</div>
 		<div class="col-md-4">
 			<div class="input-group custom-search-form ">

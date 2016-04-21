@@ -13,16 +13,16 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="alunos/index"><i class="fa fa-dashboard fa-fw"></i> Alunos</a>
+                            <a href="<?php echo base_url('alunos') ?>"><i class="fa fa-dashboard fa-fw"></i> Alunos</a>
                         </li>
                         <li>
-                            <a href="professores"><i class="fa fa-dashboard fa-fw"></i> Professores</a>
+                            <a href="<?php echo base_url('professores') ?>"><i class="fa fa-dashboard fa-fw"></i> Professores</a>
                         </li>
                         <li>
-                            <a href="projetos"><i class="fa fa-dashboard fa-fw"></i> Projetos</a>
+                            <a href="<?php echo base_url('projetos') ?>"><i class="fa fa-dashboard fa-fw"></i> Projetos</a>
                         </li>
                         <li>
-                            <a href="area"><i class="fa fa-dashboard fa-fw"></i> Area de Interesse</a>
+                            <a href="<?php echo base_url('areainteresses') ?>"><i class="fa fa-dashboard fa-fw"></i> Area de Interesse</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
