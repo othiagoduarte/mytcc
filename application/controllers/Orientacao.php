@@ -33,8 +33,6 @@ class Orientacao extends CI_Controller {
 	    
 	    $this->load->view('includes/prototipo_header');
 	    $this->load->view('orientacao/listar');
-	    $this->load->view('includes/prototipo_footer');
-	 
-	}
-
+	    $this->load->view('includes/prototipo_footer');	 
+	}	
 }

@@ -5,10 +5,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>MyTCC: é agora!</title>
 	
-    <!-- Bootstrap Core CSS -->
+    <!-- Dependências do AngularJS -->
     <script src="<?php echo base_url("/assets/js/angular.min.js") ?>"></script>
+    <script src="<?php  echo base_url("assets/js/angular-messages.min.js") ?>"></script>
     
     <!-- Bootstrap Core CSS -->
     <link href="<?php  echo base_url("/assets/css/bootstrap.min.css") ?>" rel="stylesheet">

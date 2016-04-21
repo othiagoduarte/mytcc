@@ -18,7 +18,14 @@ class Alunos extends CI_Controller {
 	    $this->load->view('includes/prototipo_footer');
 	}
 	
-	public function listar ()
+	function criar()
+	{
+		$this->load->view('includes/prototipo_header');
+	    $this->load->view('alunos/criar');
+	    $this->load->view('includes/prototipo_footer');
+	}
+	
+	public function listar()
 	{		
 		echo json_encode($this->model->get_all());
 	}
@@ -30,7 +37,7 @@ class Alunos extends CI_Controller {
 		// retira o objeto do formado json
 		$request  =json_decode($postData);
 		// chama o metodo inserir da model aluno p/ inserir os dados no banco
-		$this->model->inserir($request);
+		$this->model->inserir($request);				
 	}
 	
 	public function deletaAluno()

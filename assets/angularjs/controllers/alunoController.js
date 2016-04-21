@@ -5,6 +5,8 @@ angular.module('mytcc')
 {	
 	$log.info("acessando controlador de alunos...");
 	
+	$scope.estados = ['RS', 'SC', 'PR', 'SP', 'RJ', 'AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF'];
+	
 	// uma variavel para usar que indica o caminho padrão da aplicação	
 	var url = "http://localhost:8080/mytcc/index.php/alunos/";
 			    
@@ -31,7 +33,9 @@ angular.module('mytcc')
 	$scope.adicionaAluno = function () 
 	{		
 		$log.log("acessando o metodo adicionaAluno...");
-		var data = $scope.fAluno;
+		var data = $scope.aluno;
+		
+		$log.log(data);
 		
 		$http.post(url+"insereAluno", data)
 		.success(function (data, status, header, config)
@@ -76,7 +80,7 @@ angular.module('mytcc')
 	// criando uma função que será chamada quando quiseremos limpar o formulário p/ inserir um novo aluno
 	var limpaCampos = function ()
 	{
-		$scope.fAluno = "";
+		$scope.aluno = "";
 		$log.log("limpando campos do formulario.");
 	}
 });

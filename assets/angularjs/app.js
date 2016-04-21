@@ -1,1 +1,1 @@
-angular.module('mytcc', []);
+angular.module('mytcc', ['ngMessages']);
