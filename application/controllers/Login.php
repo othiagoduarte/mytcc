@@ -7,17 +7,19 @@ class Login extends CI_Controller {
 	{	
 		parent::__construct();
 		$this->load->library('session');
-		//$this->load->model('usuario','usuario');
+		$this->load->model('usuario','usuario');
 	
 	}
 	
 	function index()
 	{	
-		echo var_dump($this->session); 
-		//$data = array();
-		//$data['teste']  = 'Usuario logado';
-		//$this->session->set_userdata($data);
-		//$this->load->view('login/logar');		
+		//echo var_dump($this->session); 
+		$data = array();
+		$data['teste']  = 'Usuario logado';
+		$this->session->set_userdata($data);
+		$this->load->view('includes/prototipo_header');
+        $this->load->view('login/logar');
+	    $this->load->view('includes/prototipo_footer');				
 	}
     
 	public function logar()
