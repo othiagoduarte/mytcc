@@ -29,9 +29,8 @@ DROP TABLE Orientacao;
 
 CREATE TABLE Aluno (
  id INT NOT NULL AUTO_INCREMENT,
- nome VARCHAR(50) NOT NULL,
+ idUsuario INT NOT NULL,
  matricula INT NOT NULL,
- email VARCHAR(70) NOT NULL,
  endereco VARCHAR(70) NOT NULL,
  telefone VARCHAR(11) NOT NULL,
  cidade VARCHAR(50) NOT NULL,
@@ -42,19 +41,12 @@ CREATE TABLE Aluno (
 );
 
 ALTER TABLE Aluno ADD UNIQUE (matricula);
-
-CREATE TABLE AreaInteresse (
- id INT NOT NULL AUTO_INCREMENT,
- nomeArea VARCHAR(50) NOT NULL,
- PRIMARY KEY (id)
-);
-
+ALTER TABLE Aluno ADD CONSTRAINT FK_Aluno_0 FOREIGN KEY (idUsuario) REFERENCES Usuario (id);
 
 CREATE TABLE Professor (
  id INT NOT NULL AUTO_INCREMENT,
- nome VARCHAR(50) NOT NULL,
+ idUsuario INT NOT NULL,
  matricula INT NOT NULL,
- email VARCHAR(70) NOT NULL,
  endereco VARCHAR(50) NOT NULL,
  telefone VARCHAR(11) NOT NULL,
  cidade VARCHAR(50) NOT NULL,
@@ -68,6 +60,21 @@ CREATE TABLE Professor (
 );
 
 ALTER TABLE Professor ADD UNIQUE (matricula);
+ALTER TABLE Professor ADD CONSTRAINT FK_Usuario_0 FOREIGN KEY (idUsuario) REFERENCES Usuario (id);
+
+CREATE TABLE Usuario (
+  id INT NOT NULL AUTO_INCREMENT,
+  email VARCHAR(70) NOT NULL,
+  nome VARCHAR(50) NOT NULL,
+  senha VARCHAR(16) NOT NULL,
+  PRIMARY KEY (id)    
+);
+
+CREATE TABLE AreaInteresse (
+ id INT NOT NULL AUTO_INCREMENT,
+ nomeArea VARCHAR(50) NOT NULL,
+ PRIMARY KEY (id)
+);
 
 
 CREATE TABLE ProfessorAreaInteresse (
