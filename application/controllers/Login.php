@@ -7,40 +7,62 @@ class Login extends CI_Controller
 	{	
 		parent::__construct();
 		$this->load->library('session');
-		$this->load->model('usuario','usuario', true);	
+		$this->load->model('usuario','usuarioDB', true);
 	}
 	
 	function index()
 	{	
-		$data = array();
-		$data['teste']  = 'Usuario logado';
-		$this->session->set_userdata($data);
 		$this->load->view('includes/prototipo_header');
         $this->load->view('login/logar');
-	    $this->load->view('includes/prototipo_footer');
-		echo var_dump($this->session); 				
+	    $this->load->view('includes/prototipo_footer');		
 	}
     
-	public function logar()
-	{		
-		$this->usuario->usuario = $this->input->post('usuario');
-		$this->usuario->senha = $this->input->post('senha');
-
-		if ($this->usuario->logar()) {
-		    $data = array();
-		    $data['logado'] = True;
-		    $data['usuario_logado'] =  $this->usuario->get_by_id($this->usuario->id);
-		    
-		    $this->session->set_userdata($data);
-			header("Location: ".base_url())	;
-		}else {
-			header("Location: ".base_url('login?err'))	;
-		}
-
+	public function pegaEmail()
+	{
+		$sessionId = $this->session->userdata('nome');
+		echo json_encode($sessionId);
 	}
 	
-	public function sair(){
+	public function logar()
+	{		
+		// le o arquivo e converte para string
+		$postData = file_get_contents("php://input");
+		// retira o objeto do formado json
+		$request = json_decode($postData);
+		// insere os dados do formulário html nas propriedades da model
+		$this->usuarioDB->email = $request->email;
+		$this->usuarioDB->senha = $request->senha;		
+
+		if ($this->usuarioDB->logar()) 
+		{		    
+			$this->insereCookie($this->usuarioDB);
+			echo "TRUE";
+		}
+	}
+	
+	private function insereCookie($usuario)
+	{		
+		$data = array();
+		if($usuario->tipo == 'professor')
+		{
+			//busca um professor pelo id do usuario e insere id e nome nos cookies
+			$professor = $this->usuarioDB->buscaProfessor();
+			$data['id'] = $professor[0]->id;
+		    $data['nome'] = $professor[0]->nome;
+		    $this->session->set_userdata($data);
+		}
+		else
+		{
+			//busca um aluno pelo id do usuario e insere id e nome nos cookies			
+			$aluno = $this->usuarioDB->buscaAluno();
+			$data['id'] = $aluno[0]->id;
+		    $data['nome'] = $aluno[0]->nome;
+		    $this->session->set_userdata($data);
+		}
+	}
+		
+	public function sair()
+	{
 	  $this->session->sess_destroy();
-	  redirect('login');
 	}
 }
