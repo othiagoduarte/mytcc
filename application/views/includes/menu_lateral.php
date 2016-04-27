@@ -103,7 +103,7 @@
                                     <a class="active" href="blank.html">Blank Page</a>
                                 </li>
                                 <li>
-                                    <a href="login.html">Login Page</a>
+                                    <a href="<?php echo base_url('login') ?>">Login Page</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

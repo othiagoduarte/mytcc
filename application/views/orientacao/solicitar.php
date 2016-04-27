@@ -1,4 +1,4 @@
-<body ng-app="mytcc" ng-controller="solicitacaoController">
+<body ng-controller="solicitacaoController">
 
 	<div class="row">
 		<div class="col-md-12">

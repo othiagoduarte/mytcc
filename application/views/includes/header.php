@@ -23,3 +23,4 @@
     <!-- Custom Fonts -->
     <link href="<?php echo base_url("/assets//bower_components/font-awesome/css/font-awesome.min.css") ?>" rel="stylesheet" type="text/css">    
 </head>
+<body ng-app="mytcc">

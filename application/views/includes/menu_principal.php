@@ -1,4 +1,5 @@
 <!-- Navigation -->
+<div ng-controller='loginController'>
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header" ng-controller="loginController">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -8,7 +9,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="<?php echo base_url('home') ?>">MyTCC 0.1</a>
-                <a class="navbar-brand" href="<?php echo base_url('home') ?>">Hello,  </a>
+                <a class="navbar-brand" href="<?php echo base_url('home') ?>">{{ nome }} </a>
             </div>
             <!-- /.navbar-header -->
 
@@ -221,3 +222,4 @@
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
+</div>

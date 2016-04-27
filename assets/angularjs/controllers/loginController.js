@@ -2,9 +2,23 @@ angular.module('mytcc')
 
 // define um controlador dentro do modulo 'myApp' que será chamado la na view
 .controller('loginController', function($scope, $http, $log) 
-{   
+{       
     $log.info("acessando o controlador do login...");
     var url = "http://localhost:8080/mytcc/index.php/login/";
+        
+    $http.get(url+"pegaEmail")
+    .then(function (response) 
+    {
+        if(response.data == 'FALSE')
+        {
+            $scope.nome = 'Seja bem vindo, faça o login';
+            $log.log(response.data);
+        }
+        else
+        {
+            $scope.nome = response.data;
+        }
+    });
         
     $scope.dados;
     $scope.error;

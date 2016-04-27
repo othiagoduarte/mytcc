@@ -17,10 +17,23 @@ class Login extends CI_Controller
 	    $this->load->view('includes/prototipo_footer');		
 	}
     
+	public function isLogged()
+	{
+		if($this->session->userdata('logado') == 'true')
+			echo 'TRUE';
+	}
+	
 	public function pegaEmail()
 	{
-		$sessionId = $this->session->userdata('nome');
-		echo json_encode($sessionId);
+		$sessionName = $this->session->userdata('nome');
+		if($sessionName == '')
+		{
+			echo 'FALSE';
+		}
+		else
+		{
+			echo json_encode($sessionName);
+		}
 	}
 	
 	public function logar()
@@ -49,6 +62,7 @@ class Login extends CI_Controller
 			$professor = $this->usuarioDB->buscaProfessor();
 			$data['id'] = $professor[0]->id;
 		    $data['nome'] = $professor[0]->nome;
+			$data['logado'] = 'true';
 		    $this->session->set_userdata($data);
 		}
 		else
@@ -57,6 +71,7 @@ class Login extends CI_Controller
 			$aluno = $this->usuarioDB->buscaAluno();
 			$data['id'] = $aluno[0]->id;
 		    $data['nome'] = $aluno[0]->nome;
+			$data['logado'] = 'true';
 		    $this->session->set_userdata($data);
 		}
 	}
