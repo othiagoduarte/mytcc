@@ -1,23 +1,24 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Login extends CI_Controller {
-	
+class Login extends CI_Controller 
+{			
 	function __construct()
 	{	
 		parent::__construct();
 		$this->load->library('session');
-		//$this->load->model('usuario','usuario');
-	
+		$this->load->model('usuario','usuario', true);	
 	}
 	
 	function index()
 	{	
-		echo var_dump($this->session); 
-		//$data = array();
-		//$data['teste']  = 'Usuario logado';
-		//$this->session->set_userdata($data);
-		//$this->load->view('login/logar');		
+		$data = array();
+		$data['teste']  = 'Usuario logado';
+		$this->session->set_userdata($data);
+		$this->load->view('includes/prototipo_header');
+        $this->load->view('login/logar');
+	    $this->load->view('includes/prototipo_footer');
+		echo var_dump($this->session); 				
 	}
     
 	public function logar()
