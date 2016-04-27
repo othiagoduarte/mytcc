@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	
 class Usuario extends My_Model {
 
-	public $nome = "";
+	public $id = 0;
 	public $senha = "";
 	public $email = "";	
 	public $tipo = "";	
@@ -23,11 +23,19 @@ class Usuario extends My_Model {
 		$usuario = $this->get_by_email();
 		
 		if($usuario == NULL)
-			return false;
+		{
+			return false;	
+		}
 		else if($usuario->senha != $this->senha)
-			return false;
+		{
+			return false;	
+		}
 		else
+		{
+			$this->tipo = $usuario->tipo;
+			$this->id = $usuario->id;
 			return true;
+		}
 	}
 	
 	// returna um usuario se o email for encontrado na tabela usuario, senão retorna nulo
@@ -43,6 +51,28 @@ class Usuario extends My_Model {
 			}
 		}		
 		return null; 
+	}
+	
+	public function buscaProfessor()
+	{
+        $this->db->select('*');
+        $this->db->from('usuario');
+        $this->db->join('professor', 'professor.idUsuario = usuario.id', 'join');
+		$this->db->where('idUsuario', $this->id);
+        
+        $query = $this->db->get();
+        return $query->result();
+	}
+	
+	public function buscaAluno()
+	{
+		$this->db->select('*');
+        $this->db->from('usuario');
+        $this->db->join('aluno', 'aluno.idUsuario = usuario.id', 'join');
+		$this->db->where('idUsuario', $this->id);
+        
+        $query = $this->db->get();
+        return $query->result();
 	}
 		
 }

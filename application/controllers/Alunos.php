@@ -35,7 +35,7 @@ class Alunos extends CI_Controller {
 		// le o arquivo e converte para string
 		$postData = file_get_contents("php://input");
 		// retira o objeto do formado json
-		$request  =json_decode($postData);
+		$request = json_decode($postData);
 		// chama o metodo inserir da model aluno p/ inserir os dados no banco
 		$this->model->inserir($request);				
 	}

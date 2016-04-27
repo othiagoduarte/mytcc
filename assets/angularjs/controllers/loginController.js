@@ -2,10 +2,10 @@ angular.module('mytcc')
 
 // define um controlador dentro do modulo 'myApp' que será chamado la na view
 .controller('loginController', function($scope, $http, $log) 
-{
+{   
     $log.info("acessando o controlador do login...");
     var url = "http://localhost:8080/mytcc/index.php/login/";
-    
+        
     $scope.dados;
     $scope.error;
         
@@ -22,6 +22,7 @@ angular.module('mytcc')
     
     $scope.logar = function()
     {        
+        $log.log("acessando o metodo logar.");
         if(validaCampos)
         {
             loginService($scope.dados.email, $scope.dados.senha)
@@ -40,6 +41,15 @@ angular.module('mytcc')
         }        
     }
     
+    $scope.logout = function()
+    {
+        $http.get(url+'sair')
+        .then(function()
+        {
+            redirect('login');      
+        })
+    };
+    
     var validaCampos = function(email, senha)
     {
         if(email == '')
@@ -57,6 +67,9 @@ angular.module('mytcc')
         return true;
     }
     
-     var reloadPage = function(){window.location.reload();}
-     var redirect = function(controller, method){window.location.assign("http://localhost:8080/mytcc/"+controller+'/'+method)};
+    var reloadPage = function(){window.location.reload();}
+    var redirect = function(controller, method = '')
+    {
+        window.location.assign("http://localhost:8080/mytcc/"+controller+'/'+method)
+    };
 });

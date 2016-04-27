@@ -27,30 +27,7 @@
 										<td >Fulano de tal</td>	
 										<td >Qualidade de software</td>
 										<td >10/10/2016</td>
-									</tr>
-		
-										<td >Fulano de tal</td>	
-										<td >Qualidade de software</td>
-										<td >10/10/2016</td>
-									</tr>
-									
-										<td >Fulano de tal</td>	
-										<td >Qualidade de software</td>
-										<td >10/10/2016</td>
-									</tr>
-									</tr>
-		
-										<td >Fulano de tal</td>	
-										<td >Qualidade de software</td>
-										<td >10/10/2016</td>
-									</tr>
-									</tr>
-		
-										<td >Fulano de tal</td>	
-										<td >Qualidade de software</td>
-										<td >10/10/2016</td>
-									</tr>
-								
+									</tr>								
 								</tbody>
 							</table>
 						</div>
@@ -73,30 +50,7 @@
 										<td >Fulano de tal</td>	
 										<td >Qualidade de software</td>
 										<td >10/10/2016</td>
-									</tr>
-		
-										<td >Fulano de tal</td>	
-										<td >Qualidade de software</td>
-										<td >10/10/2016</td>
-									</tr>
-									
-										<td >Fulano de tal</td>	
-										<td >Qualidade de software</td>
-										<td >10/10/2016</td>
-									</tr>
-									</tr>
-		
-										<td >Fulano de tal</td>	
-										<td >Qualidade de software</td>
-										<td >10/10/2016</td>
-									</tr>
-									</tr>
-		
-										<td >Fulano de tal</td>	
-										<td >Qualidade de software</td>
-										<td >10/10/2016</td>
-									</tr>
-								
+									</tr>								
 								</tbody>
 							</table>
 							
@@ -120,30 +74,7 @@
 										<td >Fulano de tal</td>	
 										<td >Qualidade de software</td>
 										<td >10/10/2016</td>
-									</tr>
-		
-										<td >Fulano de tal</td>	
-										<td >Qualidade de software</td>
-										<td >10/10/2016</td>
-									</tr>
-									
-										<td >Fulano de tal</td>	
-										<td >Qualidade de software</td>
-										<td >10/10/2016</td>
-									</tr>
-									</tr>
-		
-										<td >Fulano de tal</td>	
-										<td >Qualidade de software</td>
-										<td >10/10/2016</td>
-									</tr>
-									</tr>
-		
-										<td >Fulano de tal</td>	
-										<td >Qualidade de software</td>
-										<td >10/10/2016</td>
-									</tr>
-								
+									</tr>								
 								</tbody>
 							</table>
 							
