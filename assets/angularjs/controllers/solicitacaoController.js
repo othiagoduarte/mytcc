@@ -9,7 +9,7 @@ angular.module('mytcc')
     $scope.listarAreas = function()
     {
         $log.info("buscando a lista de areas p/ carregar o select...")
-		$http.get(url+"areainteresses/listaareas")
+		$http.get(url+"areainteresses/listaareas") 
 		.success(function (data, status, header, config) 
 		{		
 			$scope.areas = data;
@@ -43,7 +43,10 @@ angular.module('mytcc')
 		$log.info("enviando proposta...");
 		$log.info($scope.projeto);
 		
-		$http.post(url+'orientacao/insereprojeto', $scope.projeto)
+		$scope.projeto.idArea = $scope.projeto.areaInteresse.id;
+		$scope.projeto.idProfessor = $scope.projeto.professor.id;
+		
+		$http.post(url+'projetos/insereSolicitacao', $scope.projeto)
 		.success(function (data, status, header, config) 
 		{
 			$log.log("metodo POST enviaProposta acessado com sucesso. Status -> "+status);			

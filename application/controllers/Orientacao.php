@@ -3,13 +3,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Orientacao extends CI_Controller {
 
-	$usuario = $this->session->userdata('id');
+	public $sessionId = 0;
 	
 	function __construct()
 	{		
 		parent::__construct();
 		$this->load->model('projeto', 'projeto', TRUE);
 		$this->load->library('session');
+		$sessionId = $this->session->userdata('id');
 	}
 	
 	public function index()
@@ -40,7 +41,7 @@ class Orientacao extends CI_Controller {
 	
 	public function listarSolicitacoes()
 	{
-		$solicitacoes = $this->projeto->get_professor($usuario);
+		$solicitacoes = $this->projeto->get_professor($sessionId);
 		echo json_encode(solicitacoes);
 	}	
 }

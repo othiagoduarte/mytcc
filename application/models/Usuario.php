@@ -4,47 +4,75 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	
 class Usuario extends My_Model {
 
-	public $nome = "";
+	public $id = 0;
 	public $senha = "";
 	public $email = "";	
 	public $tipo = "";	
 	
-	public function __construct(){
+	public function __construct()
+	{
 	   	parent::__construct();
 		$this->set_tabela(get_class($this));  
 	}
 	
-	public function logar(){
-		
+	// retorna verdadeiro se email e senha forem correspondentes
+	public function logar()
+	{		
 		$this->conectarDB();
 	
-		if ($this->db->count_all_results($this->get_table()) > 0) {
-			
-			$usuario = $this->get_by_usuario($this->usuario);
-		    $this->id = $usuario->id;
-		    $this->nome = $usuario->nome;
-		    
-			return $usuario->usuario == $this->usuario && $usuario->senha == $this->senha;
+		$usuario = $this->get_by_email();
+		
+		if($usuario == NULL)
+		{
+			return false;	
 		}
-		else{
-		    
-			return $this->usuario === 'admin' && $this->senha === 'admin' ;		
-		}	
+		else if($usuario->senha != $this->senha)
+		{
+			return false;	
+		}
+		else
+		{
+			$this->tipo = $usuario->tipo;
+			$this->id = $usuario->id;
+			return true;
+		}
 	}
 	
-	public function get_by_usuario($nomeUsuario)	{
-		
+	// returna um usuario se o email for encontrado na tabela usuario, senão retorna nulo
+	public function get_by_email()	
+	{		
 		$usuarios =  $this->get_all();
 	
 		foreach ($usuarios as $usuario) 
 		{
-			if ($usuario->usuario == $nomeUsuario ) 
+			if ($usuario->email == $this->email)
 			{				
 				return $usuario;
 			}
-		}
-		
-		return new Usuario(); 
+		}		
+		return null; 
+	}
+	
+	public function buscaProfessor()
+	{
+        $this->db->select('*');
+        $this->db->from('usuario');
+        $this->db->join('professor', 'professor.idUsuario = usuario.id', 'join');
+		$this->db->where('idUsuario', $this->id);
+        
+        $query = $this->db->get();
+        return $query->result();
+	}
+	
+	public function buscaAluno()
+	{
+		$this->db->select('*');
+        $this->db->from('usuario');
+        $this->db->join('aluno', 'aluno.idUsuario = usuario.id', 'join');
+		$this->db->where('idUsuario', $this->id);
+        
+        $query = $this->db->get();
+        return $query->result();
 	}
 		
 }

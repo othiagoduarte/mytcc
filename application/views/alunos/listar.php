@@ -1,4 +1,4 @@
-<div ng-app="mytcc" ng-controller="alunoController">
+<div ng-controller="alunoController">
 	<div class="row">
 		<div class="col-md-8">
 			<h3>Alunos cadastrados</h3> <hr>

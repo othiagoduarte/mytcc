@@ -1,4 +1,4 @@
-<div ng-app="mytcc" ng-controller="alunoController">
+<div  ng-controller="alunoController">
     <h3>Inserir um novo aluno</h3> <hr>
     <form name="form_aluno" role="form">
         <fieldset class="form-group">
