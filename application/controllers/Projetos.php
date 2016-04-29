@@ -20,7 +20,9 @@ class Projetos extends CI_Controller
     
     public function insereSolicitacao()
     {
-		// le o arquivo e converte para string
+		var_dump($this->sessionId);
+        
+        // le o arquivo e converte para string
 		$postData = file_get_contents("php://input");
 		// retira o objeto do formado json
 		$request = json_decode($postData, true);
@@ -32,7 +34,7 @@ class Projetos extends CI_Controller
         $this->projetoDB->idProfessor = $request['idProfessor'];
         $this->projetoDB->idAreaInteresse = $request['idArea'];
         $this->projetoDB->turno = 'Noite';
-        $this->projetoDB->idAluno = $this->sessionId;
+        $this->projetoDB->idAluno = $this->session->userdata('id');
         
         $this->projetoDB->insert();
     }

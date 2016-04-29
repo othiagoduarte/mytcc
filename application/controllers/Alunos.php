@@ -25,6 +25,17 @@ class Alunos extends CI_Controller {
 	    $this->load->view('includes/prototipo_footer');
 	}
 	
+	// funcao criada para trazer a modal de registrar aluno
+	function registrarAluno()
+	{
+		$this->load->view('alunos/modalRegistrarAluno');
+	}
+	
+	function registrarUsuario()
+	{
+		$this->load->view('usuarios/modalRegistrarUsuario');
+	}	
+	
 	public function listar()
 	{		
 		echo json_encode($this->model->get_all());

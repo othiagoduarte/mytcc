@@ -1,1 +1,1 @@
-angular.module('mytcc', ['ngMessages']);
+angular.module('mytcc', ['ngMessages', 'ui.bootstrap']);

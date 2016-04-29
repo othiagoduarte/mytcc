@@ -14,4 +14,6 @@
     <script src="<?php echo base_url("/assets/angularjs/controllers/solicitacaoController.js") ?>"></script>
     <script src="<?php echo base_url("/assets/angularjs/controllers/areaController.js") ?>"></script>
     <script src="<?php echo base_url("/assets/angularjs/controllers/loginController.js") ?>"></script>
+    <script src="<?php echo base_url("/assets/angularjs/controllers/homeController.js") ?>"></script>
+    <script src="<?php echo base_url("/assets/angularjs/controllers/professorController.js") ?>"></script>
 </footer>
