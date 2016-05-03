@@ -6,7 +6,7 @@ class Usuario extends My_Model {
 
 	public $id = 0;
 	public $senha = "";
-	public $email = "";	
+	public $user = "";	
 	public $tipo = "";	
 	
 	public function __construct()

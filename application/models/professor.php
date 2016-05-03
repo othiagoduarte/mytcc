@@ -1,18 +1,20 @@
 <?php
-/*CREATE TABLE Professor (
- idProfessor INT NOT NULL,
- nome VARCHAR(50) NOT NULL,
- matricula INT NOT NULL,
- email VARCHAR(70) NOT NULL,
- endereco VARCHAR(50) NOT NULL,
- telefone INT NOT NULL,
- cidade VARCHAR(50) NOT NULL,
- estado VARCHAR(2) NOT NULL,
- bairro VARCHAR(50) NOT NULL,
- numVagas INT NOT NULL,
- turnoDia BIT(1) NOT NULL,
- turnoNoite BIT(1) NOT NULL
-);
+/*CREATE TABLE `professor` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(50) NOT NULL,
+  `matricula` int(11) NOT NULL,
+  `email` varchar(70) NOT NULL,
+  `endereco` varchar(50) NOT NULL,
+  `telefone` varchar(11) NOT NULL,
+  `cidade` varchar(50) NOT NULL,
+  `estado` varchar(2) NOT NULL,
+  `bairro` varchar(50) NOT NULL,
+  `numVagas` int(11) NOT NULL,
+  `turnoDia` bit(1) NOT NULL,
+  `turnoNoite` bit(1) NOT NULL,
+  `cpf` varchar(9) NOT NULL,
+  `idUsuario` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -20,6 +22,7 @@ class Professor extends My_Model {
 
     public $matricula = "";
     public $endereco ="";
+    public $email = "";
     public $telefone = 0;
     public $cidade = "";
     public $estado = "";
@@ -27,6 +30,7 @@ class Professor extends My_Model {
     public $numVagas = 0;
     public $turnoDia = false;
     public $turnoNoite = false;
+    public $cpf = "";
     
     public $usuario = 0;   
     
