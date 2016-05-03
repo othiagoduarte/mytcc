@@ -12,9 +12,9 @@ class Login extends CI_Controller
 	
 	function index()
 	{	
-		$this->load->view('includes/prototipo_header');
+		$this->load->view('includes/header');
         $this->load->view('login/logar');
-	    $this->load->view('includes/prototipo_footer');		
+	    $this->load->view('includes/footer');		
 	}
     
 	public function isLogged()

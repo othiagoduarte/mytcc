@@ -2,6 +2,15 @@ USE mytcc;
 
 -- Inclui os alunos com os seus respectivos usuarios
 
+INSERT INTO StatusProjeto (id, statusProjeto) VALUES
+(null, 'Aguardando');
+INSERT INTO StatusProjeto (id, statusProjeto) VALUES
+(null, 'Recusado');
+INSERT INTO StatusProjeto (id, statusProjeto) VALUES
+(null, 'Aceito');
+INSERT INTO StatusProjeto (id, statusProjeto) VALUES
+(null, 'Rejeitado');
+
 INSERT INTO Usuario (id, email, senha, tipo) VALUES
 (1, 'ms.castanheira@gmail.com', '1234', 'aluno');
 INSERT INTO Aluno (id, idUsuario, nome, matricula, endereco, telefone, cidade, estado, bairro) VALUES
