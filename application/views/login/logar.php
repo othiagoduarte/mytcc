@@ -42,6 +42,7 @@
                         <input id="senha" name="senha" value="" class="form-control" required="" type="password" ng-model="dados.senha">
                     </div>
                 </div>
+                <!-- O sistema ja detecta o perfil do usuario atraves do usuario.tipo 
                 <div class="form-group">
                     <label for="perfil" class="control-label col-sm-3">Perfil:</label>
                     <div class="col-sm-7" >
@@ -52,6 +53,8 @@
                         </select>
                     </div>
                 </div>
+                -->
+
                 <div class="form-group">
                     <div class="col-sm-7 col-sm-offset-3">
                         <input id="btnLogin" name="btnLogin" value="Log In" class="btn btn-lg btn-default" type="button" ng-click="logar()">
