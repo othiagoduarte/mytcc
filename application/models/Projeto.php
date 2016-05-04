@@ -25,6 +25,9 @@ class Projeto extends My_Model {
     public $turno = "";
     public $motivoRecusa = "";
     public $status = "";
+	public $statusProjeto = "";
+	public $dataSolicitacao = "";
+	public $dataResposta = "";
 	
     public function __construct(){
 	   	parent::__construct();

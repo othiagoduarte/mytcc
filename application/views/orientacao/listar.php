@@ -22,7 +22,7 @@
 							<th>Data da solicitação	</th>
 						</thead>
 						<tbody>
-							<tr ng-repeat="projeto in projeto | filter projeto.status">
+							<tr ng-repeat="projeto in projeto | filter projeto.status projeto = Aguardando">
 								<td >{{ projeto.aluno.nome }}</td>	
 								<td >{{ projeto.areaInteresse.nome }}</td>
 								<td >{{ projeto.dataSolicitacao }}</td>
@@ -48,7 +48,7 @@
 					</thead>
 					<tbody>
 						<tr >
-							<tr ng-repeat="projeto in projeto | filter projeto.status">
+							<tr ng-repeat="projeto in projeto | filter projeto.status projeto = Aceito">
 								<td >{{ projeto.aluno.nome }}</td>	
 								<td >{{ projeto.areaInteresse.nome }}</td>
 								<td >{{ projeto.dataSolicitacao }}</td>
@@ -75,7 +75,7 @@
 					</thead>
 					<tbody>
 						<tr >
-							<tr ng-repeat="projeto in projeto | filter projeto.status">
+							<tr ng-repeat="projeto in projeto | filter projeto.status projeto = Recusado">
 								<td >{{ projeto.aluno.nome }}</td>	
 								<td >{{ projeto.areaInteresse.nome }}</td>
 								<td >{{ projeto.dataSolicitacao }}</td>

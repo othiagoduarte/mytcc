@@ -5,6 +5,7 @@ angular.module('mytcc')
 	var url = "http://localhost:8080/mytcc/index.php/";   
 			
 	$scope.projeto;
+	$scope.aguardando = true;
 					    
     $scope.listarAreas = function()
     {
@@ -49,7 +50,9 @@ angular.module('mytcc')
 		$http.post(url+'projetos/insereSolicitacao', $scope.projeto)
 		.success(function (data, status, header, config) 
 		{
-			$log.log("metodo POST enviaProposta acessado com sucesso. Status -> "+status);			
+			$log.log("metodo POST enviaProposta acessado com sucesso. Status -> "+status);
+			setTimeout(function(){location.href="listar"} , 3000);
+			$scope.aguardando = false;		
 		})
 		.error(function (data, status, header, config) 
 		{
