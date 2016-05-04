@@ -4,7 +4,7 @@ angular.module('mytcc')
 .controller('loginController', function($scope, $http, $log) 
 {       
     $log.info("acessando o controlador do login...");
-    var url = "http://localhost:8080/mytcc/index.php/login/";
+    var url = "/index.php/login/";
         
     $http.get(url+"pegaEmail")
     .then(function (response) 
@@ -82,8 +82,8 @@ angular.module('mytcc')
     }
     
     var reloadPage = function(){window.location.reload();}
-    var redirect = function(controller, method = '')
+    var redirect = function(controller, method )
     {
-        window.location.assign("http://localhost:8080/mytcc/"+controller+'/'+method)
+        window.location.assign(controller+'/'+method)
     };
 });
