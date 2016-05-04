@@ -6,7 +6,6 @@ class Login extends CI_Controller
 	function __construct()
 	{	
 		parent::__construct();
-		$this->load->library('session');
 		$this->load->model('usuario','usuarioDB', true);
 	}
 	
@@ -43,7 +42,7 @@ class Login extends CI_Controller
 		// retira o objeto do formado json
 		$request = json_decode($postData);
 		// insere os dados do formulário html nas propriedades da model
-		$this->usuarioDB->email = $request->email;
+		$this->usuarioDB->user = $request->email;
 		$this->usuarioDB->senha = $request->senha;		
 
 		if ($this->usuarioDB->logar()) 
@@ -56,24 +55,27 @@ class Login extends CI_Controller
 	private function insereCookie($usuario)
 	{		
 		$data = array();
-		if($usuario->tipo == 'professor')
+
+		$model = null;
+		
+		if($usuario->tipo == 'p')
 		{
-			//busca um professor pelo id do usuario e insere id e nome nos cookies
-			$professor = $this->usuarioDB->buscaProfessor();
-			$data['id'] = $professor[0]->id;
-		    $data['nome'] = $professor[0]->nome;
-			$data['logado'] = 'true';
-		    $this->session->set_userdata($data);
+			$model = $usuario->buscaProfessor();
 		}
 		else
 		{
-			//busca um aluno pelo id do usuario e insere id e nome nos cookies			
-			$aluno = $this->usuarioDB->buscaAluno();
-			$data['id'] = $aluno[0]->id;
-		    $data['nome'] = $aluno[0]->nome;
-			$data['logado'] = 'true';
-		    $this->session->set_userdata($data);
+			$model = $usuario->buscaAluno();
 		}
+		if ($model != null ) {
+			
+			$data['id'] = $model->id;
+			$data['nome'] = $model->nome;
+			$data['logado'] = 'true';
+		}
+		
+		$data['user'] = $usuario;
+
+		$this->session->set_userdata($data);
 	}
 		
 	public function sair()

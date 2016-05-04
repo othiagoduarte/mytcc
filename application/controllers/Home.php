@@ -14,4 +14,8 @@ class Home extends CI_Controller
         $this->load->view('home/main');
 	    $this->load->view('includes/prototipo_footer');
     }
+    public function testarSession(){
+
+        var_dump($this->session);
+    }
 }

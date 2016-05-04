@@ -9,6 +9,9 @@ class Professores extends CI_Controller {
 		$this->load->model('professor','model');			
 	}
 	
+	public function index(){
+		echo "Interface de cadastro de professor";
+	}
 	// funcao criada para trazer a modal de registrar professor
 	function registrarProfessor()
 	{
