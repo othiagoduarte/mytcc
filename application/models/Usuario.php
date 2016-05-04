@@ -4,7 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	
 class Usuario extends My_Model {
 
-	public $id = 0;
 	public $senha = "";
 	public $user = "";	
 	public $tipo = "";	
@@ -20,59 +19,63 @@ class Usuario extends My_Model {
 	{		
 		$this->conectarDB();
 	
-		$usuario = $this->get_by_email();
+		$usuario = $this->get_by_user();
+
+		if( $usuario != NULL)
+		{
+			if($usuario->senha == $this->senha){
+				
+				$this->id = $usuario->id; 
+				$this->senha = $usuario->senha;
+				$this->user = $usuario->user;
+				$this->tipo = $usuario->tipo;
+				
+				return true;
+			};
+		}
 		
-		if($usuario == NULL)
-		{
-			return false;	
-		}
-		else if($usuario->senha != $this->senha)
-		{
-			return false;	
-		}
-		else
-		{
-			$this->tipo = $usuario->tipo;
-			$this->id = $usuario->id;
-			return true;
-		}
+		return false;
+	
 	}
 	
-	// returna um usuario se o email for encontrado na tabela usuario, senão retorna nulo
-	public function get_by_email()	
+	public function get_by_user()	
 	{		
 		$usuarios =  $this->get_all();
 	
 		foreach ($usuarios as $usuario) 
 		{
-			if ($usuario->email == $this->email)
+			if ($usuario->user == $this->user)
 			{				
 				return $usuario;
 			}
 		}		
-		return null; 
+		return null;
 	}
 	
 	public function buscaProfessor()
 	{
-        $this->db->select('*');
-        $this->db->from('usuario');
-        $this->db->join('professor', 'professor.idUsuario = usuario.id', 'join');
-		$this->db->where('idUsuario', $this->id);
-        
-        $query = $this->db->get();
-        return $query->result();
+       	try {
+ 			
+			$this->load->model('professor','model');
+			
+			return $this->model->get_by_id_user($this->id);
+		
+		}catch (Exception $e) {
+    		return NULL;
+		}	
 	}
 	
 	public function buscaAluno()
 	{
-		$this->db->select('*');
-        $this->db->from('usuario');
-        $this->db->join('aluno', 'aluno.idUsuario = usuario.id', 'join');
-		$this->db->where('idUsuario', $this->id);
-        
-        $query = $this->db->get();
-        return $query->result();
+		try {
+ 			
+			$this->load->model('aluno','model');
+			
+			return $this->model->get_by_id_user($this->id);
+		
+		}catch (Exception $e) {
+    		return NULL;
+		}	
 	}
 		
 }

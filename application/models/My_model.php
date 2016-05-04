@@ -13,7 +13,7 @@ class My_Model extends CI_Model {
 	}
 	
 	public function set_tabela($tabela){
-		$this->tabela = $tabela;
+		$this->tabela = strtolower($tabela);
 	}
 	
 	public function get_table(){
