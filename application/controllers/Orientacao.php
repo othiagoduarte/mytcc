@@ -8,14 +8,18 @@ class Orientacao extends CI_Controller {
 	function __construct()
 	{		
 		parent::__construct();
+		
+		if ( ! $this->session->userdata('logado')){
+            redirect('login');
+        } 
+		
 		$this->load->model('projeto', 'projeto', TRUE);
-		$this->load->library('session');
 		$sessionId = $this->session->userdata('id');
 	}
 	
 	public function index()
 	{		
-		echo "não definido";
+		$this->listar();
 	}
 	
 	public function solicitar()

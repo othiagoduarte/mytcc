@@ -8,6 +8,10 @@ class Alunos extends CI_Controller {
 	{
 		parent::__construct();
 		
+		if ( ! $this->session->userdata('logado')){
+            redirect('login');
+        } 
+		
 		$this->load->model('aluno', 'model', TRUE);
 	}
 	

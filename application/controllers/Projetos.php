@@ -8,8 +8,13 @@ class Projetos extends CI_Controller
     function __construct()
     {		
 		parent::__construct();
-		$this->load->model('projeto','projetoDB');
-        $this->load->library('session');
+		
+        if ( ! $this->session->userdata('logado')){
+            redirect('login');
+        }  
+        
+        $this->load->model('projeto','projetoDB');
+
         $sessionId = $this->session->userdata('id');		
 	}
 	

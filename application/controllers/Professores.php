@@ -6,6 +6,11 @@ class Professores extends CI_Controller {
 	function __construct()
 	{		
 		parent::__construct();
+		
+		if ( ! $this->session->userdata('logado')){
+            redirect('login');
+        }
+		 
 		$this->load->model('professor','model');			
 	}
 	
