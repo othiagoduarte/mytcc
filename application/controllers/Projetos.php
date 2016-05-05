@@ -40,19 +40,11 @@ class Projetos extends CI_Controller
         $this->projetoDB->insert();
     }
     
-    public function listaPorStatus()
-    {        
-        return $this->projetoDB->join_AreaInteresse();
-        echo json_encode($this->projetoDB->get_all());
+    public function listarProjetosPorProfessor(){
+        
+        $idProfessor = $this->session->userdata('id');
+        
+        echo json_encode($this->projetoDB->get_projeto_by_professor($idProfessor));
+        
     }
-    
-    public function join_AreaInteresse()
-	{
-		$this->projetoDB->select('*');
-        $this->projetoDB->from('projeto');
-        $this->projetoDB->join('statusProjeto');
-        $this->projetoDB->where('projeto.idAreaInteresse == statusProjeto.id');        
-		$query = $this->projetoDB->get(); 
-		return $query->result();
-	}
 }
