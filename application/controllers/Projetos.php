@@ -39,13 +39,12 @@ class Projetos extends CI_Controller
         $this->projetoDB->insert();
     }
     
-    public function listaPorStatus($status)
-    {
-        $this->projetoDB->select('*');
-        $this->projetoDB->from('projeto');
-        $this->projetoDB->where('status',$status);
-        $this->projetoDB->get();
+    public function listarProjetosPorProfessor(){
         
-        return $this->projetoDB->result();
+        $idProfessor = $this->session->userdata('id');
+        
+        echo json_encode($this->projetoDB->get_projeto_by_professor($idProfessor));
+        
     }
+    
 }
