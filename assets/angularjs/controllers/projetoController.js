@@ -1,23 +1,22 @@
 angular.module('mytcc')
 
 .controller('projetoController', function($scope, $http, $log)
-{
-	//var url = "http://localhost:8080/mytcc/index.php/projetos/";
-    
+{    
     $scope.projetos;
+    $scope.status = { aguardando: '1', aceito: '2', negado: '3' };
     
     $scope.listaProjetos = function ()
     {
-        $http.get('/projetos/listarProjetosPorProfessor')
-        .success(function (data, status, header, config) 
+        $http.get('/mytcc/projetos/listarProjetosPorProfessor')
+		.success(function (data, status, header, config)
 		{
-			$log.log("metodo GET acessado com sucesso. Status -> "+status);
+			$log.info(data);
+            $log.info("metodo POST acessado com sucesso. Status -> " +status);
 			$scope.projetos = data;
-			$log.log($scope.projetos);
 		})
-		.error(function (data, status, header, config) 
+		.error(function (data, status, header, config)
 		{
-			$log.error("método GET com erro. Status -> " +status);
-		})
+			$log.error("metodo POST com erro. Status -> " +status);
+		})	
     }    
 });

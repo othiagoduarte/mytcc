@@ -4,6 +4,7 @@ angular.module('mytcc')
 .controller('loginController', function($scope, $http, $log) 
 {       
     $log.info("acessando o controlador do login...");
+    $scope.formInvalido = false;
     var url = "/index.php/login/";
         
     $http.get(url+"pegaEmail")
@@ -20,39 +21,39 @@ angular.module('mytcc')
         }
     });
         
-    $scope.dados;
+    $scope.dados = { cpf: '', senha: ''};
     $scope.error;
         
     // metodo que retorna um promisse http
-    var loginService = function(email, senha)
+    var loginService = function(cpf, senha)
     {
         return $http
         ({            
             url: url+'logar',
             method: 'POST',
-            data: { 'email': email, 'senha' : senha }
+            data: { 'email': cpf, 'senha' : senha }
         });
     }
     
     $scope.logar = function()
     {        
         $log.log("acessando o metodo logar.");
-        if(validaCampos)
+        if(validaCampos($scope.dados.cpf, $scope.dados.senha))
         {
-            loginService($scope.dados.email, $scope.dados.senha)
+            loginService($scope.dados.cpf, $scope.dados.senha)
             .then(function(loginResult)
             {
-                $log.info(loginResult);
                 if(loginResult.data == "TRUE")
                 {
                     redirect('orientacao', 'listar');
                 }
                 else
                 {
-                    $scope.error = 'Email ou senha incorretos.';                   
+                    $scope.formInvalido = true;
+                    $scope.error = 'Email ou senha incorretos';                   
                 }
             });
-        }        
+        }
     }
     
     $scope.logout = function()
@@ -64,17 +65,20 @@ angular.module('mytcc')
         })
     };
     
-    var validaCampos = function(email, senha)
+    var validaCampos = function(cpf, senha)
     {
-        if(email == '')
+        $log.log("validando...");
+        if(cpf == '')
         {
-            $scope.error = "Insira seu email.";
+            $scope.error = "Insira seu CPF";
+            $scope.formInvalido = true;
             return false;
         }
             
         if(senha == '')
         {
-            $scope.error = "Insira sua email.";
+            $scope.error = "Insira sua senha";
+            $scope.formInvalido = true;
             return false;   
         }
             

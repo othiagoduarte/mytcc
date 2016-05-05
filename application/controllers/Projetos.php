@@ -10,31 +10,32 @@ class Projetos extends CI_Controller
 		parent::__construct();
 		$this->load->model('projeto','projetoDB');
         $this->load->library('session');
-        $sessionId = $this->session->userdata('id');		
+        $sessionId = $this->session->userdata('id');
+        
+        $this->load->helper('date');		
 	}
 	
 	public function listar()
     {		
-		echo json_encode($this->model->get_all());
+		echo json_encode($this->projetoDB->get_all());
 	}
     
     public function insereSolicitacao()
-    {
-		var_dump($this->sessionId);
-        
+    {        
         // le o arquivo e converte para string
 		$postData = file_get_contents("php://input");
 		// retira o objeto do formado json
 		$request = json_decode($postData, true);
         
         // insere os dados que vieram do angular nas proriedades da moel
-        $this->projetoDB->status = 'wait';
-        $this->projetoDB->resumo = $request['resumo'];
-        $this->projetoDB->titulo = $request['titulo'];
+        $this->projetoDB->idAluno = $this->session->userdata('id');
         $this->projetoDB->idProfessor = $request['idProfessor'];
+        $this->projetoDB->titulo = $request['titulo'];
+        $this->projetoDB->resumo = $request['resumo'];
         $this->projetoDB->idAreaInteresse = $request['idArea'];
         $this->projetoDB->turno = 'Noite';
-        $this->projetoDB->idAluno = $this->session->userdata('id');
+        $this->projetoDB->statusProjeto = 1; //aguardando        
+        $this->projetoDB->dataSolicitacao = date('Y-m-d H:i:s');        
         
         $this->projetoDB->insert();
     }
