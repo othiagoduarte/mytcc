@@ -2,7 +2,7 @@ angular.module('mytcc')
 
 .controller('solicitacaoController', function($scope, $http, $log)
 {
-	var url = "http://localhost:8080/mytcc/index.php/";   
+	var url = "/index.php/";   
 			
 	$scope.projeto;
 	$scope.aguardando = true;

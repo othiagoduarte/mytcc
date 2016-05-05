@@ -47,4 +47,5 @@ class Projetos extends CI_Controller
         echo json_encode($this->projetoDB->get_projeto_by_professor($idProfessor));
         
     }
+    
 }
