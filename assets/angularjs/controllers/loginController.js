@@ -5,18 +5,20 @@ angular.module('mytcc')
 {       
     $log.info("acessando o controlador do login...");
     $scope.formInvalido = false;
-    var url = "/index.php/login/";
+    var url = "index.php/login/";
         
     $http.get(url+"pegaEmail")
     .then(function (response) 
     {
+        $log.log('verificando se o usuario esta logado');
         if(response.data == 'FALSE')
         {
+            $log.log('não esta logado');
             $scope.nome = 'Seja bem vindo, faça o login';
-            $log.log(response.data);
         }
         else
         {
+            $log.log('esta logado, '+response.data);
             $scope.nome = response.data;
         }
     });
