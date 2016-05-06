@@ -1,13 +1,15 @@
 angular.module('mytcc')
 
-.controller('projetoController', function($scope, $http, $log)
+.controller('projetoController', function($scope, $http, $log, urlService)
 {    
-    $scope.projetos;
+    var url = urlService.getUrl;
+	
+	$scope.projetos;
     $scope.status = { aguardando: '1', aceito: '2', negado: '3' };
     
     $scope.listaProjetos = function ()
     {
-        $http.get('/mytcc/projetos/listarProjetosPorProfessor')
+        $http.get(url+'projetos/listarProjetosPorProfessor')
 		.success(function (data, status, header, config)
 		{
 			$log.info(data);

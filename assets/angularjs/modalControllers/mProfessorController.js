@@ -1,6 +1,8 @@
 angular.module('mytcc')
-.controller('mProfessorController', function ($http, $log, $scope, $uibModalInstance, items) 
+.controller('mProfessorController', function ($http, $log, $scope, $uibModalInstance, items, urlService) 
 {
+    var url = urlService.getUrl;
+    
     $scope.data = items;
     
     $scope.error = '';
@@ -16,7 +18,7 @@ angular.module('mytcc')
          $scope.data.professor.vagas, $scope.data.professor.turnoDia, $scope.data.professor.turnoNoite))
         {
             $log.log('passou no teste de validacao');
-            $http.post('professores/registrar', $scope.data)
+            $http.post(url+'professores/registrar', $scope.data)
             .success(function (data, status, header, config)
 		    {
                 $log.info("metodo POST acessado com sucesso. Status -> " +status);

@@ -1,8 +1,8 @@
 angular.module('mytcc')
 
-.controller('solicitacaoController', function($scope, $http, $log)
+.controller('solicitacaoController', function($scope, $http, $log, urlService)
 {
-	var url = "/index.php/";   
+	var url = urlService.getUrl;   
 			
 	$scope.projeto;
 	$scope.aguardando = true;

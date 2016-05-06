@@ -1,8 +1,8 @@
 angular.module('mytcc')
 
-.controller('orientacaoController', function($scope, $http, $log)
+.controller('orientacaoController', function($scope, $http, $log, urlService)
 {
-	var url = "http://localhost:8080/mytcc/index.php/";
+	var url = urlService.getUrl;
     
     				
 });

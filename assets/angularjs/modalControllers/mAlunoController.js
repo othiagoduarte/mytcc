@@ -1,6 +1,8 @@
 angular.module('mytcc')
-.controller('mAlunoController', function ($http, $log, $scope, $uibModalInstance, items) 
+.controller('mAlunoController', function ($http, $log, $scope, $uibModalInstance, items, urlService) 
 {
+    var url = urlService.getUrl;
+    
     $scope.data = items;
     
     $scope.error = '';
@@ -14,7 +16,7 @@ angular.module('mytcc')
         if(validaFormAluno($scope.data.aluno.nome, $scope.data.aluno.email, $scope.data.aluno.matricula, $scope.data.aluno.cidade, $scope.data.aluno.bairro, $scope.data.aluno.telefone, $scope.data.aluno.estado))
         {
             $log.log('passou no teste de validacao');
-            $http.post('alunos/registrar', $scope.data)
+            $http.post(url+'alunos/registrar', $scope.data)
             .success(function (data, status, header, config)
 		    {
                 $log.info("metodo POST acessado com sucesso. Status -> " +status);

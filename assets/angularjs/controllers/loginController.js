@@ -1,13 +1,13 @@
 angular.module('mytcc')
 
 // define um controlador dentro do modulo 'myApp' que será chamado la na view
-.controller('loginController', function($scope, $http, $log) 
+.controller('loginController', function($scope, $http, $log, urlService) 
 {       
     $log.info("acessando o controlador do login...");
     $scope.formInvalido = false;
-    var url = "index.php/login/";
+    var url = urlService.getUrl;
         
-    $http.get(url+"pegaEmail")
+    $http.get(url+"login/pegaEmail")
     .then(function (response) 
     {
         $log.log('verificando se o usuario esta logado');
@@ -31,7 +31,7 @@ angular.module('mytcc')
     {
         return $http
         ({            
-            url: url+'logar',
+            url: url+'login/logar',
             method: 'POST',
             data: { 'email': cpf, 'senha' : senha }
         });
@@ -60,10 +60,10 @@ angular.module('mytcc')
     
     $scope.logout = function()
     {
-        $http.get(url+'sair')
+        $http.get(url+'login/sair')
         .then(function()
         {
-            redirect('login');      
+            redirect('login', "");      
         })
     };
     
@@ -88,8 +88,8 @@ angular.module('mytcc')
     }
     
     var reloadPage = function(){window.location.reload();}
-    var redirect = function(controller, method )
+    var redirect = function(controller, method)
     {
-        window.location.assign(controller+'/'+method)
+        window.location.assign(url+controller+'/'+method)
     };
 });

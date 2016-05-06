@@ -1,8 +1,10 @@
 angular.module('mytcc')
 
 // define um controlador dentro do modulo 'myApp' que será chamado la na view
-.controller('alunoController', function($scope, $http, $log) 
+.controller('alunoController', function($scope, $http, $log, urlService) 
 {		
+	var url = urlService.getUrl;
+	
 	$log.info("acessando controlador de alunos...");
 	
 	$scope.estados = ['RS', 'SC', 'PR', 'SP', 'RJ', 'AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF'];
@@ -12,7 +14,7 @@ angular.module('mytcc')
 	   e atribui o resultado disso a uma variavel aluno que será chamada la na view */
 	$scope.listaAlunos = function()
 	{
-		$http.get("alunos/listar")
+		$http.get(url+"alunos/listar")
 		.success(function (data, status, header, config) 
 		{
 			$log.log("metodo GET acessado com sucesso. Status -> "+status);
@@ -33,7 +35,7 @@ angular.module('mytcc')
 				
 		var data = { usuario: user, aluno:student };
 		
-		$http.post("alunos/insereAluno", data)
+		$http.post(url+"alunos/insereAluno", data)
 		.success(function (data, status, header, config)
 		{
 			$log.info("metodo POST acessado com sucesso. Status -> " +status);
@@ -54,7 +56,7 @@ angular.module('mytcc')
 		{
 			$log.log("acessando o metodo removeAluno...");
 	
-			$http.post('alunos/deletaAluno', idAluno)
+			$http.post(url+'alunos/deletaAluno', idAluno)
 			.success(function (data, status, header, config)
 			{
 				$log.info("metodo DELETE acessado com sucesso. Status -> " +status);
