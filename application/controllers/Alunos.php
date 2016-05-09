@@ -8,11 +8,17 @@ class Alunos extends CI_Controller {
 	{
 		parent::__construct();
 		
+<<<<<<< HEAD
 		if ( ! $this->session->userdata('logado')){
             redirect('login');
         } 
 		
 		$this->load->model('aluno', 'model', TRUE);
+=======
+		$this->load->library('session');
+		$this->load->model('usuario', 'usuarioDB', TRUE);
+		$this->load->model('aluno', 'alunoDB', TRUE);		
+>>>>>>> f8302c0bf68b56224fc4b605b4ecfa469b1b5494
 	}
 	
 	function index()
@@ -32,12 +38,12 @@ class Alunos extends CI_Controller {
 	// funcao criada para trazer a modal de registrar aluno
 	function registrarAluno()
 	{
-		$this->load->view('alunos/modalRegistrarAluno');
+		$this->load->view('registros/modalRegistrarAluno');
 	}
 	
 	function registrarUsuario()
 	{
-		$this->load->view('usuarios/modalRegistrarUsuario');
+		$this->load->view('registros/modalRegistrarUsuario');
 	}	
 	
 	public function listar()
@@ -52,7 +58,7 @@ class Alunos extends CI_Controller {
 		// retira o objeto do formado json
 		$request = json_decode($postData);
 		// chama o metodo inserir da model aluno p/ inserir os dados no banco
-		$this->model->inserir($request);				
+		$this->alunoDB->inserir($request);				
 	}
 	
 	public function deletaAluno()
@@ -61,6 +67,63 @@ class Alunos extends CI_Controller {
 		$postData = file_get_contents("php://input");
 		$request  =json_decode($postData);
 		
-		$this->model->remover($request);
+		$this->alunoDB->remover($request);
 	}
+	
+	// metodo que a model mAlunoModel usa para efetuar o registro de um aluno
+	function registrar()
+	{
+		// le o arquivo e converte para string
+		$postData = file_get_contents("php://input");
+		// retira o objeto do formado json
+		$request = json_decode($postData, true);
+		
+		try
+		{
+			$this->usuarioDB->beginTrans();
+			$this->alunoDB->beginTrans();
+			
+			// atribui as propriedades do usuario a sua model
+			$this->usuarioDB->user = $request['usuario']['cpf'];
+			$this->usuarioDB->senha = $request['usuario']['senha'];
+			$this->usuarioDB->tipo = $request['usuario']['tipo'];
+			
+			$this->usuarioDB->insert();
+			
+			$userID = $this->usuarioDB->getLastId();
+			
+			// // atribui as propriedades do aluno a sua model
+			$this->alunoDB->nome = $request['aluno']['nome'];
+			$this->alunoDB->matricula = $request['aluno']['matricula'];
+			$this->alunoDB->email = $request['aluno']['email'];
+			$this->alunoDB->endereco = $request['aluno']['endereco'];
+			$this->alunoDB->telefone = $request['aluno']['telefone'];
+			$this->alunoDB->cidade = $request['aluno']['cidade'];
+			$this->alunoDB->estado = $request['aluno']['estado'];
+			$this->alunoDB->bairro = $request['aluno']['bairro'];
+			$this->alunoDB->cpf = $request['usuario']['cpf'];
+			$this->alunoDB->idUsuario = $userID;
+			
+			$this->alunoDB->insert();
+			$alunoID = $this->alunoDB->getLastId();
+			
+			$this->usuarioDB->commit();
+			$this->alunoDB->commit();	
+			
+			// registra o login nos cookies
+			$data = array();
+			$data['id'] = $alunoID;
+		    $data['nome'] = $this->alunoDB->nome;
+			$data['logado'] = 'true';
+		    $this->session->set_userdata($data);
+		} 
+		// nao esta funcionando, configuracoes do codeigniter
+		catch(Exception $e)
+		{
+			$this->usuarioDB->rollback();
+			$this->alunoDB->rollback();
+			echo '{"data": "Exception occurred: '.$e->getMessage().'"}';
+			var_dump($e);
+		}		
+	}		
 }
