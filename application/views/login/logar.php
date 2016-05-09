@@ -33,13 +33,13 @@
                 <div class="form-group">
                     <label for="cpf" class="control-label col-sm-3">CPF:</label>
                     <div class="col-sm-7">
-                        <input id="cpf" name="cpf" class="form-control" type="text" ng-model="dados.cpf">
+                        <input id="cpf" name="cpf" class="form-control" required="" type="text" ng-model="dados.email">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="senha" class="control-label col-sm-3">Senha:</label>
                     <div class="col-sm-7">
-                        <input id="senha" name="senha" value="" class="form-control" type="password" ng-model="dados.senha">
+                        <input id="senha" name="senha" value="" class="form-control" required="" type="password" ng-model="dados.senha">
                     </div>
                 </div>
                 <!-- O sistema ja detecta o perfil do usuario atraves do usuario.tipo 
@@ -62,6 +62,6 @@
                 </div>
             </div>
         </div>
-            <div ng-show="formInvalido" class="alert alert-warning" > {{ error }}</div>
     </form>
+    {{ error }}
 </div> 

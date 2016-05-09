@@ -18,19 +18,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Professor extends My_Model {
 
-    public $nome = "";
     public $matricula = "";
-    public $email = "";
     public $endereco ="";
     public $telefone = 0;
     public $cidade = "";
     public $estado = "";
     public $bairro = "";
-    public $cpf = "";
     public $numVagas = 0;
     public $turnoDia = false;
-    public $turnoNoite = false;    
-    public $idUsuario = 0;   
+    public $turnoNoite = false;
+    
+    public $usuario = 0;   
     
     public function __construct(){
 	   	parent::__construct();

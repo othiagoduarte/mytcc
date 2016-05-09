@@ -22,9 +22,9 @@
 							<th>Data da solicitação	</th>
 						</thead>
 						<tbody>
-							<tr ng-repeat="projeto in projetos | filter: { statusProjeto: status.aguardando }">
-								<td >{{ projeto.NomeAluno }}</td>	
-								<td >{{ projeto.NomeAreaInteresse }}</td>
+							<tr ng-repeat="projeto in projeto | filter projeto.status">
+								<td >{{ projeto.aluno.nome }}</td>	
+								<td >{{ projeto.areaInteresse.nome }}</td>
 								<td >{{ projeto.dataSolicitacao }}</td>
 							</tr>								
 						</tbody>
@@ -47,9 +47,10 @@
 						<th>Data da solicitação	</th>
 					</thead>
 					<tbody>
-						<tr ng-repeat="projeto in projetos | filter: { statusProjeto: status.aceito }">
-								<td >{{ projeto.NomeAluno }}</td>	
-								<td >{{ projeto.NomeAreaInteresse }}</td>
+						<tr >
+							<tr ng-repeat="projeto in projeto | filter projeto.status">
+								<td >{{ projeto.aluno.nome }}</td>	
+								<td >{{ projeto.areaInteresse.nome }}</td>
 								<td >{{ projeto.dataSolicitacao }}</td>
 						</tr>								
 					</tbody>
@@ -73,9 +74,10 @@
 						<th>Data da solicitação	</th>
 					</thead>
 					<tbody>
-						<tr ng-repeat="projeto in projetos | filter: { statusProjeto: status.negado }">
-								<td >{{ projeto.NomeAluno }}</td>	
-								<td >{{ projeto.NomeAreaInteresse }}</td>
+						<tr >
+							<tr ng-repeat="projeto in projeto | filter projeto.status">
+								<td >{{ projeto.aluno.nome }}</td>	
+								<td >{{ projeto.areaInteresse.nome }}</td>
 								<td >{{ projeto.dataSolicitacao }}</td>
 						</tr>								
 					</tbody>

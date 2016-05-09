@@ -76,11 +76,5 @@ class My_Model extends CI_Model {
 	
 	public function teste(){
 		echo "Model ".get_class($this)." esta funcionando !!";
-	}
-	
-	// retorna o ultimo id inserido na tabela
-	public function getLastId()
-    {
-        return $this->db->insert_id();
-    } 	
+	}	
 }

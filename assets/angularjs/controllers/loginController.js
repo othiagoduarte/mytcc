@@ -4,58 +4,55 @@ angular.module('mytcc')
 .controller('loginController', function($scope, $http, $log) 
 {       
     $log.info("acessando o controlador do login...");
-    $scope.formInvalido = false;
-    var url = "index.php/login/";
+    var url = "http://localhost:8080/mytcc/index.php/login/";
         
     $http.get(url+"pegaEmail")
     .then(function (response) 
     {
-        $log.log('verificando se o usuario esta logado');
         if(response.data == 'FALSE')
         {
-            $log.log('não esta logado');
             $scope.nome = 'Seja bem vindo, faça o login';
+            $log.log(response.data);
         }
         else
         {
-            $log.log('esta logado, '+response.data);
             $scope.nome = response.data;
         }
     });
         
-    $scope.dados = { cpf: '', senha: ''};
+    $scope.dados;
     $scope.error;
         
     // metodo que retorna um promisse http
-    var loginService = function(cpf, senha)
+    var loginService = function(email, senha)
     {
         return $http
         ({            
             url: url+'logar',
             method: 'POST',
-            data: { 'email': cpf, 'senha' : senha }
+            data: { 'email': email, 'senha' : senha }
         });
     }
     
     $scope.logar = function()
     {        
         $log.log("acessando o metodo logar.");
-        if(validaCampos($scope.dados.cpf, $scope.dados.senha))
+        if(validaCampos)
         {
-            loginService($scope.dados.cpf, $scope.dados.senha)
+            loginService($scope.dados.email, $scope.dados.senha)
             .then(function(loginResult)
             {
+                $log.info(loginResult);
                 if(loginResult.data == "TRUE")
                 {
                     redirect('orientacao', 'listar');
                 }
                 else
                 {
-                    $scope.formInvalido = true;
-                    $scope.error = 'Email ou senha incorretos';                   
+                    $scope.error = 'Email ou senha incorretos.';                   
                 }
             });
-        }
+        }        
     }
     
     $scope.logout = function()
@@ -67,20 +64,17 @@ angular.module('mytcc')
         })
     };
     
-    var validaCampos = function(cpf, senha)
+    var validaCampos = function(email, senha)
     {
-        $log.log("validando...");
-        if(cpf == '')
+        if(email == '')
         {
-            $scope.error = "Insira seu CPF";
-            $scope.formInvalido = true;
+            $scope.error = "Insira seu email.";
             return false;
         }
             
         if(senha == '')
         {
-            $scope.error = "Insira sua senha";
-            $scope.formInvalido = true;
+            $scope.error = "Insira sua email.";
             return false;   
         }
             
@@ -88,8 +82,8 @@ angular.module('mytcc')
     }
     
     var reloadPage = function(){window.location.reload();}
-    var redirect = function(controller, method )
+    var redirect = function(controller, method = '')
     {
-        window.location.assign(controller+'/'+method)
+        window.location.assign("http://localhost:8080/mytcc/"+controller+'/'+method)
     };
 });

@@ -15,6 +15,7 @@
 <div ng-controller="alunoController">
     <input class="btn btn-primary btn-lg" type="button" value="Registre-se agora!" ng-click="open()"/>
     <a class="btn btn-primary" href="./login" role="button">Entrar</a>
+
 <div ng-controller="homeController">
     
     <div ng-show="data.sucesso" class="alert alert-success">{{ data.mensagem }}</div>
@@ -59,7 +60,7 @@
         </tbody>
     </table>		
     </div>
->>>>>>> f8302c0bf68b56224fc4b605b4ecfa469b1b5494
+
 </div>
 </div>
 

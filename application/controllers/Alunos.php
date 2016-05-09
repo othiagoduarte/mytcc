@@ -8,7 +8,6 @@ class Alunos extends CI_Controller {
 	{
 		parent::__construct();
 		
-
 		if ( ! $this->session->userdata('logado')){
             redirect('login');
         } 
@@ -16,6 +15,7 @@ class Alunos extends CI_Controller {
 		$this->load->model('aluno', 'model', TRUE);
 		$this->load->model('usuario', 'usuarioDB', TRUE);
 		$this->load->model('aluno', 'alunoDB', TRUE);		
+
 	}
 	
 	function index()

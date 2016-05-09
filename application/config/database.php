@@ -78,12 +78,12 @@ $db['default'] = array(
 	'hostname' => 'localhost',
 	
 	//Config: Cristiano
-	// 'username' => 'root',
-	// 'password' => '',
+	'username' => 'root',
+	'password' => '',
 	
 	//Config: USB WEBSERVER
-	'username' => 'm@ster',
-	'password' => 'master',
+	//'username' => 'root',
+	//'password' => 'usbw',
 	'database' => 'mytcc',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
