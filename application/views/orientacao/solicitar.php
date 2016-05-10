@@ -1,4 +1,4 @@
-<body ng-controller="solicitacaoController">
+<div ng-controller="solicitacaoController">
 
 	<div class="row">
 		<div class="col-md-12">
@@ -70,15 +70,14 @@
 	</div>
 	
 	<!--Botão enviar solicitação do formulário-->
-	<div class="row">
+	<div class="row" ng-show="aguardando">
 		<div class="col-md-10">
 		</div>
 		<div class="col-md-2">				
 			<input ng-click="enviaProposta()" type="button" class="btn btn-success" value="Solicitar Orientação"></input>
 		</div>
 	</div>
-	
 </form>
-
-</body>
+	<div ng-show="!aguardando" class="alert alert-success">Solicitação enviada com sucesso. Aguarde o feedback do professor.</div>
+</div>
 </html>

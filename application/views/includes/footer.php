@@ -16,4 +16,9 @@
     <script src="<?php echo base_url("/assets/angularjs/controllers/loginController.js") ?>"></script>
     <script src="<?php echo base_url("/assets/angularjs/controllers/homeController.js") ?>"></script>
     <script src="<?php echo base_url("/assets/angularjs/controllers/professorController.js") ?>"></script>
+    <script src="<?php echo base_url("/assets/angularjs/controllers/projetoController.js") ?>"></script>
+    <script src="<?php echo base_url("/assets/angularjs/modalControllers/mAlunoController.js") ?>"></script>
+    <script src="<?php echo base_url("/assets/angularjs/modalControllers/mProfessorController.js") ?>"></script>
+    <script src="<?php echo base_url("/assets/angularjs/modalControllers/mUsuarioController.js") ?>"></script>
+    <script src="<?php echo base_url("/assets/angularjs/services/url.js") ?>"></script>
 </footer>
