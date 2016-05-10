@@ -6,25 +6,31 @@ class Professores extends CI_Controller {
 	function __construct()
 	{		
 		parent::__construct();
-		
-		$this->load->library('session');
+
+		if ( ! $this->session->userdata('logado')){
+            redirect('login');
+        }
+		 		
 		$this->load->model('usuario', 'usuarioDB', TRUE);
 		$this->load->model('professor','professorDB', TRUE);				
+
 	}
 	
 	public function index(){
 		echo "Interface de cadastro de professor";
 	}
+	
 	// funcao criada para trazer a modal de registrar professor
 	function registrarProfessor()
 	{
-		$this->load->view('registros/modalRegistrarProfessor');
+		$this->load->view('professores/modalRegistrarProfessor');
 	}
 	
 	public function listar()
 	{		
 		echo json_encode($this->professorDB->get_all());
 	}
+
 	// metodo que a model mProfessorModel usa para efetuar o registro de um professor
 	function registrar()
 	{
@@ -83,5 +89,4 @@ class Professores extends CI_Controller {
 			echo '{"data": "Exception occurred: '.$e->getMessage().'"}';
 			var_dump($e);
 		}	
-	}
 }

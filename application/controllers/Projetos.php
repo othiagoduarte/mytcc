@@ -5,14 +5,19 @@ class Projetos extends CI_Controller
 {
 	public $sessionId = 0;
     
-    function __construct()
+    public function __construct()
     {		
 		parent::__construct();
+		
+        if ( ! $this->session->userdata('logado')){
+            redirect('login');
+        }          	
+
 		$this->load->model('projeto','projetoDB');
-        $this->load->library('session');
         $sessionId = $this->session->userdata('id');
         
         $this->load->helper('date');		
+
 	}
 	
 	public function listar()
@@ -27,25 +32,23 @@ class Projetos extends CI_Controller
 		// retira o objeto do formado json
 		$request = json_decode($postData, true);
         
-        // insere os dados que vieram do angular nas proriedades da moel
+        // insere os dados que vieram do angular nas proriedades da model
         $this->projetoDB->idAluno = $this->session->userdata('id');
         $this->projetoDB->idProfessor = $request['idProfessor'];
-        $this->projetoDB->titulo = $request['titulo'];
+        $this->projetoDB->titulo = $request['titulo'];        
+        $this->projetoDB->status = 'wait';
         $this->projetoDB->resumo = $request['resumo'];
         $this->projetoDB->idAreaInteresse = $request['idArea'];
         $this->projetoDB->turno = 'Noite';
-        $this->projetoDB->statusProjeto = 1; //aguardando        
-        $this->projetoDB->dataSolicitacao = date('Y-m-d H:i:s');        
+        $this->projetoDB->idAluno = $this->session->userdata('id');
         
         $this->projetoDB->insert();
     }
-    
-    public function listarProjetosPorProfessor(){
         
+    public function listarProjetosPorProfessor()
+    {        
         $idProfessor = $this->session->userdata('id');
         
-        echo json_encode($this->projetoDB->get_projeto_by_professor($idProfessor));
-        
+        echo json_encode($this->projetoDB->get_projeto_by_professor($idProfessor));        
     }
-    
 }

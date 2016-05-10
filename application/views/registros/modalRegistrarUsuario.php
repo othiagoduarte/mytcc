@@ -39,5 +39,5 @@
 </div>        
 <div class="modal-footer">
     <input type="button" class="btn btn-danger" ng-click="cancel()" value="Cancelar"/>
-    <input type="button" class="btn btn-info" ng-click="next()" value="Adiante"/>     
+    <input type="button" class="btn btn-info" ng-click="next()" value="Adiante"/>  
 </div>

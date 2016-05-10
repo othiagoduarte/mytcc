@@ -48,9 +48,9 @@
 					</thead>
 					<tbody>
 						<tr ng-repeat="projeto in projetos | filter: { statusProjeto: status.aceito }">
-								<td >{{ projeto.NomeAluno }}</td>	
-								<td >{{ projeto.NomeAreaInteresse }}</td>
-								<td >{{ projeto.dataSolicitacao }}</td>
+							<td >{{ projeto.NomeAluno }}</td>	
+							<td >{{ projeto.NomeAreaInteresse }}</td>
+							<td >{{ projeto.dataSolicitacao }}</td>
 						</tr>								
 					</tbody>
 				</table>
@@ -74,9 +74,9 @@
 					</thead>
 					<tbody>
 						<tr ng-repeat="projeto in projetos | filter: { statusProjeto: status.negado }">
-								<td >{{ projeto.NomeAluno }}</td>	
-								<td >{{ projeto.NomeAreaInteresse }}</td>
-								<td >{{ projeto.dataSolicitacao }}</td>
+							<td >{{ projeto.NomeAluno }}</td>	
+							<td >{{ projeto.NomeAreaInteresse }}</td>
+							<td >{{ projeto.dataSolicitacao }}</td>
 						</tr>								
 					</tbody>
 				</table>				

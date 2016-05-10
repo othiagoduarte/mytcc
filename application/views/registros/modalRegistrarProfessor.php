@@ -49,7 +49,7 @@
             <label for="inputTelefone">Qual é seu telefone?</label>
             <input type="number" ng-model="data.professor.telefone" id="inputTelefone" class="form-control" placeholder="Telefone: ">
         </fieldset>
-         <fieldset class="form-group">
+        <fieldset class="form-group">
             <label for="inputEstado">Selecione o estado:</label>
             <select ng-options="x for x in estados" ng-model="data.professor.estado" id="inputEstado "class="form-control"></select>
         </fieldset>

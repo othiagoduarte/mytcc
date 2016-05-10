@@ -8,13 +8,14 @@ angular.module('mytcc')
 	$log.info("acessando controlador de alunos...");
 	
 	$scope.estados = ['RS', 'SC', 'PR', 'SP', 'RJ', 'AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF'];
-								    
+			    
     /* criando o método listaAluno
 	   usa o metodo get do protocolo http para chamar o metodo 'listaAlunos' do controlador 'aluno_controller'
 	   e atribui o resultado disso a uma variavel aluno que será chamada la na view */
 	$scope.listaAlunos = function()
 	{
 		$http.get(url+"alunos/listar")
+
 		.success(function (data, status, header, config) 
 		{
 			$log.log("metodo GET acessado com sucesso. Status -> "+status);
@@ -32,10 +33,12 @@ angular.module('mytcc')
 	$scope.adicionaAluno = function () 
 	{		
 		$log.log("acessando o metodo adicionaAluno...");
-				
-		var data = { usuario: user, aluno:student };
+		var data = $scope.aluno;
+		
+		$log.log(data);
 		
 		$http.post(url+"alunos/insereAluno", data)
+
 		.success(function (data, status, header, config)
 		{
 			$log.info("metodo POST acessado com sucesso. Status -> " +status);
@@ -57,6 +60,7 @@ angular.module('mytcc')
 			$log.log("acessando o metodo removeAluno...");
 	
 			$http.post(url+'alunos/deletaAluno', idAluno)
+
 			.success(function (data, status, header, config)
 			{
 				$log.info("metodo DELETE acessado com sucesso. Status -> " +status);

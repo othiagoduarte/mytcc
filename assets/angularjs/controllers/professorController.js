@@ -5,5 +5,5 @@ angular.module('mytcc')
 {	
 	$log.info("acessando controlador de professores...");
 	
-	$scope.estados = ['RS', 'SC', 'PR', 'SP', 'RJ', 'AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF'];				    
+	$scope.estados = ['RS', 'SC', 'PR', 'SP', 'RJ', 'AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF'];			    
 });

@@ -6,13 +6,14 @@ class Home extends CI_Controller
     function __construct() 
 	{
 		parent::__construct();	
+        
 	}
     
     function index()
     {
-        $this->load->view('includes/prototipo_header');
+        $this->load->view('includes/header');
         $this->load->view('home/main');
-	    $this->load->view('includes/prototipo_footer');
+	    $this->load->view('includes/footer');
     }
     public function testarSession(){
 

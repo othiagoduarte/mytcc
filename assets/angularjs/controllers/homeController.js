@@ -77,9 +77,4 @@ angular.module('mytcc')
             $log.info('Modal dismissed at: ' + new Date());
         });
     };
-    
-    $scope.setFeedBack = function()
-    {
-        $scope.feedback = !$scope.feedback;
-    }
 });

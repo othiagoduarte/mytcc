@@ -8,6 +8,10 @@ class AreaInteresses extends CI_Controller
 	{
 		parent::__construct();
 		
+		if ( ! $this->session->userdata('logado')){
+            redirect('login');
+        }		
+		
 		$this->load->model('areainteresse', 'model', TRUE);
 	}
 	

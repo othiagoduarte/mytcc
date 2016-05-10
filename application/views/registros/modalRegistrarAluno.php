@@ -36,7 +36,7 @@
             <div ng-messages="form_aluno.cidade.$error" ng-if='form_aluno.cidade.$dirty' class="error">
                 <div ng-message="required">É obrigatório digitar a cidade</div>
                 <div ng-message="minlength">A matrícula precisa ter pelo menos 6 digitos</div>
-            </div>	 
+            </div>
         </fieldset>
         <fieldset class="form-group">
             <label for="inputBairro">Qual é o seu bairro?</label>

@@ -12,30 +12,28 @@
                             </div>
                             <!-- /input-group -->
                         </li>
+                        <li class="active">
+                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Orientação<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                
+                                <li>
+                                    <a href="<?php echo base_url('orientacao/listar') ?>"><i class="fa fa-dashboard fa-fw"></i> Listar</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url('orientacao/solicitar') ?>"><i class="fa fa-dashboard fa-fw"></i> Solicitar</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url('orientacao/responder') ?>"><i class="fa fa-dashboard fa-fw"></i> Responder</a>
+                                </li>
+                                
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
                         <li>
                             <a href="<?php echo base_url('alunos') ?>"><i class="fa fa-dashboard fa-fw"></i> Alunos</a>
                         </li>
                         <li>
                             <a href="<?php echo base_url('professores') ?>"><i class="fa fa-dashboard fa-fw"></i> Professores</a>
-                        </li>
-                        <li>
-                            <a href="<?php echo base_url('projetos') ?>"><i class="fa fa-dashboard fa-fw"></i> Projetos</a>
-                        </li>
-                        <li>
-                            <a href="<?php echo base_url('areainteresses') ?>"><i class="fa fa-dashboard fa-fw"></i> Area de Interesse</a>
-                        </li>
-                        
-                        <li class="active">
-                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a class="active" href="blank.html">Blank Page</a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo base_url('login') ?>">Login Page</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
                         </li>
                     </ul>
                 </div>
