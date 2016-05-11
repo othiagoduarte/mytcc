@@ -86,7 +86,7 @@ class Projeto extends My_Model {
 		$this->db->join('aluno', 'projeto.idaluno = aluno.id');
 		$this->db->join('professor', 'projeto.idprofessor = professor.id');
 		$this->db->join('areainteresse', 'projeto.idAreaInteresse = areainteresse.id');
-		$this->db->where( array('projeto.idProfessor' , $idProfessor) );
+		$this->db->where('projeto.idProfessor' , $idProfessor);
 		
 		return $this->db->get()->result();
 		
@@ -104,7 +104,7 @@ class Projeto extends My_Model {
 		$this->db->join('aluno', 'projeto.idaluno = aluno.id');
 		$this->db->join('professor', 'projeto.idprofessor = professor.id');
 		$this->db->join('areainteresse', 'projeto.idAreaInteresse = areaInteresse.id');
-		$this->db->where( array('projeto.idAluno' , $idAluno) );
+		$this->db->where('projeto.idAluno' , $idAluno);
 		
 		return $this->db->get()->result();
 	}

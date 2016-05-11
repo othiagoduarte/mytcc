@@ -52,7 +52,7 @@ angular.module('mytcc')
         var modalInstance = $uibModal.open
         ({
             animation: true,
-            templateUrl: 'home/registrarUsuario',
+            templateUrl: 'registrarUsuario',
             controller: 'mUsuarioController',
             resolve: 
             {
@@ -69,7 +69,7 @@ angular.module('mytcc')
             $log.log('result chamado');
             if($scope.data.sucesso == true)
             {
-                 setTimeout(function(){location.href="orientacao/solicitar"} , 3000); 
+                 setTimeout(function(){location.href="/mytcc/home"} , 3000); 
             }
         }, 
         function () 

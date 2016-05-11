@@ -4,7 +4,7 @@ angular.module('mytcc')
 {
 	var url = urlService.getUrl;   
 			
-	$scope.projeto;
+	$scope.projeto = { titulo: '', resumo: '' };
 	$scope.aguardando = true;
 					    
     $scope.listarAreas = function()
@@ -14,8 +14,7 @@ angular.module('mytcc')
 		.success(function (data, status, header, config) 
 		{		
 			$scope.areas = data;
-			$log.info("sucesso. Status ->"+status);
-			$log.info(data);
+			$log.info("areas carregadas com sucesso. Status ->"+status);
 		})
 		.error(function (data, status, header, config) 
 		{
@@ -29,8 +28,7 @@ angular.module('mytcc')
 		$http.get(url+"areainteresses/listaprofessorporarea")
 		.success(function (data, status, header, config) 
 		{
-			$log.info("sucesso. Status -> "+status);
-			$log.info(data);
+			$log.info("professores carregados com sucesso. Status -> "+status);
 			$scope.valores = data;
 		})
 		.error(function (data, status, header, config) 
@@ -50,8 +48,8 @@ angular.module('mytcc')
 		$http.post(url+'projetos/insereSolicitacao', $scope.projeto)
 		.success(function (data, status, header, config) 
 		{
-			$log.log("metodo POST enviaProposta acessado com sucesso. Status -> "+status);
-			setTimeout(function(){location.href="listar"} , 3000);
+			$log.log("proposta enviada o com sucesso. Status -> "+status);
+			setTimeout(function(){location.href="solicitar"} , 3000);
 			$scope.aguardando = false;		
 		})
 		.error(function (data, status, header, config) 

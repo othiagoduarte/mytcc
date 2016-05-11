@@ -84,12 +84,12 @@ angular.module('mytcc')
         if($scope.data.usuario.tipo == "p")
         {
             $log.log("abrindo modal professor");
-            return 'home/registrarProfessor';
+            return 'registrarProfessor';
         }				
         else
         {
             $log.log("abrindo modal aluno");
-            return 'home/registrarAluno';
+            return 'registrarAluno';
         }				
     }
     

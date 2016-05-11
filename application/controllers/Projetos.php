@@ -37,6 +37,7 @@ class Projetos extends CI_Controller
         $this->projetoDB->idProfessor = $request['idProfessor'];
         $this->projetoDB->titulo = $request['titulo'];        
         $this->projetoDB->status = 'wait';
+        $this->projetoDB->statusProjeto = 1;
         $this->projetoDB->resumo = $request['resumo'];
         $this->projetoDB->idAreaInteresse = $request['idArea'];
         $this->projetoDB->turno = 'Noite';
