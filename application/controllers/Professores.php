@@ -20,12 +20,6 @@ class Professores extends CI_Controller {
 		echo "Interface de cadastro de professor";
 	}
 	
-	// funcao criada para trazer a modal de registrar professor
-	function registrarProfessor()
-	{
-		$this->load->view('professores/modalRegistrarProfessor');
-	}
-	
 	public function listar()
 	{		
 		echo json_encode($this->professorDB->get_all());
@@ -78,6 +72,7 @@ class Professores extends CI_Controller {
 			$data = array();
 			$data['id'] = $professorID;
 		    $data['nome'] = $this->professorDB->nome;
+			$data['tipo'] = 'p';
 			$data['logado'] = 'true';
 		    $this->session->set_userdata($data);
 		} 

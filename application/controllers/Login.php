@@ -68,6 +68,15 @@ class Login extends CI_Controller
 		}
 		if ($model != null ) {
 			
+			if($this->usuarioDB->tipo == 'a')
+			{
+				$data['tipo'] = 'a';
+			}
+			if($this->usuarioDB->tipo == 'p')
+			{
+				$data['tipo'] = 'p';
+			}
+			
 			$data['id'] = $model->id;
 			$data['nome'] = $model->nome;
 			$data['logado'] = 'true';
