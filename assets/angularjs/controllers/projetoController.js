@@ -12,8 +12,7 @@ angular.module('mytcc')
         $http.get(url+'projetos/listarProjetosPorProfessor')
 		.success(function (data, status, header, config)
 		{
-			$log.info(data);
-            $log.info("metodo POST acessado com sucesso. Status -> " +status);
+            $log.info("lista de projetos carregada com sucesso. Status -> " +status);
 			$scope.projetos = data;
 		})
 		.error(function (data, status, header, config)

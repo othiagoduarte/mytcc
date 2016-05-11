@@ -17,7 +17,7 @@
     <div ng-show="data.sucesso" class="alert alert-success">{{ data.mensagem }}</div>
 
     <input class="btn btn-primary btn-lg" type="button" value="Registre-se agora!" ng-click="open()"/> </br> <br>
-    <input class="btn btn-info btn-sm" type="button" value="Feedback" ng-click="setFeedBack()"/> </br>
+    <input class="btn btn-info btn-lg" type="button" value="Faça o login!" ng-click="login()"/> </br>
     	
     </div>
 

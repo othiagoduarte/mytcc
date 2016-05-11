@@ -52,7 +52,7 @@ angular.module('mytcc')
         var modalInstance = $uibModal.open
         ({
             animation: true,
-            templateUrl: 'alunos/registrarUsuario',
+            templateUrl: 'home/registrarUsuario',
             controller: 'mUsuarioController',
             resolve: 
             {
@@ -77,4 +77,9 @@ angular.module('mytcc')
             $log.info('Modal dismissed at: ' + new Date());
         });
     };
+    
+    $scope.login = function()
+    {
+        setTimeout(function(){location.href="login"} , 0); 
+    }
 });

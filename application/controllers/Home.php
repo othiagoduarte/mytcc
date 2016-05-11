@@ -7,6 +7,14 @@ class Home extends CI_Controller
 	{
 		parent::__construct();	
         
+            if ($this->session->userdata('tipo') == 'a')
+            {
+                redirect('orientacao/solicitar');
+            }
+            if($this->session->userdata('tipo') == 'p')
+            {
+                redirect('orientacao/listar');
+            }         
 	}
     
     function index()
@@ -15,8 +23,26 @@ class Home extends CI_Controller
         $this->load->view('home/main');
 	    $this->load->view('includes/footer');
     }
-    public function testarSession(){
+    
+    function testarSession(){
 
         var_dump($this->session);
     }
+    
+	// funcao criada para trazer a modal de registrar aluno
+	function registrarAluno()
+	{
+		$this->load->view('registros/modalRegistrarAluno');
+	}
+	
+	function registrarUsuario()
+	{
+		$this->load->view('registros/modalRegistrarUsuario');
+	}	
+    
+	// funcao criada para trazer a modal de registrar professor
+	function registrarProfessor()
+	{
+		$this->load->view('registros/modalRegistrarProfessor');
+	}
 }
