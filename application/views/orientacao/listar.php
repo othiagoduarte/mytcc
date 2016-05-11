@@ -7,6 +7,8 @@
 		</div>
 	</div>
 	
+	<div ng-show="data.sucesso" class="alert alert-success">{{ data.mensagem }}</div>
+	
 	<!--Painel com as novas solicitacoes-->
 	<div class="panel-group" id="panel-95759">
 		<div class="panel panel-default">
@@ -23,9 +25,9 @@
 						</thead>
 						<tbody>
 							<tr ng-repeat="projeto in projetos | filter: { statusProjeto: status.aguardando }">
-								<td >{{ projeto.NomeAluno }}</td>	
-								<td >{{ projeto.NomeAreaInteresse }}</td>
-								<td >{{ projeto.dataSolicitacao }}</td>
+								<td><a ng-click="open(projeto)">{{ projeto.NomeAluno }}</a></td>	
+								<td>{{ projeto.NomeAreaInteresse }}</td>
+								<td>{{ projeto.dataSolicitacao }}</td>
 							</tr>								
 						</tbody>
 					</table>

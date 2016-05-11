@@ -47,5 +47,15 @@ class Orientacao extends CI_Controller {
 	{
 		$solicitacoes = $this->projeto->get_professor($sessionId);
 		echo json_encode(solicitacoes);
-	}	
+	}
+	
+	function detalhes()
+	{
+		$this->load->view('orientacao/modalDetalhes');
+	}
+	
+	function resposta()
+	{
+		$this->load->view('orientacao/modalResposta');
+	}
 }

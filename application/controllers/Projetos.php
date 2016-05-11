@@ -51,4 +51,28 @@ class Projetos extends CI_Controller
         
         echo json_encode($this->projetoDB->get_projeto_by_professor($idProfessor));        
     }
+    
+    function insereRespostaProfessor()
+    {
+        // le o arquivo e converte para string
+		$postData = file_get_contents("php://input");
+		// retira o objeto do formado json
+		$request = json_decode($postData, true);
+        
+        $project = $this->projetoDB->get_by_id($request['id']);       
+        
+        $this->projetoDB->id = $project->id;      
+        $this->projetoDB->idAluno = $project->idAluno;
+        $this->projetoDB->idProfessor = $project->idProfessor;
+        $this->projetoDB->titulo = $project->titulo;
+        $this->projetoDB->resumo = $project->resumo;
+        $this->projetoDB->idAreaInteresse = $project->idAreaInteresse;
+        $this->projetoDB->turno = 'Noite';
+        $this->projetoDB->dataSolicitacao = $project->dataSolicitacao;      
+        $this->projetoDB->mensagem = $request['mensagem'];
+        $this->projetoDB->statusProjeto = 2; //respondido        
+        $this->projetoDB->dataResposta = date('Y-m-d H:i:s');             
+        
+        $this->projetoDB->update();
+    }
 }
