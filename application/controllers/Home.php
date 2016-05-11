@@ -7,7 +7,7 @@ class Home extends CI_Controller
 	{
 		parent::__construct();	
         
-            if ($this->session->userdata('tipo') == 'a')
+			if ($this->session->userdata('tipo') == 'a')
             {
                 redirect('orientacao/solicitar');
             }

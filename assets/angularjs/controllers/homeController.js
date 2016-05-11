@@ -80,6 +80,6 @@ angular.module('mytcc')
     
     $scope.login = function()
     {
-        setTimeout(function(){location.href="login"} , 0); 
+        setTimeout(function(){location.href="/mytcc/login"} , 0); 
     }
 });

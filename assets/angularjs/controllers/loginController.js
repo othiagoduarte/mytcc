@@ -47,7 +47,7 @@ angular.module('mytcc')
             {
                 if(loginResult.data == "TRUE")
                 {
-                    redirect('orientacao', 'listar');
+                    redirect('home', '');
                 }
                 else
                 {
@@ -63,7 +63,7 @@ angular.module('mytcc')
         $http.get(url+'login/sair')
         .then(function()
         {
-            redirect('login', "");      
+            redirect('home', "");      
         })
     };
     
