@@ -7,13 +7,11 @@ angular.module('mytcc')
     
     $scope.error = '';
     $scope.formInvalido = false;
-    
-    $scope.estados = ['RS', 'SC', 'PR', 'SP', 'RJ', 'AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF'];
-    
+        
     $scope.registrar = function () 
     {
         $log.log('botao registrar pressionado.');
-        if(validaFormAluno($scope.data.aluno.nome, $scope.data.aluno.email, $scope.data.aluno.matricula, $scope.data.aluno.cidade, $scope.data.aluno.bairro, $scope.data.aluno.telefone, $scope.data.aluno.estado))
+        if(validaFormAluno($scope.data.aluno.nome, $scope.data.aluno.email, $scope.data.aluno.matricula))
         {
             $log.log('passou no teste de validacao');
             $http.post(url+'alunos/registrar', $scope.data)
@@ -48,7 +46,7 @@ angular.module('mytcc')
         $uibModalInstance.dismiss();
     };
       
-    var validaFormAluno = function(nome, email, matricula, cidade, bairro, telefone, estado)
+    var validaFormAluno = function(nome, email, matricula)
     {
         if(nome == undefined || nome == '')
         {
@@ -64,26 +62,6 @@ angular.module('mytcc')
         {
             $scope.error =  'É preciso digitar a matricula para prosseguir';
             return false;
-        }
-        if(cidade == undefined || cidade == '')
-        {
-            $scope.error = 'É preciso digitar a cidade para prosseguir';
-            return false;
-        }			
-        if(bairro == undefined || bairro == '')
-        {
-            $scope.error =  'É preciso digitar o bairro para prosseguir';
-            return false;
-        }			
-        if(telefone == undefined || telefone == '')
-        {
-            $scope.error =  'É preciso digitar o telefone para prosseguir';
-            return false;
-        }			
-        if(estado == '')
-        {
-            $scope.error =  'É obrigatório escolhar um estado';
-            return false;	
         }
         return true;
     }						

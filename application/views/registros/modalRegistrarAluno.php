@@ -2,8 +2,6 @@
     <h3 class="modal-title">Ótimo! Aluno!</h3>
 </div>
 
-<!--<uib-progressbar class="progress-striped active" max="200" value="166" type="info"><i>166 / 200</i></uib-progressbar>-->
-
 <div class="modal-body">
     <form name="form_aluno" role="form">
         <fieldset class="form-group">
@@ -29,34 +27,6 @@
                 <div ng-message="required">É obrigatório digitar a matrícula</div>
                 <div ng-message="minlength">A matrícula precisa ter pelo menos 6 digitos</div>
             </div>	  
-        </fieldset>
-        <fieldset class="form-group">
-            <label for="inputCidade">Qual é a sua cidade?</label>
-            <input type="text" ng-model="data.aluno.cidade" id="inputCidade" name="cidade" class="form-control" placeholder="Cidade: " required>
-            <div ng-messages="form_aluno.cidade.$error" ng-if='form_aluno.cidade.$dirty' class="error">
-                <div ng-message="required">É obrigatório digitar a cidade</div>
-                <div ng-message="minlength">A matrícula precisa ter pelo menos 6 digitos</div>
-            </div>
-        </fieldset>
-        <fieldset class="form-group">
-            <label for="inputBairro">Qual é o seu bairro?</label>
-            <input type="text" ng-model="data.aluno.bairro" id="inputBairro" name="bairro" class="form-control" placeholder="Bairro: " required>
-            <div ng-messages="form_aluno.bairro.$error" ng-if='form_aluno.bairro.$dirty' class="error">
-                <div ng-message="required">É obrigatório digitar o bairro</div>
-            </div>
-        </fieldset>
-        <fieldset class="form-group">
-            <label for="inputTelefone">Qual é seu telefone?</label>
-            <input type="number" ng-model="data.aluno.telefone" id="inputTelefone" name="telefone" class="form-control" placeholder="Telefone: " required required ng-minlength="10" required ng-maxlength="12">
-            <div ng-messages="form_aluno.telefone.$error" ng-if='form_aluno.telefone.$dirty' class="error">
-                <div ng-message="required">É obrigatório digitar o telefone</div>
-                <div ng-message="minlength">O telefone precisa ter pelo menos 10 digitos</div>
-                <div ng-message="maxlength">A matrícula precisa ter no máximo 12 digitos</div>
-            </div>
-        </fieldset>
-         <fieldset class="form-group">
-            <label for="inputEstado">Selecione o estado:</label>
-            <select ng-options="x for x in estados" ng-model="data.aluno.estado" id="inputEstado "class="form-control"></select>
         </fieldset>
         <div ng-show="formInvalido" class="alert alert-warning" > {{ error }}</div>
     </form>

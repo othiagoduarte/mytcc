@@ -1,7 +1,6 @@
 <div class="modal-header">
     <h3 class="modal-title">Ótimo! Professor!</h3>
 </div>
-<!--<uib-progressbar class="progress-striped active" max="200" value="166" type="info"><i>166 / 200</i></uib-progressbar>-->
 
 <div class="modal-body">
     <form name="form_professor" role="form">
@@ -36,22 +35,6 @@
             <div ng-messages="form_professor.matricula.$error" ng-if='form_professor.matricula.$dirty' class="error">
                 <div ng-message="required">É obrigatório digitar a matrícula</div>
             </div>	  
-        </fieldset>
-        <fieldset class="form-group">
-            <label for="inputCidade">Qual é a sua cidade?</label>
-            <input type="text" ng-model="data.professor.cidade" id="inputCidade" class="form-control" placeholder="Cidade: ">
-        </fieldset>
-        <fieldset class="form-group">
-            <label for="inputBairro">Qual é o seu bairro?</label>
-            <input type="text" ng-model="data.professor.bairro" id="inputBairro" class="form-control" placeholder="Bairro: ">
-        </fieldset>
-        <fieldset class="form-group">
-            <label for="inputTelefone">Qual é seu telefone?</label>
-            <input type="number" ng-model="data.professor.telefone" id="inputTelefone" class="form-control" placeholder="Telefone: ">
-        </fieldset>
-        <fieldset class="form-group">
-            <label for="inputEstado">Selecione o estado:</label>
-            <select ng-options="x for x in estados" ng-model="data.professor.estado" id="inputEstado "class="form-control"></select>
         </fieldset>
         <div ng-show="formInvalido" class="alert alert-warning" > {{ error }}</div>
     </form>
