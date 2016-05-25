@@ -1,5 +1,5 @@
 <!-- Navigation -->
-<div ng-controller='loginController'>
+<div ng-controller='loginController as login'>
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -9,7 +9,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="<?php echo base_url('home') ?>">MyTCC 0.1</a>
-                <a class="navbar-brand" href="<?php echo base_url('home') ?>">{{ nome }} </a>
+                <a class="navbar-brand" href="<?php echo base_url('home') ?>">{{ login.nome }} </a>
             </div>
             <!-- /.navbar-header -->
 
@@ -214,7 +214,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="" ng-click="logout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="" ng-click="login.logout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -222,4 +222,4 @@
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
-</div>
+

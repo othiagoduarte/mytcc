@@ -6,11 +6,11 @@
     <meta name="author" content="">
 
     <title>MyTCC: é agora!</title>
-	
+    
     <!-- Dependências do AngularJS -->
     <script src="<?php echo base_url("/assets/js/angular.min.js") ?>"></script>
     <script src="<?php echo base_url("assets/js/angular-messages.min.js") ?>"></script>
-    <script src="<?php echo base_url("assets/js/ui-bootstrap-tpls-1.3.2.min.js") ?>"></script>
+    <script src="<?php echo base_url("assets/js/ui-bootstrap-tpls-1.3.2.min.js") ?>"></script>            
         
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url("/assets/css/bootstrap.min.css") ?>" rel="stylesheet">
@@ -22,6 +22,6 @@
     <link href="<?php echo base_url("/assets/dist/css/sb-admin-2.css") ?>" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="<?php echo base_url("/assets//bower_components/font-awesome/css/font-awesome.min.css") ?>" rel="stylesheet" type="text/css">    
+    <link href="<?php echo base_url("/assets/bower_components/font-awesome/css/font-awesome.min.css") ?>" rel="stylesheet" type="text/css">    
 </head>
-<body ng-app="mytcc">
+<body ng-app="mytcc" ng-cloak>

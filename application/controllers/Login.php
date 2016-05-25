@@ -16,22 +16,27 @@ class Login extends CI_Controller
 	    $this->load->view('includes/footer');		
 	}
     
-	public function isLogged()
+	// retorna verdadeiro se a variavel de sessão 'logado' não estiver vazia
+	private function isLogged()
 	{
-		if($this->session->userdata('logado') == 'true')
-			echo 'TRUE';
+		$logado = $this->session->userdata('logado');
+		return !empty($logado);
 	}
 	
-	public function pegaEmail()
+	public function getSessionData()
 	{
-		$sessionName = $this->session->userdata('nome');
-		if($sessionName == '')
-		{
-			echo 'FALSE';
+		if ($this->isLogged())
+		{			
+			$data = array();
+			$data['session_name'] = $this->session->userdata('nome');
+			$data['session_type'] = $this->session->userdata('tipo');
+			$data['session_logged'] = $this->session->userdata('logado');
+			
+			echo json_encode($data);
 		}
 		else
 		{
-			echo json_encode($sessionName);
+			echo "f";
 		}
 	}
 	
@@ -48,7 +53,7 @@ class Login extends CI_Controller
 		if ($this->usuarioDB->logar()) 
 		{		    
 			$this->insereCookie($this->usuarioDB);
-			echo "TRUE";
+			echo "t";
 		}
 	}
 	

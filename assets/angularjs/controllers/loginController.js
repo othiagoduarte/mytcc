@@ -3,23 +3,38 @@ angular.module('mytcc')
 // define um controlador dentro do modulo 'myApp' que será chamado la na view
 .controller('loginController', function($scope, $http, $log, urlService) 
 {       
+    var vm = this;
+    
     $log.info("acessando o controlador do login...");
-    $scope.formInvalido = false;
     var url = urlService.getUrl;
-        
-    $http.get(url+"login/pegaEmail")
+    
+    $scope.formInvalido = false;
+    vm.menu_professor = false;
+    vm.menu_aluno = false;
+            
+    $http.get(url+"login/getSessionData")
     .then(function (response) 
     {
+        $log.log(response);
         $log.log('verificando se o usuario esta logado');
-        if(response.data == 'FALSE')
+        if(response.data == 'f')
         {
-            $log.log('não esta logado');
-            $scope.nome = 'Seja bem vindo, faça o login';
+            $log.log('nenhum usuario esta logado');
+            vm.nome = 'Seja bem vindo, faça o login';
         }
         else
         {
-            $log.log('esta logado, '+response.data);
-            $scope.nome = response.data;
+            $log.log('esta logado, '+response.data.session_name);
+            vm.nome = response.data.session_name;
+            
+            if(response.data.session_type == 'p')
+            {
+                vm.menu_professor = true;             
+            }
+            else
+            {
+                vm.menu_aluno = true;
+            }
         }
     });
         
@@ -45,7 +60,7 @@ angular.module('mytcc')
             loginService($scope.dados.cpf, $scope.dados.senha)
             .then(function(loginResult)
             {
-                if(loginResult.data == "TRUE")
+                if(loginResult.data == "t")
                 {
                     redirect('home', '');
                 }
@@ -58,7 +73,7 @@ angular.module('mytcc')
         }
     }
     
-    $scope.logout = function()
+    vm.logout = function()
     {
         $http.get(url+'login/sair')
         .then(function()
