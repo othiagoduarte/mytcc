@@ -40,7 +40,6 @@ angular.module('mytcc')
 	$scope.enviaProposta = function()
 	{		
 		$log.info("enviando proposta...");
-		$log.info($scope.projeto);
 		
 		$scope.projeto.idArea = $scope.projeto.areaInteresse.id;
 		$scope.projeto.idProfessor = $scope.projeto.professor.id;

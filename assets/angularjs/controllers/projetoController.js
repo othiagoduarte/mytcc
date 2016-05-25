@@ -25,7 +25,6 @@ angular.module('mytcc')
 	$scope.open = function (projeto) 
     {
         $log.log('abrindo modal de detalhes da solicitacao');
-		$log.log(projeto);
         var modalDetalhes = $uibModal.open
         ({
             animation: true,

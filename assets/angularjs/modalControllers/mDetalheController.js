@@ -5,7 +5,6 @@ angular.module('mytcc')
     var url = urlService.getUrl;
     
     $scope.projeto = items;
-    $log.log('projeto clicado -> '+$scope.projeto.titulo);
     $scope.back = true;
     $scope.next = true;
     

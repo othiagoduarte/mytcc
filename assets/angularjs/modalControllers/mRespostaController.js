@@ -12,7 +12,6 @@ angular.module('mytcc')
     {
         $log.log('botao enviar solicitação pressionado.');
         
-        $log.log($scope.projeto);
         $log.log('passou no teste de validacao');
         $http.post(url+'projetos/insereRespostaProfessor', $scope.projeto)
         .success(function (data, status, header, config)
