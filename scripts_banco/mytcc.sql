@@ -31,11 +31,7 @@ CREATE TABLE `aluno` (
   `nome` varchar(50) NOT NULL,
   `matricula` int(11) NOT NULL,
   `email` varchar(70) NOT NULL,
-  `endereco` varchar(70) NOT NULL,
-  `telefone` varchar(11) NOT NULL,
-  `cidade` varchar(50) NOT NULL,
-  `estado` varchar(2) NOT NULL,
-  `bairro` varchar(50) NOT NULL,
+  `telefone` varchar(11),
   `cpf` varchar(9) NOT NULL,
   `idUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -44,12 +40,12 @@ CREATE TABLE `aluno` (
 -- Fazendo dump de dados para tabela `aluno`
 --
 
-INSERT INTO `aluno` (`id`, `nome`, `matricula`, `email`, `endereco`, `telefone`, `cidade`, `estado`, `bairro`, `cpf`, `idUsuario`) VALUES
-(1, 'Marcos', 123456, 'ms.castanheira@gmail.com', 'Rua Jackson de Figueiredo, 295', '5198450033', 'Porto Alegre', 'RS', 'Sarandi', '123456000', 15),
-(2, 'Thiago', 234567, 'thiago@gmail.com', 'Rua dos Andradas, 295', '5182901771', 'Porto Alegre', 'RS', 'Centro', '234567000', 16),
-(3, 'Cristiano', 345678, 'cristiano@gmail.com', 'Av Cavalhada, 295', '5192257575', 'Porto Alegre', 'RS', 'Cavalhada', '345678000', 17),
-(4, 'Luis Henrique', 456789, 'lh@gmail.com', 'Rua 7 de Setembro, 295', '5191633250', 'Porto Alegre', 'RS', 'Centro', '456789000', 18),
-(5, 'Vanessa', 567890, 'vanessa@gmail.com', 'Rua Cel Genuíno, 295', '5195559118', 'Porto Alegre', 'RS', 'Centro', '567890000', 19);
+INSERT INTO `aluno` (`id`, `nome`, `matricula`, `email`, `telefone`, `cpf`, `idUsuario`) VALUES
+(1, 'Marcos', 123456, 'ms.castanheira@gmail.com', '5198450033', '123456000', 15),
+(2, 'Thiago', 234567, 'thiago@gmail.com', '5182901771', '234567000', 16),
+(3, 'Cristiano', 345678, 'cristiano@gmail.com', '5192257575', '345678000', 17),
+(4, 'Luis Henrique', 456789, 'lh@gmail.com', '5191633250', '456789000', 18),
+(5, 'Vanessa', 567890, 'vanessa@gmail.com', '5195559118', '567890000', 19);
 
 -- --------------------------------------------------------
 
@@ -100,11 +96,7 @@ CREATE TABLE `professor` (
   `nome` varchar(50) NOT NULL,
   `matricula` int(11) NOT NULL,
   `email` varchar(70) NOT NULL,
-  `endereco` varchar(50) NOT NULL,
-  `telefone` varchar(11) NOT NULL,
-  `cidade` varchar(50) NOT NULL,
-  `estado` varchar(2) NOT NULL,
-  `bairro` varchar(50) NOT NULL,
+  `telefone` varchar(11),
   `numVagas` int(11) NOT NULL,
   `turnoDia` bit(1) NOT NULL,
   `turnoNoite` bit(1) NOT NULL,
@@ -116,12 +108,12 @@ CREATE TABLE `professor` (
 -- Fazendo dump de dados para tabela `professor`
 --
 
-INSERT INTO `professor` (`id`, `nome`, `matricula`, `email`, `endereco`, `telefone`, `cidade`, `estado`, `bairro`, `numVagas`, `turnoDia`, `turnoNoite`, `cpf`, `idUsuario`) VALUES
-(1, 'Rafael', 123456, 'rafael@senacrs.com.br', 'Rua Cel Genuíno, 130', '5130221044', 'Porto Alegre', 'RS', 'Centro', 5, b'1', b'1', '000123456', 22),
-(2, 'Aline', 234567, 'aline@senacrs.com.br', 'Rua Cel Genuíno, 130', '5130221044', 'Porto Alegre', 'RS', 'Centro', 3, b'0', b'1', '000234567', 23),
-(3, 'Ries', 345678, 'ries@senacrs.com.br', 'Rua Cel Genuíno, 130', '5130221044', 'Porto Alegre', 'RS', 'Centro', 4, b'1', b'0', '000345678', 24),
-(4, 'Carbonera', 456789, 'carbonera@senacrs.com.br', 'Rua Cel Genuíno, 130', '5130221044', 'Porto Alegre', 'RS', 'Centro', 6, b'0', b'1', '000456789', 25),
-(5, 'Lizandro', 567890, 'rafael@senacrs.com.br', 'Rua Cel Genuíno, 130', '5130221044', 'Porto Alegre', 'RS', 'Centro', 2, b'1', b'1', '000567890', 26);
+INSERT INTO `professor` (`id`, `nome`, `matricula`, `email`, `telefone`, `numVagas`, `turnoDia`, `turnoNoite`, `cpf`, `idUsuario`) VALUES
+(1, 'Rafael', 123456, 'rafael@senacrs.com.br', '5130221044', 5, b'1', b'1', '000123456', 22),
+(2, 'Aline', 234567, 'aline@senacrs.com.br', '5130221044', 3, b'0', b'1', '000234567', 23),
+(3, 'Ries', 345678, 'ries@senacrs.com.br', '5130221044', 4, b'1', b'0', '000345678', 24),
+(4, 'Carbonera', 456789, 'carbonera@senacrs.com.br', '5130221044', 6, b'0', b'1', '000456789', 25),
+(5, 'Lizandro', 567890, 'rafael@senacrs.com.br', '5130221044', 2, b'1', b'1', '000567890', 26);
 
 -- --------------------------------------------------------
 
