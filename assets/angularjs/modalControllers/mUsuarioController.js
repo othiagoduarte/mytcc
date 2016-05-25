@@ -1,12 +1,13 @@
 angular.module('mytcc')
-.controller('mUsuarioController', function ($log, $scope, $uibModalInstance, $uibModal, items) 
+.controller('mUsuarioController', function ($log, $scope, $uibModalInstance, $uibModal, items, urlService) 
 {    
+    var url = urlService.getUrl;
+    
     $scope.data = items;
     
     $scope.error = '';
     $scope.formInvalido = false;
     
-
     $scope.next = function () 
     {
         if(validaFormUsuario($scope.data.usuario.cpf, $scope.data.usuario.senha, $scope.data.usuario.conf, $scope.data.usuario.tipo))
@@ -53,7 +54,7 @@ angular.module('mytcc')
 
     
     // funcao que valida se os campos sao validos pra prosseguir
-    var validaFormUsuario = function(cpf, senha, conf, papel, error)
+    var validaFormUsuario = function(cpf, senha, conf, papel)
     {
         if(cpf == undefined || cpf == '')
         {
@@ -84,12 +85,12 @@ angular.module('mytcc')
         if($scope.data.usuario.tipo == "p")
         {
             $log.log("abrindo modal professor");
-            return 'registrarProfessor';
+            return url+'home/registrarProfessor';
         }				
         else
         {
             $log.log("abrindo modal aluno");
-            return 'registrarAluno';
+            return url+'home/registrarAluno';
         }				
     }
     

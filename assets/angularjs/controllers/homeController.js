@@ -1,7 +1,9 @@
 angular.module('mytcc')
 
-.controller('homeController', function($scope, $uibModal, $log, $timeout)
+.controller('homeController', function($scope, $uibModal, $log, $timeout, urlService)
 {    
+    var url = urlService.getUrl;
+    
     $log.log('acessando o home controller..');
     
     // inicializa os dados que serao enviados pelos formularios no final do processo
@@ -18,23 +20,13 @@ angular.module('mytcc')
         {
             nome: '',
             email: '',
-            matricula: '',
-            cidade: '',
-            endereco: 'endereco qualquer',
-            bairro: '',
-            estado: '',
-            telefone: ''
+            matricula: ''
         },
         professor:
         {
             nome: '',
             email: '',
             matricula: '',
-            endereco: 'endereco qualquer',
-            cidade: '',
-            bairro: '',
-            estado: '',
-            telefone: '',
             turnoDia: false,
             turnoNoite: false,
             vagas: 1
@@ -52,7 +44,7 @@ angular.module('mytcc')
         var modalInstance = $uibModal.open
         ({
             animation: true,
-            templateUrl: 'registrarUsuario',
+            templateUrl: url+'home/registrarUsuario',
             controller: 'mUsuarioController',
             resolve: 
             {
@@ -69,7 +61,7 @@ angular.module('mytcc')
             $log.log('result chamado');
             if($scope.data.sucesso == true)
             {
-                 setTimeout(function(){location.href="/mytcc/home"} , 3000); 
+                 setTimeout(function(){location.href=url+'home'} , 3000); 
             }
         }, 
         function () 
@@ -80,6 +72,6 @@ angular.module('mytcc')
     
     $scope.login = function()
     {
-        setTimeout(function(){location.href="/mytcc/login"} , 0); 
+        setTimeout(function(){location.href=url+"login"} , 0); 
     }
 });

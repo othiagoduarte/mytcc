@@ -81,9 +81,13 @@ $db['default'] = array(
 	// 'username' => 'root',
 	// 'password' => '',
 	
+	//Config: phpmyadmin default
+	'username' => 'root',
+	'password' => 'usbw',
+		
 	//Config: USB WEBSERVER
-	'username' => 'm@ster',
-	'password' => 'master',
+	// 'username' => 'm@ster',
+	// 'password' => 'master',
 	'database' => 'mytcc',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

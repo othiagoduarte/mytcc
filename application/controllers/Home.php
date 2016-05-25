@@ -35,6 +35,7 @@ class Home extends CI_Controller
 		$this->load->view('registros/modalRegistrarAluno');
 	}
 	
+	// funcao criada para trazer a modal de registrar usuario
 	function registrarUsuario()
 	{
 		$this->load->view('registros/modalRegistrarUsuario');
