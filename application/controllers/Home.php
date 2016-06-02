@@ -9,11 +9,11 @@ class Home extends CI_Controller
         
 		// define a view a ser direcionada após o login conforme o perfil de usuario
 		if ($this->session->userdata('tipo') == 'a')
-			redirect('orientacao/solicitar');
+			redirect('orientacao/solicitar');	
 		if($this->session->userdata('tipo') == 'p')
-			redirect('orientacao/listar');
+			redirect('orientacao/listar');	
 		if($this->session->userdata('tipo') == 'c')
-			redirect('areainteresses/dashboard');
+			redirect('areainteresses/dashboard');	
 	}
     
     function index()

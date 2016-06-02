@@ -40,6 +40,7 @@ class Login extends CI_Controller
 		}
 	}
 	
+	// envia 't' caso a validação dos dados do usuário estejam corretos
 	public function logar()
 	{		
 		// le o arquivo e converte para string
@@ -57,24 +58,24 @@ class Login extends CI_Controller
 		}
 	}
 	
+	public function sair()
+	{
+	  $this->session->sess_destroy();
+	}
+	
 	private function insereCookie($usuario)
 	{		
 		$data = array();
 
 		$model = null;
 		
-		if($usuario->tipo == 'p')
+		$model = $this->buscaUsuarioConformeTipo($usuario);
+		
+		if($model == null)
 		{
-			$model = $usuario->buscaProfessor();
+			throw new Exception("usuario nulo");			
 		}
-		else if($usuario->tipo == 'a')
-		{
-			$model = $usuario->buscaAluno();
-		}
-		else if($usuario->tipo == 'c')
-		{
-			$model = $usuario->buscaProfessor();
-		}
+
 		
 		if ($model != null ) 
 		{			
@@ -88,9 +89,16 @@ class Login extends CI_Controller
 
 		$this->session->set_userdata($data);
 	}
-		
-	public function sair()
-	{
-	  $this->session->sess_destroy();
+	
+	private function buscaUsuarioConformeTipo($usuario)
+	{				
+		if($usuario->tipo == 'p')
+			return $usuario->buscaProfessor();
+		else if($usuario->tipo == 'a')
+			return $usuario->buscaAluno();
+		else if($usuario->tipo == 'c')
+			return $usuario->buscaProfessor();
+		else
+			throw new Exception('Usuario cadastrado sem papel.');		
 	}
 }
