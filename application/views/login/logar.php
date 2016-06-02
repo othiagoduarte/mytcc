@@ -1,22 +1,3 @@
-<!--<h3>Digite as suas credênciais</h3>
-<hr>
-<div ng-app="mytcc" ng-controller="loginController">    
-    <form role="form">
-    <div class="form-group">
-        <label for="email">Endereço de email:</label>
-        <input type="email" ng-model="dados.email" class="form-control" id="email">
-    </div>
-    <div class="form-group">
-        <label for="pwd">Senha:</label>
-        <input type="password" ng-model="dados.senha" class="form-control" id="pwd">
-    </div>
-    <div class="checkbox">
-        <label><input type="checkbox"> Remember me</label>
-    </div>
-    <input type="button" ng-click="logar()" class="btn btn-default" value="Entrar"/>
-    </form>
-    {{ error }}
-</div>-->
 <style type="text/css">
     .form-login {
         max-width: 500px;
@@ -42,19 +23,6 @@
                         <input id="senha" name="senha" value="" class="form-control" type="password" ng-model="dados.senha">
                     </div>
                 </div>
-                <!-- O sistema ja detecta o perfil do usuario atraves do usuario.tipo 
-                <div class="form-group">
-                    <label for="perfil" class="control-label col-sm-3">Perfil:</label>
-                    <div class="col-sm-7" >
-                        <select class="form-control" id="perfil">
-                            <option></option>
-                            <option>Professor</option>
-                            <option selected="selected">Aluno</option>
-                        </select>
-                    </div>
-                </div>
-                -->
-
                 <div class="form-group">
                     <div class="col-sm-7 col-sm-offset-3">
                         <input id="btnLogin" name="btnLogin" value="Log In" class="btn btn-lg btn-default" type="button" ng-click="logar()">

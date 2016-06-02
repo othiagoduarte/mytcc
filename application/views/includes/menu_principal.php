@@ -8,8 +8,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<?php echo base_url('home') ?>">MyTCC 0.1</a>
-                <a class="navbar-brand" href="<?php echo base_url('home') ?>">{{ login.nome }} </a>
+                <a class="navbar-brand" href="<?php echo base_url('home') ?>">MyTCC 0.4</a>
+                <a class="navbar-brand"> {{ login.nome }} </a>
             </div>
             <!-- /.navbar-header -->
 

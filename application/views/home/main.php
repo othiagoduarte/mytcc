@@ -18,8 +18,10 @@
 
     <input class="btn btn-primary btn-lg" type="button" value="Registre-se agora!" ng-click="open()"/> </br> <br>
     <input class="btn btn-info btn-lg" type="button" value="Faça o login!" ng-click="login()"/> </br>
-    	
-    </div>
+    <br>
+    <div class="text-warning">Coordenador: CPF-> 000101010 Senha-> admin</div>
+        	
+</div>
 
 </div>
 </div>
