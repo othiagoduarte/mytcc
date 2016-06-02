@@ -24,4 +24,18 @@ class AreaInteresses extends CI_Controller
     {
         echo json_encode($this->model->listarProfessores());
     }
+	
+	function areas()
+	{
+		$this->load->view('includes/prototipo_header');
+	    $this->load->view('coordenador_temp/manipular_areas');
+	    $this->load->view('includes/prototipo_footer');	 
+	} 
+	
+	function dashboard()
+	{
+		$this->load->view('includes/prototipo_header');
+	    $this->load->view('coordenador_temp/relatorios');
+	    $this->load->view('includes/prototipo_footer');	 
+	} 
 }

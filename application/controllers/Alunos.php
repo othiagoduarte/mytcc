@@ -28,7 +28,7 @@ class Alunos extends CI_Controller {
 	function criar()
 	{
 		$this->load->view('includes/prototipo_header');
-	    $this->load->view('alunos/criar');
+	    $this->load->view('coordenador_temp/adicionar_alunos');
 	    $this->load->view('includes/prototipo_footer');
 	}
 		
@@ -36,7 +36,7 @@ class Alunos extends CI_Controller {
 	{		
 		echo json_encode($this->model->get_all());
 	}
-	
+		
 	public function insereAluno()
 	{
 		// le o arquivo e converte para string
