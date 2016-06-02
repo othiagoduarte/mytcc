@@ -11,6 +11,7 @@ angular.module('mytcc')
     $scope.formInvalido = false;
     vm.menu_professor = false;
     vm.menu_aluno = false;
+    vm.menu_coordenador = false;
             
     $http.get(url+"login/getSessionData")
     .then(function (response) 
@@ -31,9 +32,13 @@ angular.module('mytcc')
             {
                 vm.menu_professor = true;             
             }
-            else
+            else if(response.data.session_type == 'a')
             {
                 vm.menu_aluno = true;
+            }
+            else if(response.data.session_type == 'c')
+            {
+                vm.menu_coordenador = true;
             }
         }
     });

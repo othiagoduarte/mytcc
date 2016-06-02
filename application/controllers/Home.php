@@ -7,14 +7,13 @@ class Home extends CI_Controller
 	{
 		parent::__construct();	
         
-			if ($this->session->userdata('tipo') == 'a')
-            {
-                redirect('orientacao/solicitar');
-            }
-            if($this->session->userdata('tipo') == 'p')
-            {
-                redirect('orientacao/listar');
-            }         
+		// define a view a ser direcionada após o login conforme o perfil de usuario
+		if ($this->session->userdata('tipo') == 'a')
+			redirect('orientacao/solicitar');
+		if($this->session->userdata('tipo') == 'p')
+			redirect('orientacao/listar');
+		if($this->session->userdata('tipo') == 'c')
+			redirect('areainteresses/dashboard');
 	}
     
     function index()

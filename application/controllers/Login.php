@@ -67,12 +67,17 @@ class Login extends CI_Controller
 		{
 			$model = $usuario->buscaProfessor();
 		}
-		else
+		else if($usuario->tipo == 'a')
 		{
 			$model = $usuario->buscaAluno();
 		}
-		if ($model != null ) {
-			
+		else if($usuario->tipo == 'c')
+		{
+			$model = $usuario->buscaProfessor();
+		}
+		
+		if ($model != null ) 
+		{			
 			$data['tipo'] = $this->usuarioDB->tipo;
 			$data['id'] = $model->id;
 			$data['nome'] = $model->nome;

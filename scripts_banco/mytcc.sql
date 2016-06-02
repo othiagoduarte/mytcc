@@ -108,7 +108,8 @@ INSERT INTO `professor` (`id`, `nome`, `matricula`, `email`, `telefone`, `numVag
 (2, 'Aline', 234567, 'aline@senacrs.com.br', '5130221044', 3, b'0', b'1', '000234567', 23),
 (3, 'Ries', 345678, 'ries@senacrs.com.br', '5130221044', 4, b'1', b'0', '000345678', 24),
 (4, 'Carbonera', 456789, 'carbonera@senacrs.com.br', '5130221044', 6, b'0', b'1', '000456789', 25),
-(5, 'Lizandro', 567890, 'rafael@senacrs.com.br', '5130221044', 2, b'1', b'1', '000567890', 26);
+(5, 'Lizandro', 567890, 'rafael@senacrs.com.br', '5130221044', 2, b'1', b'1', '000567890', 26),
+(6, 'Sr. Coordenador', 101010, 'admin@admin.com', '5133333333', 1, b'1', b'1', '000101010', 14);
 
 -- --------------------------------------------------------
 
@@ -206,6 +207,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `user`, `senha`, `tipo`) VALUES
+(14, '000101010', 'admin', 'c'),
 (15, '123456000', '123', 'a'),
 (16, '234567000', '123', 'a'),
 (17, '345678000', '123', 'a'),
