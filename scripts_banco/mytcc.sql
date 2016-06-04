@@ -1,38 +1,31 @@
-USE mytcc;
-
--- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Tempo de geração: 03/05/2016 às 01:54
--- Versão do servidor: 10.1.10-MariaDB
--- Versão do PHP: 5.6.19
-
-
-
+-- Base de Dados: `mytcc`
 --
--- Banco de dados: `mytcc`
---
+CREATE DATABASE IF NOT EXISTS `mytcc` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `mytcc`;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `aluno`
+-- Estrutura da tabela `aluno`
 --
 
-CREATE TABLE `aluno` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `aluno` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) NOT NULL,
   `matricula` int(11) NOT NULL,
   `email` varchar(70) NOT NULL,
-  `telefone` varchar(11),
+  `telefone` varchar(11) DEFAULT NULL,
   `cpf` varchar(9) NOT NULL,
-  `idUsuario` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `idUsuario` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `matricula_2` (`matricula`),
+  UNIQUE KEY `cpf` (`cpf`),
+  KEY `matricula` (`matricula`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
--- Fazendo dump de dados para tabela `aluno`
+-- Extraindo dados da tabela `aluno`
 --
 
 INSERT INTO `aluno` (`id`, `nome`, `matricula`, `email`, `telefone`, `cpf`, `idUsuario`) VALUES
@@ -45,16 +38,17 @@ INSERT INTO `aluno` (`id`, `nome`, `matricula`, `email`, `telefone`, `cpf`, `idU
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `areainteresse`
+-- Estrutura da tabela `areainteresse`
 --
 
-CREATE TABLE `areainteresse` (
-  `id` int(11) NOT NULL,
-  `nomeArea` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE IF NOT EXISTS `areainteresse` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nomeArea` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
--- Fazendo dump de dados para tabela `areainteresse`
+-- Extraindo dados da tabela `areainteresse`
 --
 
 INSERT INTO `areainteresse` (`id`, `nomeArea`) VALUES
@@ -67,40 +61,46 @@ INSERT INTO `areainteresse` (`id`, `nomeArea`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `orientacao`
+-- Estrutura da tabela `orientacao`
 --
 
-CREATE TABLE `orientacao` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `orientacao` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `idProjeto` int(11) NOT NULL,
   `datahora` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `okAluno` bit(1) NOT NULL,
-  `okProfessor` bit(1) NOT NULL,
-  `anotacoesAluno` varchar(500) DEFAULT NULL,
-  `anotacoesProfessor` varchar(500) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `anotacoesAgendamento` varchar(500) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `feedback` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_Orientacao_0` (`idProjeto`),
+  KEY `FK_Orientacao_1` (`status`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `professor`
+-- Estrutura da tabela `professor`
 --
 
-CREATE TABLE `professor` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `professor` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) NOT NULL,
   `matricula` int(11) NOT NULL,
   `email` varchar(70) NOT NULL,
-  `telefone` varchar(11),
+  `telefone` varchar(11) DEFAULT NULL,
   `numVagas` int(11) NOT NULL,
   `turnoDia` bit(1) NOT NULL,
   `turnoNoite` bit(1) NOT NULL,
   `cpf` varchar(9) NOT NULL,
-  `idUsuario` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `idUsuario` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `matricula_2` (`matricula`),
+  UNIQUE KEY `cpf` (`cpf`),
+  KEY `matricula` (`matricula`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
--- Fazendo dump de dados para tabela `professor`
+-- Extraindo dados da tabela `professor`
 --
 
 INSERT INTO `professor` (`id`, `nome`, `matricula`, `email`, `telefone`, `numVagas`, `turnoDia`, `turnoNoite`, `cpf`, `idUsuario`) VALUES
@@ -114,46 +114,48 @@ INSERT INTO `professor` (`id`, `nome`, `matricula`, `email`, `telefone`, `numVag
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `professorareainteresse`
+-- Estrutura da tabela `professorareainteresse`
 --
 
-CREATE TABLE `professorareainteresse` (
+CREATE TABLE IF NOT EXISTS `professorareainteresse` (
   `idAreaInteresse` int(11) NOT NULL,
-  `idProfessor` int(11) NOT NULL
+  `idProfessor` int(11) NOT NULL,
+  PRIMARY KEY (`idAreaInteresse`,`idProfessor`),
+  KEY `FK_ProfessorAreaInteresse_1` (`idProfessor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Fazendo dump de dados para tabela `professorareainteresse`
+-- Extraindo dados da tabela `professorareainteresse`
 --
 
 INSERT INTO `professorareainteresse` (`idAreaInteresse`, `idProfessor`) VALUES
 (1, 1),
-(1, 2),
-(1, 3),
-(1, 5),
 (2, 1),
-(2, 2),
-(2, 3),
-(2, 5),
-(3, 2),
-(3, 4),
-(3, 5),
-(4, 2),
-(4, 5),
 (5, 1),
+(1, 2),
+(2, 2),
+(3, 2),
+(4, 2),
 (5, 2),
+(1, 3),
+(2, 3),
 (5, 3),
+(3, 4),
 (5, 4),
+(1, 5),
+(2, 5),
+(3, 5),
+(4, 5),
 (5, 5);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `projeto`
+-- Estrutura da tabela `projeto`
 --
 
-CREATE TABLE `projeto` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `projeto` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `idAluno` int(11) NOT NULL,
   `idProfessor` int(11) NOT NULL,
   `titulo` varchar(100) NOT NULL,
@@ -162,25 +164,54 @@ CREATE TABLE `projeto` (
   `turno` varchar(10) NOT NULL,
   `motivoRecusa` varchar(500) DEFAULT NULL,
   `mensagem` varchar(500) DEFAULT NULL,
-  `status` varchar(10) DEFAULT NULL,
-  `statusProjeto` int(11) NOT NULL,
+  `status` int(11) DEFAULT NULL,
+  `numOrientacoes` int(11) NOT NULL,
   `dataSolicitacao` date NOT NULL,
-  `dataResposta` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `dataResposta` date DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_Projeto_0` (`idAluno`),
+  KEY `FK_Projeto_1` (`idProfessor`),
+  KEY `FK_Projeto_2` (`idAreaInteresse`),
+  KEY `FK_Projeto_3` (`status`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `statusprojeto`
+-- Estrutura da tabela `statusorientacao`
 --
 
-CREATE TABLE `statusprojeto` (
+CREATE TABLE IF NOT EXISTS `statusorientacao` (
   `id` int(11) NOT NULL,
-  `statusProjeto` varchar(50) NOT NULL
+  `status` varchar(25) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Fazendo dump de dados para tabela `statusprojeto`
+-- Extraindo dados da tabela `statusorientacao`
+--
+
+INSERT INTO `statusorientacao` (`id`, `status`) VALUES
+(1, 'Enviada'),
+(2, 'Agendada'),
+(3, 'Recusada'),
+(4, 'Compareceu'),
+(5, 'Não compareceu');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `statusprojeto`
+--
+
+CREATE TABLE IF NOT EXISTS `statusprojeto` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `statusProjeto` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Extraindo dados da tabela `statusprojeto`
 --
 
 INSERT INTO `statusprojeto` (`id`, `statusProjeto`) VALUES
@@ -192,18 +223,20 @@ INSERT INTO `statusprojeto` (`id`, `statusProjeto`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `usuario`
+-- Estrutura da tabela `usuario`
 --
 
-CREATE TABLE `usuario` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `usuario` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `user` varchar(50) NOT NULL,
   `senha` varchar(50) NOT NULL,
-  `tipo` char(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `tipo` char(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user` (`user`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
 
 --
--- Fazendo dump de dados para tabela `usuario`
+-- Extraindo dados da tabela `usuario`
 --
 
 INSERT INTO `usuario` (`id`, `user`, `senha`, `tipo`) VALUES
@@ -220,131 +253,28 @@ INSERT INTO `usuario` (`id`, `user`, `senha`, `tipo`) VALUES
 (26, '000567890', '123', 'p');
 
 --
--- Índices de tabelas apagadas
+-- Constraints for dumped tables
 --
 
 --
--- Índices de tabela `aluno`
---
-ALTER TABLE `aluno`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `matricula_2` (`matricula`),
-  ADD UNIQUE KEY `cpf` (`cpf`),
-  ADD KEY `matricula` (`matricula`);
-
---
--- Índices de tabela `areainteresse`
---
-ALTER TABLE `areainteresse`
-  ADD PRIMARY KEY (`id`);
-
---
--- Índices de tabela `orientacao`
+-- Limitadores para a tabela `orientacao`
 --
 ALTER TABLE `orientacao`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `FK_Orientacao_0` (`idProjeto`);
+  ADD CONSTRAINT `FK_Orientacao_0` FOREIGN KEY (`idProjeto`) REFERENCES `projeto` (`id`),
+  ADD CONSTRAINT `FK_Orientacao_1` FOREIGN KEY (`status`) REFERENCES `statusorientacao` (`id`);
 
 --
--- Índices de tabela `professor`
---
-ALTER TABLE `professor`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `matricula_2` (`matricula`),
-  ADD UNIQUE KEY `cpf` (`cpf`),
-  ADD KEY `matricula` (`matricula`);
-
---
--- Índices de tabela `professorareainteresse`
---
-ALTER TABLE `professorareainteresse`
-  ADD PRIMARY KEY (`idAreaInteresse`,`idProfessor`),
-  ADD KEY `FK_ProfessorAreaInteresse_1` (`idProfessor`);
-
---
--- Índices de tabela `projeto`
---
-ALTER TABLE `projeto`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `FK_Projeto_0` (`idAluno`),
-  ADD KEY `FK_Projeto_1` (`idProfessor`),
-  ADD KEY `FK_Projeto_2` (`idAreaInteresse`);
-
---
--- Índices de tabela `statusprojeto`
---
-ALTER TABLE `statusprojeto`
-  ADD PRIMARY KEY (`id`);
-
---
--- Índices de tabela `usuario`
---
-ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `user` (`user`);
-
---
--- AUTO_INCREMENT de tabelas apagadas
---
-
---
--- AUTO_INCREMENT de tabela `aluno`
---
-ALTER TABLE `aluno`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT de tabela `areainteresse`
---
-ALTER TABLE `areainteresse`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT de tabela `orientacao`
---
-ALTER TABLE `orientacao`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de tabela `professor`
---
-ALTER TABLE `professor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT de tabela `projeto`
---
-ALTER TABLE `projeto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de tabela `statusprojeto`
---
-ALTER TABLE `statusprojeto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT de tabela `usuario`
---
-ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
---
--- Restrições para dumps de tabelas
---
-
---
--- Restrições para tabelas `orientacao`
---
-ALTER TABLE `orientacao`
-  ADD CONSTRAINT `FK_Orientacao_0` FOREIGN KEY (`idProjeto`) REFERENCES `projeto` (`id`);
-
---
--- Restrições para tabelas `professorareainteresse`
+-- Limitadores para a tabela `professorareainteresse`
 --
 ALTER TABLE `professorareainteresse`
   ADD CONSTRAINT `FK_ProfessorAreaInteresse_0` FOREIGN KEY (`idAreaInteresse`) REFERENCES `areainteresse` (`id`),
   ADD CONSTRAINT `FK_ProfessorAreaInteresse_1` FOREIGN KEY (`idProfessor`) REFERENCES `professor` (`id`);
 
 --
--- Restrições para tabelas `projeto`
+-- Limitadores para a tabela `projeto`
 --
 ALTER TABLE `projeto`
   ADD CONSTRAINT `FK_Projeto_0` FOREIGN KEY (`idAluno`) REFERENCES `aluno` (`id`),
   ADD CONSTRAINT `FK_Projeto_1` FOREIGN KEY (`idProfessor`) REFERENCES `professor` (`id`),
-  ADD CONSTRAINT `FK_Projeto_2` FOREIGN KEY (`idAreaInteresse`) REFERENCES `areainteresse` (`id`);
-
-
+  ADD CONSTRAINT `FK_Projeto_2` FOREIGN KEY (`idAreaInteresse`) REFERENCES `areainteresse` (`id`),
+  ADD CONSTRAINT `FK_Projeto_3` FOREIGN KEY (`status`) REFERENCES `statusprojeto` (`id`);
