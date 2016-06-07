@@ -16,7 +16,6 @@ angular.module('mytcc')
     $http.get(url+"login/getSessionData")
     .then(function (response) 
     {
-        $log.log(response);
         $log.log('verificando se o usuario esta logado');
         if(response.data == 'f')
         {
