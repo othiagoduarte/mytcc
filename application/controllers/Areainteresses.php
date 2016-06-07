@@ -8,22 +8,80 @@ class AreaInteresses extends CI_Controller
 	{
 		parent::__construct();
 		
-		if ( ! $this->session->userdata('logado')){
+		if (!$this->session->userdata('logado'))
+		{
             redirect('login');
         }		
 		
-		$this->load->model('areainteresse', 'model', TRUE);
+		$this->load->model('areainteresse', 'areaDB', TRUE);
 	}
 	
-    public function listaAreas()
+    function index()
 	{
-		echo json_encode($this->model->listar());
+		$this->load->view('includes/prototipo_header');
+	    $this->load->view('areas/index');
+	    $this->load->view('includes/prototipo_footer');	
 	}
 	
-	public function listaProfessorPorArea()
+	function professor()
+	{
+		$this->load->view('includes/prototipo_header');
+	    $this->load->view('areas/professorporarea');
+	    $this->load->view('includes/prototipo_footer');	
+	}
+	
+	function criar()
+	{
+		$this->load->view('includes/prototipo_header');
+	    $this->load->view('areas/criar');
+	    $this->load->view('includes/prototipo_footer');
+	}
+	
+	function editar($IdArea)
+	{
+		$this->load->view('includes/prototipo_header');
+	    $this->load->view('areas/criar');
+	    $this->load->view('includes/prototipo_footer');
+	}
+	
+	function registrar()
+	{
+		$postData = file_get_contents("php://input");
+		$areaArray = json_decode($postData, true);
+		
+		try
+		{
+			$this->areaDB->beginTrans();						
+			
+			$this->areaDB->arrayBuilder($areaArray);
+			
+			var_dump($this->areaDB);
+			
+			$this->areaDB->insert();
+			$this->areaDB->commit();	
+		}
+		catch(Exception $e)
+		{
+			$this->areaDB->rollback();		
+		}		
+	}
+	
+	function listar()
+	{
+		echo json_encode($this->areaDB->listar());
+	}
+	
+	function listaProfessorPorArea()
     {
-        echo json_encode($this->model->listarProfessores());
+        echo json_encode($this->areaDB->listarProfessores());
     }
+	
+	// lista todas as áreas de interesse do professor que está logado
+	function listarPorProfessor()
+	{
+		$idProfessor = $this->session->userdata('id');
+		echo json_encode($this->areaDB->listarPorProfessor($idProfessor));        
+	}
 	
 	function areas()
 	{
