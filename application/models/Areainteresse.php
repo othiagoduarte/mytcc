@@ -26,7 +26,8 @@ class AreaInteresse extends My_Model
     {
         $this->conectarDB();
         
-        $this->db->select('*');
+        $this->db->select('areainteresse.id');
+        $this->db->select('areainteresse.nomeArea as descricao');
         $this->db->from('areainteresse');
         $query = $this->db->get();
         return $query->result();

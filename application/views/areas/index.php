@@ -18,7 +18,7 @@
             <tbody>
                     <tr ng-repeat="ar in areaCtrl.areas">
                         <td>{{ ar.id }}</td>
-                        <td>{{ ar.nomeArea }}</td>
+                        <td>{{ ar.descricao }}</td>
                         <td>Editar</td>
                     </tr>
             </tbody>
