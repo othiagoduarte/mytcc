@@ -58,4 +58,18 @@ class Orientacao extends CI_Controller {
 	{
 		$this->load->view('orientacao/modalResposta');
 	}
+	
+	function listarOrientacoes()
+	{
+	    $this->load->view('includes/prototipo_header');
+	    $this->load->view('orientacao/listarOrientacoesAluno');
+	    $this->load->view('includes/prototipo_footer');
+	}
+	
+	function agendarOrientacao()
+	{
+	    $this->load->view('includes/prototipo_header');
+	    $this->load->view('orientacao/modalAgendarOrientacao');
+	    $this->load->view('includes/prototipo_footer');
+	}
 }

@@ -31,10 +31,10 @@
                                     <a ng-href="<?php echo base_url('orientacao/responder') ?>"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
                                 </li>
                                 <li>
-                                    <a ng-href="<?php echo base_url('orientacao/listar') ?>"><i class="fa fa-dashboard fa-fw"></i>Gerência de orientandos</a>
+                                    <a ng-href="<?php echo base_url('orientacao/listar') ?>"><i class="glyphicon glyphicon-pencil"></i>Gerência de orientandos</a>
                                 </li>                            
                                 <li>
-                                    <a ng-href="<?php echo base_url('orientacao/listar') ?>"><i class="fa fa-dashboard fa-fw"></i>Agendar Orientação</a>
+                                    <a ng-href="<?php echo base_url('orientacao/listar') ?>"><i class="glyphicon glyphicon-calendar"></i>Agendar Orientação</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
