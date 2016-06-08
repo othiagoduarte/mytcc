@@ -9,8 +9,9 @@ angular.module("mytcc")
     vm.areas; // todas as areas
     vm.areasProfessor; // areas referentes a um professor
     vm.areasNotProfessor = []; // areas que um professor pode adicionar
-    // vm.adiciona = adicionar(vm.area, vm.areasNotProfessor, vm.areasProfessor);
-    // vm.remove = adicionar(vm.area, vm.areasProfessor, vm.areasNotProfessor);
+    var novas_areas = []; // areas que serão incluidas no backend
+    var velhas_areas = []; // areas que serão excluidas no backend
+    var index_position = -1;
     
     vm.criarLink = areaFactory.CriarAreaLink();
     
@@ -83,6 +84,7 @@ angular.module("mytcc")
         {
             if(a[i].descricao == obj.descricao)
             {
+                index_position = i;
                 return true;
             }
         }
@@ -98,10 +100,18 @@ angular.module("mytcc")
             if(vm.areasNotProfessor[i].id == area.id)
                 position = i;
         }
-                       
-        $log.log(position);
+        
+        if(contains(velhas_areas, area))
+        {
+            velhas_areas.splice(index_position, 1);
+        }
+        else
+        {
+            novas_areas.push(area);    
+        }
+                                                              
         vm.areasNotProfessor.splice(position, 1);
-        vm.areasProfessor.push(area);
+        vm.areasProfessor.push(area);        
     };
     
     vm.remover = function(area)
@@ -112,9 +122,16 @@ angular.module("mytcc")
         {
             if(vm.areasProfessor[i].id == area.id)
                 position = i;
+        } 
+        
+        if(contains(novas_areas, area))
+        {
+           novas_areas.splice(index_position, 1);
         }
-
-        $log.log(position);
+        else
+        {
+            velhas_areas.push(area);    
+        }          
         
         vm.areasProfessor.splice(position, 1);
         vm.areasNotProfessor.push(area);
