@@ -17,6 +17,13 @@ class Orientacao extends CI_Controller {
 		$sessionId = $this->session->userdata('id');
 	}
 	
+	function minhasorientacoes()
+	{
+	    $this->load->view('includes/prototipo_header');
+	    $this->load->view('orientacao/minhasorientacoes');
+	    $this->load->view('includes/prototipo_footer');	 
+	}
+	
 	public function index()
 	{		
 		$this->listar();

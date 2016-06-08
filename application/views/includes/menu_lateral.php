@@ -8,7 +8,7 @@
                                     <a ng-href="<?php echo base_url('areainteresses/dashboard') ?>"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
                                 </li>
                                 <li>
-                                    <a ng-href="<?php echo base_url('areainteresses/areas') ?>"><i class="fa fa-dashboard fa-fw"></i>Areas de Interesse</a>
+                                    <a ng-href="<?php echo base_url('areainteresses') ?>"><i class="fa fa-dashboard fa-fw"></i>Areas de Interesse</a>
                                 </li>
                                 <li>
                                     <a ng-href="<?php echo base_url('alunos/criar') ?>"><i class="fa fa-dashboard fa-fw"></i>Incluir Alunos</a>
@@ -18,7 +18,7 @@
                             <a href="#"><i class="fa fa-files-o fa-fw"></i> Aluno<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">                                
                                 <li>
-                                    <a ng-href="<?php echo base_url('') ?>"><i class="fa fa-dashboard fa-fw"></i> Minhas Orientacoes</a>
+                                    <a ng-href="<?php echo base_url('orientacao/minhasorientacoes') ?>"><i class="fa fa-dashboard fa-fw"></i> Minhas Orientacoes</a>
                                 </li>
                                 <li>
                                     <a ng-href="<?php echo base_url('orientacao/solicitar') ?>"><i class="fa fa-dashboard fa-fw"></i> Solicitar orientador</a>
@@ -28,13 +28,15 @@
                             <a href="#"><i class="fa fa-files-o fa-fw"></i> Professor<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">                                
                                 <li>
-                                    <a ng-href="<?php echo base_url('orientacao/responder') ?>"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
+                                    <a ng-href="<?php echo base_url('') ?>"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
                                 </li>
                                 <li>
                                     <a ng-href="<?php echo base_url('orientacao/listar') ?>"><i class="glyphicon glyphicon-pencil"></i>Gerência de orientandos</a>
                                 </li>                            
                                 <li>
                                     <a ng-href="<?php echo base_url('orientacao/listar') ?>"><i class="glyphicon glyphicon-calendar"></i>Agendar Orientação</a>
+
+                                    <a ng-href="<?php echo base_url('areainteresses/professor') ?>"><i class="fa fa-dashboard fa-fw"></i>Áreas de Interesse</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

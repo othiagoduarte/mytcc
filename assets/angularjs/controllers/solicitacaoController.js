@@ -10,7 +10,7 @@ angular.module('mytcc')
     $scope.listarAreas = function()
     {
         $log.info("buscando a lista de areas p/ carregar o select...")
-		$http.get(url+"areainteresses/listaareas") 
+		$http.get(url+"areainteresses/listar") 
 		.success(function (data, status, header, config) 
 		{		
 			$scope.areas = data;

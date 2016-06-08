@@ -23,4 +23,5 @@
     <script src="<?php echo base_url("/assets/angularjs/modalControllers/mDetalheController.js") ?>"></script>
     <script src="<?php echo base_url("/assets/angularjs/modalControllers/mRespostaController.js") ?>"></script>
     <script src="<?php echo base_url("/assets/angularjs/services/url.js") ?>"></script>
+    <script src="<?php echo base_url("/assets/angularjs/factories/areaFactory.js") ?>"></script>
 </footer>
