@@ -4,21 +4,24 @@ angular.module('mytcc')
 {    
     var url = urlService.getUrl;
 	
-	$scope.projetos;
-    $scope.status = { aguardando: '1', aceito: '2', negado: '3' };
+    $scope.aguardando = [];
+    $scope.aceito = [];
+    $scope.negado = [];
+    $scope.status = { aguardando: "1", aceito: "2", negado: "3" };
     
     $scope.listaProjetos = function ()
     {
         $http.get(url+'projetos/listarProjetosPorProfessor')
-		.success(function (data, status, header, config)
-		{
-            $log.info("lista de projetos carregada com sucesso. Status -> " +status);
-			$scope.projetos = data;
-		})
-		.error(function (data, status, header, config)
-		{
-			$log.error("metodo POST com erro. Status -> " +status);
-		})	
+        .then(function(response)
+        {
+            teste($scope.status.aguardando, response.data, $scope.aguardando);
+            teste($scope.status.aceito, response.data, $scope.aceito);
+            teste($scope.status.negado, response.data, $scope.negado);
+            $scope.error = "Projetos do professor carregados com sucesso.";          
+        }, function(error)
+        {
+            $scope.error = "Não foi possível listar os projetos: " + error.statusText;
+        });
     }
 	
 	// funcao para abrir a modal que exibe os detalhes de uma solicitacao
@@ -52,5 +55,16 @@ angular.module('mytcc')
         {
             $log.info('modalDetalhes fechada as: ' + new Date());
         });
+    };
+    
+    var teste = function(status, from, to)
+    {
+        for(i=0; i<from.length; i++)
+        {
+            $log.log('status da requisicao '+from[i].statusProjeto);
+            $log.log('status '+status);
+            if(from[i].statusProjeto == status)
+                to.push(from[i]);
+        }
     };
 });
