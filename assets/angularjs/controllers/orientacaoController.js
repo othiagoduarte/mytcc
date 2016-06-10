@@ -1,8 +1,24 @@
 angular.module('mytcc')
 
-.controller('orientacaoController', function($scope, $http, $log, urlService)
+.controller('orientacaoController', function($log, orientacaoFactory)
 {
-	var url = urlService.getUrl;
+    var vm = this;
+	
+	vm.dashboard = [];
     
-    				
+    loadDashboard();
+    
+    function loadDashboard()
+    {
+        $log.log("acessando funcao loadDashboard");
+        orientacaoFactory.getDashboard()
+        .then(function(response)
+        {
+            vm.dashboard = response.data;
+        }),
+        function(error)
+        {
+            
+        };        
+    }    
 });

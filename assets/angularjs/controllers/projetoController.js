@@ -7,16 +7,17 @@ angular.module('mytcc')
     $scope.aguardando = [];
     $scope.aceito = [];
     $scope.negado = [];
-    $scope.status = { aguardando: "1", aceito: "2", negado: "3" };
+    var status = { aguardando: "1", negado: "2", aceito: "3" };
     
     $scope.listaProjetos = function ()
     {
         $http.get(url+'projetos/listarProjetosPorProfessor')
         .then(function(response)
         {
-            teste($scope.status.aguardando, response.data, $scope.aguardando);
-            teste($scope.status.aceito, response.data, $scope.aceito);
-            teste($scope.status.negado, response.data, $scope.negado);
+            separaPorStatus(status.aguardando, response.data, $scope.aguardando);
+            separaPorStatus(status.aceito, response.data, $scope.aceito);
+            separaPorStatus(status.negado, response.data, $scope.negado);
+                        
             $scope.error = "Projetos do professor carregados com sucesso.";          
         }, function(error)
         {
@@ -31,7 +32,7 @@ angular.module('mytcc')
         var modalDetalhes = $uibModal.open
         ({
             animation: true,
-            templateUrl: url+'orientacao/detalhes',
+            templateUrl: url+'orientacoes/detalhes',
             controller: 'mDetalheController',
             resolve: 
             {
@@ -57,13 +58,11 @@ angular.module('mytcc')
         });
     };
     
-    var teste = function(status, from, to)
+    var separaPorStatus = function(status, from, to)
     {
         for(i=0; i<from.length; i++)
         {
-            $log.log('status da requisicao '+from[i].statusProjeto);
-            $log.log('status '+status);
-            if(from[i].statusProjeto == status)
+            if(from[i].status == status)
                 to.push(from[i]);
         }
     };

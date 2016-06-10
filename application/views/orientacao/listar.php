@@ -23,12 +23,14 @@
 				<table class="table table-condensed table-striped table-bordered">
 					<thead>
 						<th>Aluno</th>
+						<th>Orientações</th>
 						<th>Área de interesse</th>
 						<th>Data da solicitação	</th>
 					</thead>
 					<tbody>
 						<tr ng-repeat="projeto in aceito">
 							<td >{{ projeto.NomeAluno }}</td>	
+							<td >{{ projeto.numOrientacoes }}</td>
 							<td >{{ projeto.NomeAreaInteresse }}</td>
 							<td >{{ projeto.dataSolicitacao }}</td>
 						</tr>								

@@ -11,7 +11,7 @@
 	<!--Combobox com as opções de áreas para escolher os professores-->
 	<div ng-init="areas = listarAreas()" class="form-group">
 		<span class="label label-info">Selecione a área de interesse</span>
-		<select ng-options="option.nomeArea for option in areas track by option.id" ng-model="projeto.areaInteresse" class="form-control"></select>
+		<select ng-options="option.descricao for option in areas track by option.id" ng-model="projeto.areaInteresse" class="form-control"></select>
 	</div>
 	
 	<!--Painél com os professores filtrados pela área de interesse-->
@@ -21,7 +21,7 @@
 			<div class="panel-group" id="panel-655984">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-							<a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-655984" href="#panel-element-943935">{{ projeto.areaInteresse.nomeArea }}</a>
+							<a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-655984" href="#panel-element-943935">{{ projeto.areaInteresse.descricao }}</a>
 					</div>
 					<div id="panel-element-943935" class="panel-collapse collapse">
 						<div class="panel-body">
