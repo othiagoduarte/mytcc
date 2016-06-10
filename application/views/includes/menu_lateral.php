@@ -18,23 +18,23 @@
                             <a href="#"><i class="fa fa-files-o fa-fw"></i> Aluno<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">                                
                                 <li>
-                                    <a ng-href="<?php echo base_url('orientacao/minhasorientacoes') ?>"><i class="fa fa-dashboard fa-fw"></i> Minhas Orientacoes</a>
+                                    <a ng-href="<?php echo base_url('orientacoes/minhasorientacoes') ?>"><i class="fa fa-dashboard fa-fw"></i> Minhas Orientacoes</a>
                                 </li>
                                 <li>
-                                    <a ng-href="<?php echo base_url('orientacao/solicitar') ?>"><i class="fa fa-dashboard fa-fw"></i> Solicitar orientador</a>
+                                    <a ng-href="<?php echo base_url('orientacoes/solicitar') ?>"><i class="fa fa-dashboard fa-fw"></i> Solicitar orientador</a>
                                 </li>                         
                             </ul>
                         <li class="active" ng-show="login.menu_professor">
                             <a href="#"><i class="fa fa-files-o fa-fw"></i> Professor<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">                                
                                 <li>
-                                    <a ng-href="<?php echo base_url('') ?>"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
+                                    <a ng-href="<?php echo base_url('orientacoes/dashboard') ?>"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
                                 </li>
                                 <li>
-                                    <a ng-href="<?php echo base_url('orientacao/listar') ?>"><i class="glyphicon glyphicon-pencil"></i>Gerência de orientandos</a>
+                                    <a ng-href="<?php echo base_url('orientacoes/listar') ?>"><i class="glyphicon glyphicon-pencil"></i>Gerência de orientandos</a>
                                 </li>                            
                                 <li>
-                                    <a ng-href="<?php echo base_url('orientacao/listar') ?>"><i class="glyphicon glyphicon-calendar"></i>Agendar Orientação</a>
+                                    <a ng-href="<?php echo base_url('orientacoes/listar') ?>"><i class="glyphicon glyphicon-calendar"></i>Agendar Orientação</a>
 
                                     <a ng-href="<?php echo base_url('areainteresses/professor') ?>"><i class="fa fa-dashboard fa-fw"></i>Áreas de Interesse</a>
                                 </li>

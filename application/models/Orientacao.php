@@ -1,31 +1,34 @@
 <?php
-/*
-CREATE TABLE Orientacao (
- id INT NOT NULL AUTO_INCREMENT,
- idProjeto INT NOT NULL,
- datahora TIMESTAMP NOT NULL,
- okAluno BIT(1) NOT NULL,
- okProfessor BIT(1) NOT NULL,
- anotacoesAluno VARCHAR(500),
- anotacoesProfessor VARCHAR(500),
- PRIMARY KEY (id)
-);
-*/
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Projeto extends My_Model {
-
+class Orientacao extends My_Model 
+{
     public $idProjeto = 0;
     public $datahora = "";
-    public $okAluno = false;
-    public $okProfessor =false;
-    public $anotacoesAluno = "";
-    public $anotacoesProfessor = "";
-    
-    public function __construct(){
+	public $feedback = "";
+	public $anotacoesAgendamento = "";
+	public $status = "1";
+	    
+    public function __construct()
+	{
 	   	parent::__construct();
            $this->set_tabela(get_class($this));        
     }
+	
+	public function orientacaoPorProfessor($idProfessor, $today)
+	{
+		$this->conectarDB();
+				
+		$this->db->select('*');
+		$this->db->from('orientacao');
+		$this->db->join('projeto', 'orientacao.idProjeto = projeto.id');
+		$this->db->where('projeto.idProfessor', $idProfessor);		
+		$where = "orientacao.status = 1 or orientacao.status = 2";
+		$this->db->where($where);
+		$this->db->where('orientacao.datahora >', $today);
+		
+		return $this->db->get()->result();
+	}
 	
 	public function get_aluno(){
 				
@@ -36,8 +39,7 @@ class Projeto extends My_Model {
 			
 		}catch(Exception $e){
 			
-			return null;
-				
+			return null;				
 		}				
 	}
 	
@@ -50,15 +52,13 @@ class Projeto extends My_Model {
 			
 		}catch(Exception $e){
 			
-			return null;
-				
+			return null;				
 		}				
 	}
 	
 	public function get_AreaInteresse(){
 				
 		$this->load->model('AreaInteresse','model');
-		return $model->get_by_id($this->$idAreaInteresse);
-				
+		return $model->get_by_id($this->$idAreaInteresse);				
 	}    
 }
