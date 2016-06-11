@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+date_default_timezone_set('America/Sao_Paulo');
 
 class Orientacoes extends CI_Controller {
 
@@ -15,8 +16,7 @@ class Orientacoes extends CI_Controller {
 		
 		$this->load->model('projeto', 'projetoDB', TRUE);
 		$this->load->model('orientacao', 'orientacaoDB', true);
-		$sessionId = $this->session->userdata('id');
-		$this->load->helper('date');	
+		$sessionId = $this->session->userdata('id');	
 	}
 	
 	function minhasorientacoes()
@@ -92,8 +92,15 @@ class Orientacoes extends CI_Controller {
 	// dashboard do professor
 	function listando()
 	{
-        $idProfessor = $this->session->userdata('id');
-		$today = date('Y-m-d H:i:s');    
-		echo json_encode($this->orientacaoDB->orientacaoPorProfessor($idProfessor, $today));		
+		$idProfessor = $this->session->userdata('id');
+		echo json_encode($this->orientacaoDB->orientacaoPorProfessor($idProfessor));		
+	}
+
+	function testando()
+	{
+		$date = new DateTime();
+		$date->add(new DateInterval('P7D'));
+		$today = $date->format('Y-m-d H:i:s');
+		echo $today;
 	}
 }

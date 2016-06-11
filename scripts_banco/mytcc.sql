@@ -64,10 +64,12 @@ INSERT INTO `areainteresse` (`id`, `nomeArea`) VALUES
 -- Estrutura da tabela `orientacao`
 --
 
-CREATE TABLE IF NOT EXISTS `orientacao` (
+CREATE TABLE IF NOT EXISTS `orientacao` 
+(
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idProjeto` int(11) NOT NULL,
   `datahora` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `local` varchar(100) DEFAULT NULL,
   `anotacoesAgendamento` varchar(500) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `feedback` varchar(500) DEFAULT NULL,
@@ -243,7 +245,7 @@ VALUES
 (23, 5, 3, 'projeto da vanessa', 'resumo do projeto da vanessa', 5, 'n', 'nao gostei', null, 2, 0, '2016/05/10', '2016/05/11'),
 (24, 5, 4, 'projeto da vanessa', 'resumo do projeto da vanessa', 5, 'n', 'gostei', null, 3, 0, '2016/05/10', '2016/05/11'),
 (25, 5, 5, 'projeto da vanessa', 'resumo do projeto da vanessa', 5, 'n', 'nao gostei', null, 1, 0, '2016/05/10', '2016/05/11');
---------------------------------------------------------
+-- ------------------------------------------------------
 
 --
 -- Estrutura da tabela `statusorientacao`

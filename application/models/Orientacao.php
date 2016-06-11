@@ -15,17 +15,33 @@ class Orientacao extends My_Model
            $this->set_tabela(get_class($this));        
     }
 	
-	public function orientacaoPorProfessor($idProfessor, $today)
+	public function orientacaoPorProfessor($idProfessor)
 	{
+		$date = new DateTime();
+		$today = $date->format('Y-m-d');
+		$date->add(new DateInterval('P7D'));
+		$sevenDaysLater = $date->format('Y-m-d H:i:s');
+		
 		$this->conectarDB();
 				
-		$this->db->select('*');
+		$this->db->select('orientacao.*');
+		$this->db->select('orientacao.dataHora as data');
+		$this->db->select('orientacao.local as local');
+		$this->db->select('aluno.nome as nomeAluno');
+		$this->db->select('statusorientacao.status as statusOrientacao');
+		
 		$this->db->from('orientacao');
 		$this->db->join('projeto', 'orientacao.idProjeto = projeto.id');
+		$this->db->join('aluno', 'projeto.idAluno = aluno.id');
+		$this->db->join('statusorientacao', 'orientacao.status = statusorientacao.id');
+		
 		$this->db->where('projeto.idProfessor', $idProfessor);		
+		$where2 = "orientacao.datahora <= '".$sevenDaysLater."' and orientacao.datahora >= '".$today."'";
+		$this->db->where($where2);
 		$where = "orientacao.status = 1 or orientacao.status = 2";
 		$this->db->where($where);
-		$this->db->where('orientacao.datahora >', $today);
+		
+		$this->db->order_by('orientacao.datahora', 'desc');
 		
 		return $this->db->get()->result();
 	}
