@@ -2,7 +2,9 @@
     <h3>Agenda - próximos 7 dias</h3>
     <hr>    
     
-    <table class="table table-bordered table-hover">
+    <div ng-show="ctrl.dashboard == '0'" class="alert-info">Você está livre por enquanto. Curta a vida!</div>
+    
+    <table class="table table-bordered table-hover" ng-show="ctrl.dashboard > '0'">
         <thead>
             <th>Data</th>
             <th>Hora</th>

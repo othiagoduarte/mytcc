@@ -15,6 +15,7 @@ class Orientacao extends My_Model
            $this->set_tabela(get_class($this));        
     }
 	
+	// metodo com bug ainda, a query 'where' esta se atrapalhando no OU
 	public function orientacaoPorProfessor($idProfessor)
 	{
 		$date = new DateTime();
@@ -35,13 +36,13 @@ class Orientacao extends My_Model
 		$this->db->join('aluno', 'projeto.idAluno = aluno.id');
 		$this->db->join('statusorientacao', 'orientacao.status = statusorientacao.id');
 		
-		$this->db->where('projeto.idProfessor', $idProfessor);		
+		$this->db->where('projeto.idProfessor', $idProfessor);	
 		$where2 = "orientacao.datahora <= '".$sevenDaysLater."' and orientacao.datahora >= '".$today."'";
 		$this->db->where($where2);
 		$where = "orientacao.status = 1 or orientacao.status = 2";
 		$this->db->where($where);
 		
-		$this->db->order_by('orientacao.datahora', 'desc');
+		$this->db->order_by('orientacao.datahora', 'asc');
 		
 		return $this->db->get()->result();
 	}
