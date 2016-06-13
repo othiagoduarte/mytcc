@@ -1,7 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+date_default_timezone_set('America/Sao_Paulo');
 
-class Orientacao extends CI_Controller {
+class Orientacoes extends CI_Controller {
 
 	public $sessionId = 0;
 	
@@ -13,8 +14,9 @@ class Orientacao extends CI_Controller {
             redirect('login');
         } 
 		
-		$this->load->model('projeto', 'projeto', TRUE);
-		$sessionId = $this->session->userdata('id');
+		$this->load->model('projeto', 'projetoDB', TRUE);
+		$this->load->model('orientacao', 'orientacaoDB', true);
+		$sessionId = $this->session->userdata('id');	
 	}
 	
 	function minhasorientacoes()
@@ -52,7 +54,7 @@ class Orientacao extends CI_Controller {
 	
 	public function listarSolicitacoes()
 	{
-		$solicitacoes = $this->projeto->get_professor($sessionId);
+		$solicitacoes = $this->projetoDB->get_professor($sessionId);
 		echo json_encode(solicitacoes);
 	}
 	
@@ -78,5 +80,27 @@ class Orientacao extends CI_Controller {
 	    $this->load->view('includes/prototipo_header');
 	    $this->load->view('orientacao/modalAgendarOrientacao');
 	    $this->load->view('includes/prototipo_footer');
+	}
+	
+	function dashboard()
+	{
+	    $this->load->view('includes/prototipo_header');
+	    $this->load->view('orientacao/dashboard');
+	    $this->load->view('includes/prototipo_footer');
+	}
+		
+	// dashboard do professor
+	function listando()
+	{
+		$idProfessor = $this->session->userdata('id');
+		echo json_encode($this->orientacaoDB->orientacaoPorProfessor($idProfessor));		
+	}
+
+	function testando()
+	{
+		$date = new DateTime();
+		$date->add(new DateInterval('P7D'));
+		$today = $date->format('Y-m-d H:i:s');
+		echo $today;
 	}
 }

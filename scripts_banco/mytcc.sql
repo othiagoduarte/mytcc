@@ -64,10 +64,12 @@ INSERT INTO `areainteresse` (`id`, `nomeArea`) VALUES
 -- Estrutura da tabela `orientacao`
 --
 
-CREATE TABLE IF NOT EXISTS `orientacao` (
+CREATE TABLE IF NOT EXISTS `orientacao` 
+(
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idProjeto` int(11) NOT NULL,
   `datahora` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `local` varchar(100) DEFAULT NULL,
   `anotacoesAgendamento` varchar(500) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `feedback` varchar(500) DEFAULT NULL,
@@ -75,6 +77,37 @@ CREATE TABLE IF NOT EXISTS `orientacao` (
   KEY `FK_Orientacao_0` (`idProjeto`),
   KEY `FK_Orientacao_1` (`status`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Extraindo dados da tabela `orientacao`
+--
+
+INSERT INTO `orientacao`(`id`, `idProjeto`, `datahora`, `anotacoesAgendamento`, `status`, `feedback`) VALUES
+(1, 5, '2016/05/15 10:10:00', null, 4, 'boa orientacao'),
+(2, 5, '2016/05/16 10:10:00', null, 3, null),
+(3, 5, '2016/05/17 10:10:00', null, 4, 'boa orientacao'),
+(4, 5, '2016/05/18 10:10:00', null, 4, 'boa orientacao'),
+(5, 5, '2016/05/19 10:10:00', null, 5, null),
+(6, 5, '2016/05/20 10:10:00', null, 4, 'boa orientacao'),
+(7, 5, '2016/05/21 10:10:00', null, 5, null),
+(8, 6, '2016/05/16 10:10:00', null, 4, 'boa orientacao'),
+(9, 6, '2016/05/17 10:10:00', null, 4, 'boa orientacao'),
+(10, 6, '2016/05/18 10:10:00', null, 4, 'boa orientacao'),
+(11, 12, '2016/05/15 10:10:00', null, 4, 'boa orientacao'),
+(12, 12, '2016/05/16 10:10:00', null, 4, 'boa orientacao'),
+(13, 12, '2016/05/17 10:10:00', null, 5, null),
+(14, 12, '2016/05/18 10:10:00', null, 4, 'boa orientacao'),
+(15, 12, '2016/05/19 10:10:00', null, 4, 'boa orientacao'),
+(16, 12, '2016/05/20 10:10:00', null, 5, null),
+(17, 16, '2016/05/15 10:10:00', null, 4, 'boa orientacao'),
+(18, 16, '2016/05/16 10:10:00', null, 4, 'boa orientacao'),
+(19, 16, '2016/05/17 10:10:00', null, 4, 'boa orientacao'),
+(20, 16, '2016/05/18 10:10:00', null, 4, 'boa orientacao'),
+(21, 5, '2016/06/13 10:10:00', null, 1, null),
+(22, 5, '2016/06/14 10:10:00', null, 1, null),
+(23, 5, '2016/06/15 10:10:00', null, 1, null),
+(24, 5, '2016/06/16 10:10:00', null, 1, null),
+(25, 5, '2016/06/17 10:10:00', null, 1, null);
 
 -- --------------------------------------------------------
 
@@ -176,6 +209,43 @@ CREATE TABLE IF NOT EXISTS `projeto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
+
+--
+-- Extraindo dados da tabela `projeto`
+--
+INSERT INTO `projeto`(`id`, `idAluno`, `idProfessor`, `titulo`, `resumo`, `idAreaInteresse`, `turno`, `motivoRecusa`, `mensagem`, `status`, `numOrientacoes`, `dataSolicitacao`, `dataResposta`) 
+VALUES
+-- Solicitacoes do Marcos
+(1, 1, 1, 'projeto do marcos', 'resumo do projeto do marcos', 1, 'noite', null, null, 1, 0, '2016/05/10', null),
+(2, 1, 2, 'projeto do marcos', 'resumo do projeto do marcos', 1, 'noite', 'nao gostei', null, 2, 0, '2016/05/10', '2016/05/11'),
+(3, 1, 3, 'projeto do marcos', 'resumo do projeto do marcos', 1, 'noite', 'nao gostei', null, 2, 0, '2016/05/10', '2016/05/11'),
+(4, 1, 4, 'projeto do marcos', 'resumo do projeto do marcos', 1, 'noite', 'nao gostei', null, 2, 0, '2016/05/10', '2016/05/11'),
+(5, 1, 5, 'projeto do marcos', 'resumo do projeto do marcos', 1, 'noite', 'gostei', null, 3, 0, '2016/05/10', '2016/05/11'),
+-- Solicitacoes do Thiago
+(6, 2, 1, 'projeto do thiago', 'resumo do projeto do thiago', 2, 'n', 'gostei', null, 3, 0, '2016/05/10', '2016/05/11'),
+(7, 2, 2, 'projeto do thiago', 'resumo do projeto do thiago', 2, 'n', 'nao gostei', null, 2, 0, '2016/05/10', '2016/05/11'),
+(8, 2, 3, 'projeto do thiago', 'resumo do projeto do thiago', 2, 'n', 'nao gostei', null, 2, 0, '2016/05/10', '2016/05/11'),
+(9, 2, 4, 'projeto do thiago', 'resumo do projeto do thiago', 2, 'n', null, null, 1, 0, '2016/05/10', null),
+(10, 2, 5, 'projeto do marcos', 'resumo do projeto do thiago', 2, 'n', 'nao gostei', null, 2, 0, '2016/05/10', '2016/05/11'),
+-- Solicitacoes do Cristiano
+(11, 3, 1, 'projeto do cristiano', 'resumo do projeto do cristiano', 3, 'n', 'nao gostei', null, 2, 0, '2016/05/10', '2016/05/11'),
+(12, 3, 2, 'projeto do cristiano', 'resumo do projeto do cristiano', 3, 'n', 'gostei', null, 3, 0, '2016/05/10', '2016/05/11'),
+(13, 3, 3, 'projeto do cristiano', 'resumo do projeto do cristiano', 3, 'n', 'nao gostei', null, 2, 0, '2016/05/10', '2016/05/11'),
+(14, 3, 4, 'projeto do cristiano', 'resumo do projeto do cristiano', 3, 'n', 'nao gostei', null, 2, 0, '2016/05/10', '2016/05/11'),
+(15, 3, 5, 'projeto do cristiano', 'resumo do projeto do cristiano', 3, 'n', null, null, 1, 0, '2016/05/10', null),
+-- Solicitacoes do Luis Henrqiue
+(16, 4, 1, 'projeto do luis', 'resumo do projeto do luis', 4, 'n', 'gostei', null, 3, 0, '2016/05/10', '2016/05/11'),
+(17, 4, 2, 'projeto do luis', 'resumo do projeto do luis', 4, 'n', null, null, 1, 0, '2016/05/10', null),
+(18, 4, 3, 'projeto do luis', 'resumo do projeto do luis', 4, 'n', 'nao gostei', null, 2, 0, '2016/05/10', '2016/05/11'),
+(19, 4, 4, 'projeto do luis', 'resumo do projeto do luis', 4, 'n', 'nao gostei', null, 2, 0, '2016/05/10', '2016/05/11'),
+(20, 4, 5, 'projeto do luis', 'resumo do projeto do luis', 4, 'n', 'nao gostei', null, 2, 0, '2016/05/10', '2016/05/11'),
+-- Solicitacoes da Vanessa
+(21, 5, 1, 'projeto da vanessa', 'resumo do projeto da vanessa', 5, 'n', 'nao gostei', null, 2, 0, '2016/05/10', '2016/05/11'),
+(22, 5, 2, 'projeto da vanessa', 'resumo do projeto da vanessa', 5, 'n', 'nao gostei', null, 2, 0, '2016/05/10', '2016/05/11'),
+(23, 5, 3, 'projeto da vanessa', 'resumo do projeto da vanessa', 5, 'n', 'nao gostei', null, 2, 0, '2016/05/10', '2016/05/11'),
+(24, 5, 4, 'projeto da vanessa', 'resumo do projeto da vanessa', 5, 'n', 'gostei', null, 3, 0, '2016/05/10', '2016/05/11'),
+(25, 5, 5, 'projeto da vanessa', 'resumo do projeto da vanessa', 5, 'n', 'nao gostei', null, 1, 0, '2016/05/10', '2016/05/11');
+-- ------------------------------------------------------
 
 --
 -- Estrutura da tabela `statusorientacao`

@@ -4,21 +4,25 @@ angular.module('mytcc')
 {    
     var url = urlService.getUrl;
 	
-	$scope.projetos;
-    $scope.status = { aguardando: '1', aceito: '2', negado: '3' };
+    $scope.aguardando = [];
+    $scope.aceito = [];
+    $scope.negado = [];
+    var status = { aguardando: "1", negado: "2", aceito: "3" };
     
     $scope.listaProjetos = function ()
     {
         $http.get(url+'projetos/listarProjetosPorProfessor')
-		.success(function (data, status, header, config)
-		{
-            $log.info("lista de projetos carregada com sucesso. Status -> " +status);
-			$scope.projetos = data;
-		})
-		.error(function (data, status, header, config)
-		{
-			$log.error("metodo POST com erro. Status -> " +status);
-		})	
+        .then(function(response)
+        {
+            separaPorStatus(status.aguardando, response.data, $scope.aguardando);
+            separaPorStatus(status.aceito, response.data, $scope.aceito);
+            separaPorStatus(status.negado, response.data, $scope.negado);
+                        
+            $scope.error = "Projetos do professor carregados com sucesso.";          
+        }, function(error)
+        {
+            $scope.error = "Não foi possível listar os projetos: " + error.statusText;
+        });
     }
 	
 	// funcao para abrir a modal que exibe os detalhes de uma solicitacao
@@ -28,7 +32,7 @@ angular.module('mytcc')
         var modalDetalhes = $uibModal.open
         ({
             animation: true,
-            templateUrl: url+'orientacao/detalhes',
+            templateUrl: url+'orientacoes/detalhes',
             controller: 'mDetalheController',
             resolve: 
             {
@@ -52,5 +56,14 @@ angular.module('mytcc')
         {
             $log.info('modalDetalhes fechada as: ' + new Date());
         });
+    };
+    
+    var separaPorStatus = function(status, from, to)
+    {
+        for(i=0; i<from.length; i++)
+        {
+            if(from[i].status == status)
+                to.push(from[i]);
+        }
     };
 });

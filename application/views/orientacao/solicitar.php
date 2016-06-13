@@ -21,7 +21,7 @@
 			<div class="panel-group" id="panel-655984">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-							<a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-655984" href="#panel-element-943935">{{ projeto.areaInteresse.nomeArea }}</a>
+							<a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-655984" href="#panel-element-943935">{{ projeto.areaInteresse.descricao }}</a>
 					</div>
 					<div id="panel-element-943935" class="panel-collapse collapse">
 						<div class="panel-body">

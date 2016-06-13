@@ -1,18 +1,4 @@
 <?php
-/*
-CREATE TABLE Projeto (
- id INT NOT NULL AUTO_INCREMENT,
- idAluno INT NOT NULL,
- idProfessor INT NOT NULL,
- titulo VARCHAR(100) NOT NULL,
- resumo VARCHAR(500) NOT NULL,
- idAreaInteresse INT NOT NULL,
- turno VARCHAR(10) NOT NULL,
- motivoRecusa VARCHAR(500),
- status VARCHAR(10),
- PRIMARY KEY (id)
-);
-*/
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Projeto extends My_Model {
