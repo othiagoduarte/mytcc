@@ -75,6 +75,13 @@ class Orientacoes extends CI_Controller {
 	    $this->load->view('includes/prototipo_footer');
 	}
 	
+	function agendar()
+	{
+	    $this->load->view('includes/prototipo_header');
+	    $this->load->view('orientacao/agendar');
+	    $this->load->view('includes/prototipo_footer');
+	}
+	
 	function agendarOrientacao()
 	{
 	    $this->load->view('includes/prototipo_header');

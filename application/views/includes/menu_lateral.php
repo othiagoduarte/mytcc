@@ -28,14 +28,15 @@
                             <a href="#"><i class="glyphicon glyphicon-th-list"></i> Professor<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">                                
                                 <li>
-                                    <a ng-href="<?php echo base_url('') ?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                                    <a ng-href="<?php echo base_url('orientacoes/dashboard') ?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                                 </li>
                                 <li>
-                                    <a ng-href="<?php echo base_url('orientacoes/listar') ?>"><i class="glyphicon glyphicon-pencil"></i> Gerência de orientandos</a>
+                                    <a ng-href="<?php echo base_url('orientacoes/agendar') ?>"><i class="glyphicon glyphicon-calendar"></i> Agendar Orientação</a>
+                                </li>
+                                <li>
+                                    <a ng-href="<?php echo base_url('orientacoes/listar') ?>"><i class="glyphicon glyphicon-pencil"></i> Gerência de solicitações</a>
                                 </li>                            
                                 <li>
-                                    <a ng-href="<?php echo base_url('orientacoes/listar') ?>"><i class="glyphicon glyphicon-calendar"></i> Agendar Orientação</a>
-
                                     <a ng-href="<?php echo base_url('areainteresses/professor') ?>"><i class="fa fa-dashboard fa-fw"></i> Áreas de Interesse</a>
                                 </li>
                             </ul>
