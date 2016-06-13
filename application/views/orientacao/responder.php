@@ -16,7 +16,7 @@
 						</h4>
 					</div>
 					<div class="modal-body">
-						...
+						...x''
 					</div>
 					<div class="modal-footer">
 						 

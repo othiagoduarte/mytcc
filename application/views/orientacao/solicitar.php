@@ -11,7 +11,7 @@
 	<!--Combobox com as opções de áreas para escolher os professores-->
 	<div ng-init="areas = listarAreas()" class="form-group">
 		<span class="label label-info">Selecione a área de interesse</span>
-		<select ng-options="option.nomeArea for option in areas track by option.id" ng-model="projeto.areaInteresse" class="form-control"></select>
+		<select ng-options="option.descricao for option in areas track by option.id" ng-model="projeto.areaInteresse" class="form-control"></select>
 	</div>
 	
 	<!--Painél com os professores filtrados pela área de interesse-->
