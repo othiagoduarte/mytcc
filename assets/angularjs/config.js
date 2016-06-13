@@ -1,15 +1,28 @@
 angular.module('mytcc')
 
-.config(['$routeProvider', function($routeProvider) 
+.config(function($routeProvider, $locationProvider)
 {
-    $routeProvider.
-      when('/alunos', 
-      {
-        templateUrl: 'views/alunos/listar.php',
-        controller: 'alunoController'
-      }).
-      otherwise
-      ({
-        redirectTo: '/home'
-      });
-  }]);
+    $locationProvider.html5Mode(false);
+
+    $routeProvider
+    .when("/home", 
+    {
+        template: "/mytcc/alunos/oi",
+        controller: "alunoController"
+    })
+    .when("/profile", 
+    {
+        template: "/pages/profile.html",
+        controller: "ProfileCtrl"
+    })
+    .when("/newlist", 
+    {
+        templateUrl: "/pages/newlist.html",
+        controller: "NewListCtrl"
+    })
+    .when("/userlists/:id", 
+    {
+        templateUrl: "/pages/userlists.html",
+        controller: "UserListsCtrl"
+    });
+});

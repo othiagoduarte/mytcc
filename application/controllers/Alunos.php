@@ -25,6 +25,13 @@ class Alunos extends CI_Controller {
 	    $this->load->view('includes/prototipo_footer');
 	}
 	
+	function oi()
+	{
+        $this->load->view('includes/prototipo_header');
+        $this->load->view('home/oi');
+	    $this->load->view('includes/prototipo_footer');
+	}
+	
 	function criar()
 	{
 		$this->load->view('includes/prototipo_header');
