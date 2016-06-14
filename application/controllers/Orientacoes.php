@@ -110,4 +110,9 @@ class Orientacoes extends CI_Controller {
 		$today = $date->format('Y-m-d H:i:s');
 		echo $today;
 	}
+	function teste(){
+		$this->load->view('includes/prototipo_header');
+	    $this->load->view('teste');
+	    $this->load->view('includes/prototipo_footer');	 
+	}
 }
