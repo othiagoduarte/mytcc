@@ -19,6 +19,16 @@
                 <textarea ng-model="form.orientacao.assunto" class="form-control" rows="3" id="comment"></textarea>
             </div>
         </div>
+        <div class="row">
+            <div class=" form-group ">
+                <div class="col-md-offset-8 col-md-2">
+                    <label><input  valided type="radio" name="optradio">Recusar</label>
+                </div>
+                <div class="col-md-2">
+                    <label><input valided  type="radio" name="optradio">Aceitar</label>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <div class="modal-footer">
