@@ -37,3 +37,4 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 *.sublime-workspace
 *.sublime-project
 >>>>>>> Inicial
+assets/bower_components/datatables-plugins/pagination/jPaginator/dataTables.jPaginator.js

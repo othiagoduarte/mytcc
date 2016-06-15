@@ -2,21 +2,18 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 date_default_timezone_set('America/Sao_Paulo');
 
-class Orientacoes extends CI_Controller {
-
-	public $sessionId = 0;
-	
+class Orientacoes extends CI_Controller 
+{	
 	function __construct()
 	{		
 		parent::__construct();
 		
-		if ( ! $this->session->userdata('logado')){
+		if (!$this->session->userdata('logado')){
             redirect('login');
         } 
 		
 		$this->load->model('projeto', 'projetoDB', TRUE);
 		$this->load->model('orientacao', 'orientacaoDB', true);
-		$sessionId = $this->session->userdata('id');	
 	}
 	
 	function minhasorientacoes()
@@ -82,11 +79,10 @@ class Orientacoes extends CI_Controller {
 	    $this->load->view('includes/prototipo_footer');
 	}
 	
+	// traz a modal agendar orientacao
 	function agendarOrientacao()
 	{
-	    $this->load->view('includes/prototipo_header');
 	    $this->load->view('orientacao/modalAgendarOrientacao');
-	    $this->load->view('includes/prototipo_footer');
 	}
 	
 	function dashboard()
@@ -96,23 +92,34 @@ class Orientacoes extends CI_Controller {
 	    $this->load->view('includes/prototipo_footer');
 	}
 		
+	function orientacaoAluno()
+	{
+		$idAluno = $this->session->userdata('id');
+		echo json_encode($this->orientacaoDB->orientacaoPorAluno($idAluno));
+	}
+			
 	// dashboard do professor
 	function listando()
 	{
 		$idProfessor = $this->session->userdata('id');
-		echo json_encode($this->orientacaoDB->orientacaoPorProfessor($idProfessor));		
+		echo json_encode($this->orientacaoDB->orientacaoPorProfessor($idProfessor));	
 	}
-
-	function testando()
+	
+	// carrega a view timeline do aluno visao professor
+	function timeline()
 	{
-		$date = new DateTime();
-		$date->add(new DateInterval('P7D'));
-		$today = $date->format('Y-m-d H:i:s');
-		echo $today;
+		$this->load->view('orientacao/timeline');
 	}
-	function teste(){
-		$this->load->view('includes/prototipo_header');
-	    $this->load->view('teste');
-	    $this->load->view('includes/prototipo_footer');	 
+	
+	// dashboard timeline por aluno visao professor
+	function orientacaoProjeto()
+	{
+		$idProjeto = intval($_GET["idProjeto"]);
+		
+		if($idProjeto == 0)
+			throw new Exception("Identificador do projeto não informado.");
+			
+		$orientacoes = $this->orientacaoDB->orientacaoProjeto($idProjeto);
+		echo json_encode($orientacoes);
 	}
 }

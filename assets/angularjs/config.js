@@ -1,28 +1,12 @@
-angular.module('mytcc')
+var app = angular.module('mytcc')
 
-.config(function($routeProvider, $locationProvider)
-{
-    $locationProvider.html5Mode(false);
-
-    $routeProvider
-    .when("/home", 
-    {
-        template: "/mytcc/alunos/oi",
-        controller: "alunoController"
-    })
-    .when("/profile", 
-    {
-        template: "/pages/profile.html",
-        controller: "ProfileCtrl"
-    })
-    .when("/newlist", 
-    {
-        templateUrl: "/pages/newlist.html",
-        controller: "NewListCtrl"
-    })
-    .when("/userlists/:id", 
-    {
-        templateUrl: "/pages/userlists.html",
-        controller: "UserListsCtrl"
-    });
+app.config(function($routeProvider, $locationProvider)
+{ 
+   $routeProvider
+   // configura a rota pra exibir o historico de orientacoes de um aluno
+   .when('/timeline/:projetoId',
+   {
+       templateUrl: '/mytcc/orientacoes/timeline',
+       controller: 'orientacaoController',
+   })
 });

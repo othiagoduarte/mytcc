@@ -1,7 +1,7 @@
     <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li class="active" ng-show="login.menu_coordenador">
+                        <li class="active" ng-if="login.menu_coordenador">
                             <a href="#"><i class="glyphicon glyphicon-th-list"></i> Coordenador<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">                                
                                 <li>

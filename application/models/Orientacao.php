@@ -47,6 +47,50 @@ class Orientacao extends My_Model
 		return $this->db->get()->result();
 	}
 	
+	public function orientacaoPorAluno($idAluno)
+	{
+		$projetoAceito = '3';
+		
+		$this->db->select('orientacao.*');
+		$this->db->select('orientacao.id as id');
+		$this->db->select('orientacao.dataHora as data');
+		$this->db->select('statusorientacao.status as statusOrientacao');
+		$this->db->select('professor.nome as nome');
+		
+		$this->db->from('orientacao');
+		$this->db->join('projeto', 'orientacao.idProjeto = projeto.id');
+		$this->db->join('professor', 'projeto.idProfessor = professor.id');
+		$this->db->join('statusorientacao', 'orientacao.status = statusorientacao.id');
+		
+		$this->db->where('projeto.idAluno', $idAluno);
+		$this->db->where('projeto.status', $projetoAceito);
+		
+		$this->db->order_by('orientacao.datahora', 'asc');
+		
+		return $this->db->get()->result();
+	}
+	
+	public function orientacaoProjeto($idProjeto)
+	{
+		$this->conectarDB();
+						
+		$this->db->select('orientacao.*');
+		$this->db->select('orientacao.id as id');
+		$this->db->select('orientacao.dataHora as data');
+		$this->db->select('statusorientacao.status as statusOrientacao');
+		$this->db->select('aluno.nome as nome');
+		
+		$this->db->from('orientacao');
+		$this->db->join('projeto', 'orientacao.idProjeto = projeto.id');
+		$this->db->join('aluno', 'projeto.idAluno = aluno.id');
+		$this->db->join('statusorientacao', 'orientacao.status = statusorientacao.id');
+		
+		$this->db->where('orientacao.idProjeto', $idProjeto);
+		$this->db->order_by('orientacao.datahora', 'desc');	
+		
+		return $this->db->get()->result();			
+	}
+	
 	public function get_aluno(){
 				
 		try{

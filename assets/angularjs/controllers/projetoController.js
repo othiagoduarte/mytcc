@@ -4,6 +4,9 @@ angular.module('mytcc')
 {    
     var url = urlService.getUrl;
 	
+    $scope.showMessage = false;   
+    
+    $scope.teste = false;
     $scope.aguardando = [];
     $scope.aceito = [];
     $scope.negado = [];
@@ -17,6 +20,11 @@ angular.module('mytcc')
             separaPorStatus(status.aguardando, response.data, $scope.aguardando);
             separaPorStatus(status.aceito, response.data, $scope.aceito);
             separaPorStatus(status.negado, response.data, $scope.negado);
+            
+            if($scope.aceito.length == 0)
+            {
+                $scope.showMessage = true;                
+            }
                         
             $scope.error = "Projetos do professor carregados com sucesso.";          
         }, function(error)
@@ -55,6 +63,35 @@ angular.module('mytcc')
         function () 
         {
             $log.info('modalDetalhes fechada as: ' + new Date());
+        });
+    };
+
+    // abre a modal de 'agendar'
+    $scope.modalAgendar = function (projeto) 
+    {
+        $log.log('abrindo modal agendar orientação');
+        var modalInstance = $uibModal.open
+        ({
+            animation: true,
+            templateUrl: url+'orientacoes/agendarOrientacao',
+            controller: 'mAgendarController',
+            resolve: 
+            {
+                items: function () 
+                {
+                    return projeto;
+                }
+            }
+        });
+
+        modalInstance.result
+        .then(function (selectedItem) 
+        {
+
+        }, 
+        function () 
+        {
+
         });
     };
     

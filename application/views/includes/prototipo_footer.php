@@ -5,4 +5,5 @@
     </div><!-- /#page-wrapper -->
 </div><!-- /#wrapper -->
 <!-- Carregar o footer -->
+<?php $this->load->view('includes/body')?>
 <?php $this->load->view('includes/footer')?>

@@ -1,21 +1,47 @@
 angular.module('mytcc')
 
-.controller('orientacaoController', function($log, orientacaoFactory,$scope)
+.controller('orientacaoController', function($log, $scope, $routeParams,$uibModal, orientacaoFactory)
 {
+    var projetoId = $routeParams.projetoId;
+    
     var vm = this;
-	vm.error;
+    
+    vm.error;
 	vm.dashboard = [];
+    vm.alunoline = [];
+    $scope.timeline = [];
+    $scope.nome;
+    
+    vm.status = "";
     
     loadDashboard();
+    
+    vm.loadAlunoLine = function()
+    {
+        $log.log("carregando as orientacoes do aluno logado");
+        orientacaoFactory.getAlunoline()
+        .then(function(response)
+        {
+            // transforma todos as jsonDates em javascript date
+            for(i=0;i<response.data.length;i++)
+            {
+                response.data[i].data = converteData(response.data[i].data);
+            }
+            
+            vm.alunoline = response.data;
+        },
+        function(error)
+        {
+            $log.war(error);
+        });
+    }
     
     function loadDashboard()
     {
         $log.log("acessando funcao loadDashboard");
         orientacaoFactory.getDashboard()
         .then(function(response)
-        {
-            $log.log(response.data);
-
+        {            
             // transforma todos as jsonDates em javascript date
             for(i=0;i<response.data.length;i++)
             {
@@ -26,10 +52,40 @@ angular.module('mytcc')
         },
         function(error)
         {
-            $log.log(error);
-            vm.error = error.message;
+            console.log(error.data.message);
+            switch(error.status)
+            {
+                case 500:
+                    vm.error = error.data.message;
+                    break;   
+            }            
         });        
-    }
+    };
+    
+    $scope.loadTimeline = function()
+    {
+        $log.log("carregando a timeline de orientacoes do aluno");
+        $log.info(projetoId);
+        orientacaoFactory.getTimeline(projetoId)
+        .then(function(response)
+        {
+            $log.log(response.data);
+            
+            // transforma todos as jsonDates em javascript date
+            for(i=0;i<response.data.length;i++)
+            {
+                response.data[i].data = converteData(response.data[i].data);
+            }
+            
+            
+            $scope.nome = response.data[0].nome;
+            $scope.timeline = response.data;
+        },
+        function(error)
+        {
+            $log.warn(error);
+        });
+    };
 
     var converteData = function(jsonData)
     {
@@ -37,19 +93,15 @@ angular.module('mytcc')
         jsonData.replace(':', '');
         jsonData.replace(' ', '');
         return new Date(jsonData);
-    }
+    };
     
-    ///DADOS FAKE PARA POPULAR A MODAL DE AGENDAR E FEEDBACK
-    $scope.form = { orientacao:{ descricao: "Orientação agendada na sala 701. Levar o documento do TCC"
-                                 ,data:new Date(2016, 1, 13)
-                                 ,hora:new Date(0, 0, 0, 14, 57, 0)
-                                 ,resposta:"aceita"
-                                 ,aluno:{nome: "Thiago Duarte"} 
-                                 ,feedback:"Foi tratado no orientação que as alterações devem ser realizadas até o dia 01/01/2016"    
-                                , presenca: "presente"  
-                             }
-                                
-                  }
-    ///
-        
+    vm.filter = function(item)
+    {
+        $log.log("filtro ativado");
+        if(vm.status == undefined || vm.status == false) 
+        {
+            return false;
+        }
+        return true;
+    };
 });

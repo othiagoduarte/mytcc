@@ -8,14 +8,14 @@ class Alunos extends CI_Controller {
 	{
 		parent::__construct();
 		
-		if ( ! $this->session->userdata('logado')){
+		if (!$this->session->userdata('logado'))
+		{
             redirect('login');
         } 
 		
 		$this->load->model('aluno', 'model', TRUE);
 		$this->load->model('usuario', 'usuarioDB', TRUE);
 		$this->load->model('aluno', 'alunoDB', TRUE);		
-
 	}
 	
 	function index()
@@ -25,11 +25,19 @@ class Alunos extends CI_Controller {
 	    $this->load->view('includes/prototipo_footer');
 	}
 	
-	function oi()
+	function pagina1()
 	{
-        $this->load->view('includes/prototipo_header');
-        $this->load->view('home/oi');
-	    $this->load->view('includes/prototipo_footer');
+        $this->load->view('pagina1');
+	}
+	
+	function pagina2()
+	{
+        $this->load->view('pagina2');
+	}
+	
+	function pagina3()
+	{
+        $this->load->view('pagina3');
 	}
 	
 	function criar()
