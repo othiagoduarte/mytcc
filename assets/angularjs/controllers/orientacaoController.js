@@ -1,8 +1,9 @@
 angular.module('mytcc')
 
-.controller('orientacaoController', function($log, $scope, $routeParams,$uibModal, orientacaoFactory)
+.controller('orientacaoController', function($log, $scope, $routeParams,$uibModal, orientacaoFactory,urlService)
 {
     var projetoId = $routeParams.projetoId;
+    var url = urlService.getUrl;
     
     var vm = this;
     
@@ -104,4 +105,36 @@ angular.module('mytcc')
         }
         return true;
     };
+    
+     // abre a modal de 'agendar'
+    vm.modalAgendamento = function (projeto) 
+    {
+        $log.log('abrindo modal agendar orientação');
+        $log.log(projeto);
+        
+        var modalInstance = $uibModal.open
+        ({
+            animation: true,
+            templateUrl: url+'orientacoes/agendarOrientacao',
+            controller: 'mAgendarController',
+            resolve: 
+            {
+                items: function () 
+                {
+                    return projeto;
+                }
+            }
+        });
+
+        modalInstance.result
+        .then(function (selectedItem) 
+        {
+
+        }, 
+        function () 
+        {
+
+        });
+     };
+   
 });

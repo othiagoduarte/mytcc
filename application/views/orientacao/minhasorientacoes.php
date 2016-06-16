@@ -16,7 +16,7 @@
                 <td>{{ orien.data | date:"HH:mm" }}</td>
                 <td>{{ orien.local }}</td>
                 <td>{{ orien.nome }}</td>
-                <td>{{ orien.statusOrientacao }}</td>
+                <td> <a ng-click= "ctrl.modalAgendamento(orien)" class="">{{ orien.statusOrientacao }}</a></td>
             </tr>
     </table>
 </div>

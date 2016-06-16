@@ -4,14 +4,16 @@ angular.module('mytcc')
     $scope.form_aluno = false;
     $scope.form_professor = false;
     $scope.form_validacao = false;
-    
+    $scope.editar = true;
+
     loginFactory.getCookies()
     .then(function(response)
     {
-        if(response.data.session_id == "p")
-            $scope.form_aluno == true;
-        else if(response.data.session_id == "a")
-            $scope.form_professor = true;
+         console.log(response);
+         console.log(response.data.session_type);
+         $scope.form_aluno = response.data.session_type == "a";
+         $scope.form_professor = response.data.session_type == "p";
+         $scope.editar = items.status == "1";
     });
     
     $scope.form = 
@@ -19,9 +21,9 @@ angular.module('mytcc')
         orientacao: 
         {
             idProjeto: items.id,
-            datahora: new Date(),
-            local: "",
-            assunto: ""
+            datahora: items.data,
+            local: items.local,
+            assunto: items.anotacoesAgendamento
         }
     };   
     
