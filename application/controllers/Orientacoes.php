@@ -20,7 +20,7 @@ class Orientacoes extends CI_Controller
 	{
 	    $this->load->view('includes/prototipo_header');
 	    $this->load->view('orientacao/minhasorientacoes');
-	    $this->load->view('includes/prototipo_footer');	 
+	    $this->load->view('includes/prototipo_footer');
 	}
 	
 	public function index()
@@ -92,6 +92,17 @@ class Orientacoes extends CI_Controller
 	    $this->load->view('includes/prototipo_footer');
 	}
 		
+	function registrar()
+	{
+		$postData = file_get_contents("php://input");
+		$request = json_decode($postData, true);
+		
+		// insere os dados que vieram do angular nas proriedades da model
+		$this->orientacaoDB->arrayBuilder($request, '3'); // 3 eh o status agendado
+        
+        $this->orientacaoDB->insert();
+	}
+	
 	function orientacaoAluno()
 	{
 		$idAluno = $this->session->userdata('id');
@@ -102,7 +113,7 @@ class Orientacoes extends CI_Controller
 	function listando()
 	{
 		$idProfessor = $this->session->userdata('id');
-		echo json_encode($this->orientacaoDB->orientacaoPorProfessor($idProfessor));	
+		echo json_encode($this->orientacaoDB->orientacaoPorProfessor($idProfessor));
 	}
 	
 	// carrega a view timeline do aluno visao professor

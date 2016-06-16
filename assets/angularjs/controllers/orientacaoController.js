@@ -16,7 +16,7 @@ angular.module('mytcc')
     vm.status = "";
     
     loadDashboard();
-    
+        
     vm.loadAlunoLine = function()
     {
         $log.log("carregando as orientacoes do aluno logado");

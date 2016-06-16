@@ -117,9 +117,18 @@ class Orientacao extends My_Model
 		}				
 	}
 	
-	public function get_AreaInteresse(){
-				
+	public function get_AreaInteresse()
+	{				
 		$this->load->model('AreaInteresse','model');
 		return $model->get_by_id($this->$idAreaInteresse);				
-	}    
+	}
+	
+	function arrayBuilder($row, $statusId)
+	{
+		$this->idProjeto = $row['idProjeto'];
+		$this->datahora = $row['datahora'];
+		$this->anotacoesAgendamento = $row['assunto'];
+		$this->feedback = $row['feedback'];
+		$this->status = $statusId;
+	} 
 }

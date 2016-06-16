@@ -1,16 +1,17 @@
 angular.module('mytcc')
-.controller('mAgendarController', function ($scope, $log, items, orientacaoFactory, loginFactory) 
+.controller('mAgendarController', function ($scope, $log, items, $uibModalInstance, orientacaoFactory, loginFactory) 
 {
     $scope.form_aluno = false;
     $scope.form_professor = false;
     $scope.form_validacao = false;
-    $scope.editar = true;
+    $scope.editar = false;
+    
+    $log.log(items);
+
 
     loginFactory.getCookies()
     .then(function(response)
     {
-         console.log(response);
-         console.log(response.data.session_type);
          $scope.form_aluno = response.data.session_type == "a";
          $scope.form_professor = response.data.session_type == "p";
          $scope.editar = items.status == "1";
@@ -23,7 +24,9 @@ angular.module('mytcc')
             idProjeto: items.id,
             datahora: items.data,
             local: items.local,
-            assunto: items.anotacoesAgendamento
+            assunto: items.anotacoesAgendamento,
+            feedback : '',
+            status : ''
         }
     };   
     
@@ -35,11 +38,14 @@ angular.module('mytcc')
             orientacaoFactory.registrar($scope.form.orientacao)
             .then(function(response)
             {
-                
+                $log.log("orientacao salva no banco com sucesso");
+                $uibModalInstance.close($scope.form);
             }),
             function(error)
             {
-
+                $log.warn("houve erro na requisicao");
+                $scope.form_validacao = true;
+                $scope.message = "Desculpe. Erro de validação";
             };
         }
         else

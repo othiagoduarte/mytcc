@@ -43,5 +43,5 @@
     <div ng-show="form_validacao" class="text text-danger" > {{ message }}</div>
 </div>
 <div class="modal-footer">
-    <input ng-hide="! editar" type="button" class="btn btn-success" ng-click="salvar()" value="Enviar"/> 
+    <input type="button" class="btn btn-success" ng-click="salvar()" value="Enviar"/> 
 </div>
