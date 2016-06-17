@@ -1,15 +1,138 @@
+-- phpMyAdmin SQL Dump
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
--- Base de Dados: `mytcc`
+-- Host: 127.0.0.1
+-- Tempo de geração: 17/06/2016 às 17:55
+-- Versão do servidor: 10.1.10-MariaDB
+-- Versão do PHP: 5.6.19
+
+-- SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+-- SET time_zone = "+00:00";
+
+
+--
+-- Banco de dados: `mytcc`
 --
 CREATE DATABASE IF NOT EXISTS `mytcc` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `mytcc`;
 
+DELIMITER $$
+--
+-- Procedimentos
+--
+DROP PROCEDURE IF EXISTS `sp_importa_alunos`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_importa_alunos` (OUT `retorno` VARCHAR(100))  BEGIN
+	SELECT 'Erro' INTO retorno;
+	
+    -- =====================================    
+	-- INSERT
+	-- =====================================
+
+	-- usuario
+	INSERT INTO usuario (id, user, senha, tipo)
+	SELECT
+		NULL,
+		STG.cpf,
+		'123',
+		'a'
+	FROM stg_cadaluno STG
+	INNER JOIN (
+		SELECT
+			MAX(id_linha) max_id_linha,
+			cpf
+		FROM stg_cadaluno
+		GROUP BY
+			matricula,
+			cpf
+	) TD_MAX
+		ON TD_MAX.max_id_linha = STG.id_linha
+		AND TD_MAX.cpf = STG.cpf
+	WHERE
+		NOT EXISTS (
+			SELECT 1
+			FROM usuario u
+			WHERE
+				STG.cpf = u.user
+				-- AND u.tipo = 'a'
+		);
+
+	-- aluno
+	INSERT INTO aluno (id, nome, matricula, email, cpf, idUsuario)
+	SELECT
+		NULL,
+		STG.nome,
+		STG.matricula,
+		STG.email,
+		STG.cpf,
+		u.id
+	FROM stg_cadaluno STG
+	INNER JOIN (
+		SELECT
+			MAX(id_linha) max_id_linha,
+			cpf
+		FROM stg_cadaluno
+		GROUP BY
+			matricula,
+			cpf
+	) TD_MAX
+		ON TD_MAX.max_id_linha = STG.id_linha
+		AND TD_MAX.cpf = STG.cpf
+	INNER JOIN usuario u
+		ON u.user = STG.cpf
+		AND u.tipo = 'a'
+	WHERE
+		NOT EXISTS (
+			SELECT 1
+			FROM aluno a
+			WHERE
+				STG.matricula = a.matricula
+		);
+		
+	-- =====================================    
+	-- UPDATE
+	-- =====================================
+
+	-- Atualiza somente o aluno
+	UPDATE aluno a
+	INNER JOIN usuario u
+		ON u.id = a.idUsuario
+		AND u.tipo = 'a'
+	INNER JOIN stg_cadaluno STG
+		ON STG.cpf = a.cpf
+	INNER JOIN (
+		SELECT
+			MAX(id_linha) max_id_linha,
+			cpf
+		FROM stg_cadaluno
+		GROUP BY
+			matricula,
+			cpf
+	) TD_MAX
+		ON TD_MAX.max_id_linha = STG.id_linha
+		AND TD_MAX.cpf = STG.cpf    
+	SET
+		a.nome = STG.nome,
+		a.matricula = STG.matricula,
+		a.email = STG.email;
+
+	-- =====================================
+    
+    -- DELETE FROM stg_cadaluno;
+    
+    SELECT 'Importação com sucesso' INTO retorno;
+    
+END$$
+
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `aluno`
+-- Estrutura para tabela `aluno`
 --
 
+DROP TABLE IF EXISTS `aluno`;
 CREATE TABLE IF NOT EXISTS `aluno` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) NOT NULL,
@@ -22,10 +145,10 @@ CREATE TABLE IF NOT EXISTS `aluno` (
   UNIQUE KEY `matricula_2` (`matricula`),
   UNIQUE KEY `cpf` (`cpf`),
   KEY `matricula` (`matricula`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `aluno`
+-- Fazendo dump de dados para tabela `aluno`
 --
 
 INSERT INTO `aluno` (`id`, `nome`, `matricula`, `email`, `telefone`, `cpf`, `idUsuario`) VALUES
@@ -38,17 +161,18 @@ INSERT INTO `aluno` (`id`, `nome`, `matricula`, `email`, `telefone`, `cpf`, `idU
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `areainteresse`
+-- Estrutura para tabela `areainteresse`
 --
 
+DROP TABLE IF EXISTS `areainteresse`;
 CREATE TABLE IF NOT EXISTS `areainteresse` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nomeArea` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `areainteresse`
+-- Fazendo dump de dados para tabela `areainteresse`
 --
 
 INSERT INTO `areainteresse` (`id`, `nomeArea`) VALUES
@@ -61,11 +185,11 @@ INSERT INTO `areainteresse` (`id`, `nomeArea`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `orientacao`
+-- Estrutura para tabela `orientacao`
 --
 
-CREATE TABLE IF NOT EXISTS `orientacao` 
-(
+DROP TABLE IF EXISTS `orientacao`;
+CREATE TABLE IF NOT EXISTS `orientacao` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idProjeto` int(11) NOT NULL,
   `datahora` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -76,45 +200,46 @@ CREATE TABLE IF NOT EXISTS `orientacao`
   PRIMARY KEY (`id`),
   KEY `FK_Orientacao_0` (`idProjeto`),
   KEY `FK_Orientacao_1` (`status`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `orientacao`
+-- Fazendo dump de dados para tabela `orientacao`
 --
 
-INSERT INTO `orientacao`(`id`, `idProjeto`, `datahora`, `anotacoesAgendamento`, `status`, `feedback`) VALUES
-(1, 5, '2016/05/15 10:10:00', null, 4, 'boa orientacao'),
-(2, 5, '2016/05/16 10:10:00', null, 3, null),
-(3, 5, '2016/05/17 10:10:00', null, 4, 'boa orientacao'),
-(4, 5, '2016/05/18 10:10:00', null, 4, 'boa orientacao'),
-(5, 5, '2016/05/19 10:10:00', null, 5, null),
-(6, 5, '2016/05/20 10:10:00', null, 4, 'boa orientacao'),
-(7, 5, '2016/05/21 10:10:00', null, 5, null),
-(8, 6, '2016/05/16 10:10:00', null, 4, 'boa orientacao'),
-(9, 6, '2016/05/17 10:10:00', null, 4, 'boa orientacao'),
-(10, 6, '2016/05/18 10:10:00', null, 4, 'boa orientacao'),
-(11, 12, '2016/05/15 10:10:00', null, 4, 'boa orientacao'),
-(12, 12, '2016/05/16 10:10:00', null, 4, 'boa orientacao'),
-(13, 12, '2016/05/17 10:10:00', null, 5, null),
-(14, 12, '2016/05/18 10:10:00', null, 4, 'boa orientacao'),
-(15, 12, '2016/05/19 10:10:00', null, 4, 'boa orientacao'),
-(16, 12, '2016/05/20 10:10:00', null, 5, null),
-(17, 16, '2016/05/15 10:10:00', null, 4, 'boa orientacao'),
-(18, 16, '2016/05/16 10:10:00', null, 4, 'boa orientacao'),
-(19, 16, '2016/05/17 10:10:00', null, 4, 'boa orientacao'),
-(20, 16, '2016/05/18 10:10:00', null, 4, 'boa orientacao'),
-(21, 5, '2016/06/13 10:10:00', null, 1, null),
-(22, 5, '2016/06/14 10:10:00', null, 1, null),
-(23, 5, '2016/06/15 10:10:00', null, 1, null),
-(24, 5, '2016/06/16 10:10:00', null, 1, null),
-(25, 5, '2016/06/17 10:10:00', null, 1, null);
+INSERT INTO `orientacao` (`id`, `idProjeto`, `datahora`, `local`, `anotacoesAgendamento`, `status`, `feedback`) VALUES
+(1, 5, '2016-05-15 13:10:00', NULL, NULL, 4, 'boa orientacao'),
+(2, 5, '2016-05-16 13:10:00', NULL, NULL, 3, NULL),
+(3, 5, '2016-05-17 13:10:00', NULL, NULL, 4, 'boa orientacao'),
+(4, 5, '2016-05-18 13:10:00', NULL, NULL, 4, 'boa orientacao'),
+(5, 5, '2016-05-19 13:10:00', NULL, NULL, 5, NULL),
+(6, 5, '2016-05-20 13:10:00', NULL, NULL, 4, 'boa orientacao'),
+(7, 5, '2016-05-21 13:10:00', NULL, NULL, 5, NULL),
+(8, 6, '2016-05-16 13:10:00', NULL, NULL, 4, 'boa orientacao'),
+(9, 6, '2016-05-17 13:10:00', NULL, NULL, 4, 'boa orientacao'),
+(10, 6, '2016-05-18 13:10:00', NULL, NULL, 4, 'boa orientacao'),
+(11, 12, '2016-05-15 13:10:00', NULL, NULL, 4, 'boa orientacao'),
+(12, 12, '2016-05-16 13:10:00', NULL, NULL, 4, 'boa orientacao'),
+(13, 12, '2016-05-17 13:10:00', NULL, NULL, 5, NULL),
+(14, 12, '2016-05-18 13:10:00', NULL, NULL, 4, 'boa orientacao'),
+(15, 12, '2016-05-19 13:10:00', NULL, NULL, 4, 'boa orientacao'),
+(16, 12, '2016-05-20 13:10:00', NULL, NULL, 5, NULL),
+(17, 16, '2016-05-15 13:10:00', NULL, NULL, 4, 'boa orientacao'),
+(18, 16, '2016-05-16 13:10:00', NULL, NULL, 4, 'boa orientacao'),
+(19, 16, '2016-05-17 13:10:00', NULL, NULL, 4, 'boa orientacao'),
+(20, 16, '2016-05-18 13:10:00', NULL, NULL, 4, 'boa orientacao'),
+(21, 5, '2016-06-13 13:10:00', NULL, NULL, 1, NULL),
+(22, 5, '2016-06-14 13:10:00', NULL, NULL, 1, NULL),
+(23, 5, '2016-06-15 13:10:00', NULL, NULL, 1, NULL),
+(24, 5, '2016-06-16 13:10:00', NULL, NULL, 1, NULL),
+(25, 5, '2016-06-17 13:10:00', NULL, NULL, 1, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `professor`
+-- Estrutura para tabela `professor`
 --
 
+DROP TABLE IF EXISTS `professor`;
 CREATE TABLE IF NOT EXISTS `professor` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) NOT NULL,
@@ -130,10 +255,10 @@ CREATE TABLE IF NOT EXISTS `professor` (
   UNIQUE KEY `matricula_2` (`matricula`),
   UNIQUE KEY `cpf` (`cpf`),
   KEY `matricula` (`matricula`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `professor`
+-- Fazendo dump de dados para tabela `professor`
 --
 
 INSERT INTO `professor` (`id`, `nome`, `matricula`, `email`, `telefone`, `numVagas`, `turnoDia`, `turnoNoite`, `cpf`, `idUsuario`) VALUES
@@ -147,9 +272,10 @@ INSERT INTO `professor` (`id`, `nome`, `matricula`, `email`, `telefone`, `numVag
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `professorareainteresse`
+-- Estrutura para tabela `professorareainteresse`
 --
 
+DROP TABLE IF EXISTS `professorareainteresse`;
 CREATE TABLE IF NOT EXISTS `professorareainteresse` (
   `idAreaInteresse` int(11) NOT NULL,
   `idProfessor` int(11) NOT NULL,
@@ -158,35 +284,36 @@ CREATE TABLE IF NOT EXISTS `professorareainteresse` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `professorareainteresse`
+-- Fazendo dump de dados para tabela `professorareainteresse`
 --
 
 INSERT INTO `professorareainteresse` (`idAreaInteresse`, `idProfessor`) VALUES
 (1, 1),
-(2, 1),
-(5, 1),
 (1, 2),
-(2, 2),
-(3, 2),
-(4, 2),
-(5, 2),
 (1, 3),
-(2, 3),
-(5, 3),
-(3, 4),
-(5, 4),
 (1, 5),
+(2, 1),
+(2, 2),
+(2, 3),
 (2, 5),
+(3, 2),
+(3, 4),
 (3, 5),
+(4, 2),
 (4, 5),
+(5, 1),
+(5, 2),
+(5, 3),
+(5, 4),
 (5, 5);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `projeto`
+-- Estrutura para tabela `projeto`
 --
 
+DROP TABLE IF EXISTS `projeto`;
 CREATE TABLE IF NOT EXISTS `projeto` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idAluno` int(11) NOT NULL,
@@ -206,51 +333,46 @@ CREATE TABLE IF NOT EXISTS `projeto` (
   KEY `FK_Projeto_1` (`idProfessor`),
   KEY `FK_Projeto_2` (`idAreaInteresse`),
   KEY `FK_Projeto_3` (`status`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+
+--
+-- Fazendo dump de dados para tabela `projeto`
+--
+
+INSERT INTO `projeto` (`id`, `idAluno`, `idProfessor`, `titulo`, `resumo`, `idAreaInteresse`, `turno`, `motivoRecusa`, `mensagem`, `status`, `numOrientacoes`, `dataSolicitacao`, `dataResposta`) VALUES
+(1, 1, 1, 'projeto do marcos', 'resumo do projeto do marcos', 1, 'noite', NULL, NULL, 1, 0, '2016-05-10', NULL),
+(2, 1, 2, 'projeto do marcos', 'resumo do projeto do marcos', 1, 'noite', 'nao gostei', NULL, 2, 0, '2016-05-10', '2016-05-11'),
+(3, 1, 3, 'projeto do marcos', 'resumo do projeto do marcos', 1, 'noite', 'nao gostei', NULL, 2, 0, '2016-05-10', '2016-05-11'),
+(4, 1, 4, 'projeto do marcos', 'resumo do projeto do marcos', 1, 'noite', 'nao gostei', NULL, 2, 0, '2016-05-10', '2016-05-11'),
+(5, 1, 5, 'projeto do marcos', 'resumo do projeto do marcos', 1, 'noite', 'gostei', NULL, 3, 0, '2016-05-10', '2016-05-11'),
+(6, 2, 1, 'projeto do thiago', 'resumo do projeto do thiago', 2, 'n', 'gostei', NULL, 3, 0, '2016-05-10', '2016-05-11'),
+(7, 2, 2, 'projeto do thiago', 'resumo do projeto do thiago', 2, 'n', 'nao gostei', NULL, 2, 0, '2016-05-10', '2016-05-11'),
+(8, 2, 3, 'projeto do thiago', 'resumo do projeto do thiago', 2, 'n', 'nao gostei', NULL, 2, 0, '2016-05-10', '2016-05-11'),
+(9, 2, 4, 'projeto do thiago', 'resumo do projeto do thiago', 2, 'n', NULL, NULL, 1, 0, '2016-05-10', NULL),
+(10, 2, 5, 'projeto do marcos', 'resumo do projeto do thiago', 2, 'n', 'nao gostei', NULL, 2, 0, '2016-05-10', '2016-05-11'),
+(11, 3, 1, 'projeto do cristiano', 'resumo do projeto do cristiano', 3, 'n', 'nao gostei', NULL, 2, 0, '2016-05-10', '2016-05-11'),
+(12, 3, 2, 'projeto do cristiano', 'resumo do projeto do cristiano', 3, 'n', 'gostei', NULL, 3, 0, '2016-05-10', '2016-05-11'),
+(13, 3, 3, 'projeto do cristiano', 'resumo do projeto do cristiano', 3, 'n', 'nao gostei', NULL, 2, 0, '2016-05-10', '2016-05-11'),
+(14, 3, 4, 'projeto do cristiano', 'resumo do projeto do cristiano', 3, 'n', 'nao gostei', NULL, 2, 0, '2016-05-10', '2016-05-11'),
+(15, 3, 5, 'projeto do cristiano', 'resumo do projeto do cristiano', 3, 'n', NULL, NULL, 1, 0, '2016-05-10', NULL),
+(16, 4, 1, 'projeto do luis', 'resumo do projeto do luis', 4, 'n', 'gostei', NULL, 3, 0, '2016-05-10', '2016-05-11'),
+(17, 4, 2, 'projeto do luis', 'resumo do projeto do luis', 4, 'n', NULL, NULL, 1, 0, '2016-05-10', NULL),
+(18, 4, 3, 'projeto do luis', 'resumo do projeto do luis', 4, 'n', 'nao gostei', NULL, 2, 0, '2016-05-10', '2016-05-11'),
+(19, 4, 4, 'projeto do luis', 'resumo do projeto do luis', 4, 'n', 'nao gostei', NULL, 2, 0, '2016-05-10', '2016-05-11'),
+(20, 4, 5, 'projeto do luis', 'resumo do projeto do luis', 4, 'n', 'nao gostei', NULL, 2, 0, '2016-05-10', '2016-05-11'),
+(21, 5, 1, 'projeto da vanessa', 'resumo do projeto da vanessa', 5, 'n', 'nao gostei', NULL, 2, 0, '2016-05-10', '2016-05-11'),
+(22, 5, 2, 'projeto da vanessa', 'resumo do projeto da vanessa', 5, 'n', 'nao gostei', NULL, 2, 0, '2016-05-10', '2016-05-11'),
+(23, 5, 3, 'projeto da vanessa', 'resumo do projeto da vanessa', 5, 'n', 'nao gostei', NULL, 2, 0, '2016-05-10', '2016-05-11'),
+(24, 5, 4, 'projeto da vanessa', 'resumo do projeto da vanessa', 5, 'n', 'gostei', NULL, 3, 0, '2016-05-10', '2016-05-11'),
+(25, 5, 5, 'projeto da vanessa', 'resumo do projeto da vanessa', 5, 'n', 'nao gostei', NULL, 1, 0, '2016-05-10', '2016-05-11');
 
 -- --------------------------------------------------------
 
 --
--- Extraindo dados da tabela `projeto`
---
-INSERT INTO `projeto`(`id`, `idAluno`, `idProfessor`, `titulo`, `resumo`, `idAreaInteresse`, `turno`, `motivoRecusa`, `mensagem`, `status`, `numOrientacoes`, `dataSolicitacao`, `dataResposta`) 
-VALUES
--- Solicitacoes do Marcos
-(1, 1, 1, 'projeto do marcos', 'resumo do projeto do marcos', 1, 'noite', null, null, 1, 0, '2016/05/10', null),
-(2, 1, 2, 'projeto do marcos', 'resumo do projeto do marcos', 1, 'noite', 'nao gostei', null, 2, 0, '2016/05/10', '2016/05/11'),
-(3, 1, 3, 'projeto do marcos', 'resumo do projeto do marcos', 1, 'noite', 'nao gostei', null, 2, 0, '2016/05/10', '2016/05/11'),
-(4, 1, 4, 'projeto do marcos', 'resumo do projeto do marcos', 1, 'noite', 'nao gostei', null, 2, 0, '2016/05/10', '2016/05/11'),
-(5, 1, 5, 'projeto do marcos', 'resumo do projeto do marcos', 1, 'noite', 'gostei', null, 3, 0, '2016/05/10', '2016/05/11'),
--- Solicitacoes do Thiago
-(6, 2, 1, 'projeto do thiago', 'resumo do projeto do thiago', 2, 'n', 'gostei', null, 3, 0, '2016/05/10', '2016/05/11'),
-(7, 2, 2, 'projeto do thiago', 'resumo do projeto do thiago', 2, 'n', 'nao gostei', null, 2, 0, '2016/05/10', '2016/05/11'),
-(8, 2, 3, 'projeto do thiago', 'resumo do projeto do thiago', 2, 'n', 'nao gostei', null, 2, 0, '2016/05/10', '2016/05/11'),
-(9, 2, 4, 'projeto do thiago', 'resumo do projeto do thiago', 2, 'n', null, null, 1, 0, '2016/05/10', null),
-(10, 2, 5, 'projeto do marcos', 'resumo do projeto do thiago', 2, 'n', 'nao gostei', null, 2, 0, '2016/05/10', '2016/05/11'),
--- Solicitacoes do Cristiano
-(11, 3, 1, 'projeto do cristiano', 'resumo do projeto do cristiano', 3, 'n', 'nao gostei', null, 2, 0, '2016/05/10', '2016/05/11'),
-(12, 3, 2, 'projeto do cristiano', 'resumo do projeto do cristiano', 3, 'n', 'gostei', null, 3, 0, '2016/05/10', '2016/05/11'),
-(13, 3, 3, 'projeto do cristiano', 'resumo do projeto do cristiano', 3, 'n', 'nao gostei', null, 2, 0, '2016/05/10', '2016/05/11'),
-(14, 3, 4, 'projeto do cristiano', 'resumo do projeto do cristiano', 3, 'n', 'nao gostei', null, 2, 0, '2016/05/10', '2016/05/11'),
-(15, 3, 5, 'projeto do cristiano', 'resumo do projeto do cristiano', 3, 'n', null, null, 1, 0, '2016/05/10', null),
--- Solicitacoes do Luis Henrqiue
-(16, 4, 1, 'projeto do luis', 'resumo do projeto do luis', 4, 'n', 'gostei', null, 3, 0, '2016/05/10', '2016/05/11'),
-(17, 4, 2, 'projeto do luis', 'resumo do projeto do luis', 4, 'n', null, null, 1, 0, '2016/05/10', null),
-(18, 4, 3, 'projeto do luis', 'resumo do projeto do luis', 4, 'n', 'nao gostei', null, 2, 0, '2016/05/10', '2016/05/11'),
-(19, 4, 4, 'projeto do luis', 'resumo do projeto do luis', 4, 'n', 'nao gostei', null, 2, 0, '2016/05/10', '2016/05/11'),
-(20, 4, 5, 'projeto do luis', 'resumo do projeto do luis', 4, 'n', 'nao gostei', null, 2, 0, '2016/05/10', '2016/05/11'),
--- Solicitacoes da Vanessa
-(21, 5, 1, 'projeto da vanessa', 'resumo do projeto da vanessa', 5, 'n', 'nao gostei', null, 2, 0, '2016/05/10', '2016/05/11'),
-(22, 5, 2, 'projeto da vanessa', 'resumo do projeto da vanessa', 5, 'n', 'nao gostei', null, 2, 0, '2016/05/10', '2016/05/11'),
-(23, 5, 3, 'projeto da vanessa', 'resumo do projeto da vanessa', 5, 'n', 'nao gostei', null, 2, 0, '2016/05/10', '2016/05/11'),
-(24, 5, 4, 'projeto da vanessa', 'resumo do projeto da vanessa', 5, 'n', 'gostei', null, 3, 0, '2016/05/10', '2016/05/11'),
-(25, 5, 5, 'projeto da vanessa', 'resumo do projeto da vanessa', 5, 'n', 'nao gostei', null, 1, 0, '2016/05/10', '2016/05/11');
--- ------------------------------------------------------
-
---
--- Estrutura da tabela `statusorientacao`
+-- Estrutura para tabela `statusorientacao`
 --
 
+DROP TABLE IF EXISTS `statusorientacao`;
 CREATE TABLE IF NOT EXISTS `statusorientacao` (
   `id` int(11) NOT NULL,
   `status` varchar(25) NOT NULL,
@@ -258,7 +380,7 @@ CREATE TABLE IF NOT EXISTS `statusorientacao` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `statusorientacao`
+-- Fazendo dump de dados para tabela `statusorientacao`
 --
 
 INSERT INTO `statusorientacao` (`id`, `status`) VALUES
@@ -271,17 +393,18 @@ INSERT INTO `statusorientacao` (`id`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `statusprojeto`
+-- Estrutura para tabela `statusprojeto`
 --
 
+DROP TABLE IF EXISTS `statusprojeto`;
 CREATE TABLE IF NOT EXISTS `statusprojeto` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `statusProjeto` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `statusprojeto`
+-- Fazendo dump de dados para tabela `statusprojeto`
 --
 
 INSERT INTO `statusprojeto` (`id`, `statusProjeto`) VALUES
@@ -293,9 +416,26 @@ INSERT INTO `statusprojeto` (`id`, `statusProjeto`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `usuario`
+-- Estrutura para tabela `stg_cadaluno`
 --
 
+DROP TABLE IF EXISTS `stg_cadaluno`;
+CREATE TABLE IF NOT EXISTS `stg_cadaluno` (
+  `id_linha` int(11) NOT NULL,
+  `nome` varchar(50) NOT NULL,
+  `matricula` int(11) NOT NULL,
+  `email` varchar(70) DEFAULT NULL,
+  `cpf` varchar(9) NOT NULL,
+  PRIMARY KEY (`id_linha`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `usuario`
+--
+
+DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE IF NOT EXISTS `usuario` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user` varchar(50) NOT NULL,
@@ -303,10 +443,10 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `tipo` char(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `user` (`user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `usuario`
+-- Fazendo dump de dados para tabela `usuario`
 --
 
 INSERT INTO `usuario` (`id`, `user`, `senha`, `tipo`) VALUES
@@ -323,25 +463,25 @@ INSERT INTO `usuario` (`id`, `user`, `senha`, `tipo`) VALUES
 (26, '000567890', '123', 'p');
 
 --
--- Constraints for dumped tables
+-- Restrições para dumps de tabelas
 --
 
 --
--- Limitadores para a tabela `orientacao`
+-- Restrições para tabelas `orientacao`
 --
 ALTER TABLE `orientacao`
   ADD CONSTRAINT `FK_Orientacao_0` FOREIGN KEY (`idProjeto`) REFERENCES `projeto` (`id`),
   ADD CONSTRAINT `FK_Orientacao_1` FOREIGN KEY (`status`) REFERENCES `statusorientacao` (`id`);
 
 --
--- Limitadores para a tabela `professorareainteresse`
+-- Restrições para tabelas `professorareainteresse`
 --
 ALTER TABLE `professorareainteresse`
   ADD CONSTRAINT `FK_ProfessorAreaInteresse_0` FOREIGN KEY (`idAreaInteresse`) REFERENCES `areainteresse` (`id`),
   ADD CONSTRAINT `FK_ProfessorAreaInteresse_1` FOREIGN KEY (`idProfessor`) REFERENCES `professor` (`id`);
 
 --
--- Limitadores para a tabela `projeto`
+-- Restrições para tabelas `projeto`
 --
 ALTER TABLE `projeto`
   ADD CONSTRAINT `FK_Projeto_0` FOREIGN KEY (`idAluno`) REFERENCES `aluno` (`id`),
