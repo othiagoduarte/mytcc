@@ -14,7 +14,7 @@ angular.module('mytcc')
         var modalResposta = $uibModal.open
         ({
             animation: true,
-            templateUrl: url+'orientacao/resposta',
+            templateUrl: url+'projetos/resposta',
             controller: 'mRespostaController',
             resolve: 
             {

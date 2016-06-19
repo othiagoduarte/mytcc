@@ -40,7 +40,7 @@ angular.module('mytcc')
         var modalDetalhes = $uibModal.open
         ({
             animation: true,
-            templateUrl: url+'orientacoes/detalhes',
+            templateUrl: url+'projetos/detalhes',
             controller: 'mDetalheController',
             resolve: 
             {

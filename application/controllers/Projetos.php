@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+date_default_timezone_set('America/Sao_Paulo');
 
 class Projetos extends CI_Controller 
 {
@@ -9,20 +10,53 @@ class Projetos extends CI_Controller
     {		
 		parent::__construct();
 		
-        if ( ! $this->session->userdata('logado')){
+        if (!$this->session->userdata('logado'))
+        {
             redirect('login');
         }          	
 
-		$this->load->model('projeto','projetoDB');
-        $sessionId = $this->session->userdata('id');
-        
-        $this->load->helper('date');		
+		$this->load->model('projeto','projetoDB');        		
+	}
 
+	// carrega views
+    
+    public function solicitar()
+	{
+	    $this->load->view('includes/prototipo_header');
+	    $this->load->view('projetos/solicitar');
+	    $this->load->view('includes/prototipo_footer');	 
+	} 
+	
+	public function responder()
+	{    
+	    $this->load->view('includes/prototipo_header');
+	    $this->load->view('projetos/responder');
+	    $this->load->view('includes/prototipo_footer');	 
 	}
 	
 	public function listar()
-    {		
-		echo json_encode($this->projetoDB->get_all());
+	{	    
+	    $this->load->view('includes/prototipo_header');
+	    $this->load->view('projetos/listar');
+	    $this->load->view('includes/prototipo_footer');	 
+	}
+
+	function detalhes()
+	{
+		$this->load->view('projetos/modalDetalhes');
+	}
+	
+	function resposta()
+	{
+		$this->load->view('projetos/modalResposta');
+	}
+	
+	// metodos chamados pelo front end pra trazer dados
+    
+    public function listarSolicitacoes()
+	{
+		$solicitacoes = $this->projetoDB->get_professor($sessionId);
+		echo json_encode(solicitacoes);
 	}
     
     public function insereSolicitacao()
@@ -32,9 +66,6 @@ class Projetos extends CI_Controller
 		// retira o objeto do formado json
 		$request = json_decode($postData, true);
 
-        
-        // var_dump($request['areaInteresse']);
-        // var_dump($request['professor']);
         // insere os dados que vieram do angular nas proriedades da model
         $this->projetoDB->idAluno = $this->session->userdata('id');
         $this->projetoDB->idAreaInteresse = $request['areaInteresse']['id'];
@@ -44,14 +75,15 @@ class Projetos extends CI_Controller
         $this->projetoDB->resumo = $request['resumo'];
         $this->projetoDB->turno = 'Noite';
         $this->projetoDB->idAluno = $this->session->userdata('id');
+        $date = new DateTime();
+        $this->projetoDB->dataSolicitacao = $date->format('Y-m-d');
         
         $this->projetoDB->insert();
     }
         
     public function listarProjetosPorProfessor()
     {        
-        $idProfessor = $this->session->userdata('id');
-        
+        $idProfessor = $this->session->userdata('id');        
         echo json_encode($this->projetoDB->get_projeto_by_professor($idProfessor));        
     }
     
@@ -74,7 +106,8 @@ class Projetos extends CI_Controller
         $this->projetoDB->dataSolicitacao = $project->dataSolicitacao;      
         $this->projetoDB->mensagem = $request['mensagem'];
         $this->projetoDB->statusProjeto = 2; //respondido        
-        $this->projetoDB->dataResposta = date('Y-m-d H:i:s');             
+        $date = new DateTime();
+        $this->projetoDB->dataResposta = $date->format('Y-m-d');             
         
         $this->projetoDB->update();
     }

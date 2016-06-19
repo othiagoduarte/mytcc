@@ -27,44 +27,7 @@ class Orientacoes extends CI_Controller
 	{		
 		$this->listar();
 	}
-	
-	public function solicitar()
-	{
-	    $this->load->view('includes/prototipo_header');
-	    $this->load->view('orientacao/solicitar');
-	    $this->load->view('includes/prototipo_footer');	 
-	} 
-	
-	public function responder()
-	{    
-	    $this->load->view('includes/prototipo_header');
-	    $this->load->view('orientacao/responder');
-	    $this->load->view('includes/prototipo_footer');	 
-	}
-	
-	public function listar()
-	{	    
-	    $this->load->view('includes/prototipo_header');
-	    $this->load->view('orientacao/listar');
-	    $this->load->view('includes/prototipo_footer');	 
-	}
-	
-	public function listarSolicitacoes()
-	{
-		$solicitacoes = $this->projetoDB->get_professor($sessionId);
-		echo json_encode(solicitacoes);
-	}
-	
-	function detalhes()
-	{
-		$this->load->view('orientacao/modalDetalhes');
-	}
-	
-	function resposta()
-	{
-		$this->load->view('orientacao/modalResposta');
-	}
-	
+				
 	function listarOrientacoes()
 	{
 	    $this->load->view('includes/prototipo_header');
