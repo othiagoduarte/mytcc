@@ -11,7 +11,8 @@ class Projeto extends My_Model {
     public $turno = "";
     public $motivoRecusa = "";
     public $status = "";
-	public $statusProjeto = "";
+	public $mensagem = "";
+	public $numOrientacoes = 0;
 	public $dataSolicitacao = "";
 	public $dataResposta = "";
 	

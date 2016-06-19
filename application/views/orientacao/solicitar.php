@@ -1,32 +1,32 @@
-<div ng-controller="solicitacaoController">
+<div ng-controller="solicitacaoController as ctrl">
 
 	<div class="row">
 		<div class="col-md-12">
 			<h3 class="text-primary text-left"> Solicitar Orientação</h3>
 		</div>
 	</div>
-
 	<form name="form">				
-	
 	<!--Combobox com as opções de áreas para escolher os professores-->
-	<div ng-init="areas = listarAreas()" class="form-group">
+	<div class="form-group">
 		<span class="label label-info">Selecione a área de interesse</span>
-		<select ng-options="option.descricao for option in areas track by option.id" ng-model="projeto.areaInteresse" class="form-control"></select>
+		<select ng-model="ctrl.projeto.areaInteresse" ng-options="option.descricao for option in ctrl.areas track by option.id" class="form-control">
+			<option value="">Selecione</option>
+		</select>
 	</div>
 	
 	<!--Painél com os professores filtrados pela área de interesse-->
-	<div ng-init="valores = listarProfessores()" class="row" >
+	<div class="row" >
 		<div class="col-md-12"> <br>							  				 
 					<span class="label label-info">Selecione o professor de sua área de interesse desejada</span>
 			<div class="panel-group" id="panel-655984">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-							<a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-655984" href="#panel-element-943935">{{ projeto.areaInteresse.descricao }}</a>
+							<a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-655984" href="#panel-element-943935">{{ ctrl.projeto.areaInteresse.descricao }}</a>
 					</div>
 					<div id="panel-element-943935" class="panel-collapse collapse">
 						<div class="panel-body">
-							<div class="radio" ng-repeat="prof in valores | filter: { idAreaInteresse: projeto.areaInteresse.id }" >
-								<label><input ng-model="$parent.projeto.professor" ng-value="prof" type="radio" name="professor">{{ prof.nome }}</label>
+							<div class="radio" ng-repeat="prof in ctrl.professor_area | filter: { idAreaInteresse: ctrl.projeto.areaInteresse.id }">
+								<label><input ng-model="$parent.ctrl.projeto.professor" ng-value="prof" type="radio" name="professor">{{ prof.nome }}</label>
 							</div>
 						</div>
 					</div>
@@ -43,8 +43,8 @@
 				<div class="list-group-item">
 					<div class="form-group">
 						<label for="inputdefault">Título do projeto</label>
-						<input name="titulo" required ng-minlength="15" ng-maxlength="100" ng-model="projeto.titulo" class="form-control" id="inputdefault" type="text">
-							<div ng-messages="form.titulo.$error" role="alert">
+						<input name="titulo" required ng-minlength="15" ng-maxlength="100" ng-model="ctrl.projeto.titulo" class="form-control" id="inputdefault" type="text">
+							<div ng-messages="form.titulo.$error" ng-if='form.titulo.$dirty' class="text text-danger">
 								<div ng-message="required">Você precisa informar o título da proposta do TCC para enviar a solicitação</div>
 								<div ng-message="minlength">O título da solicitação é muito curto</div>
 								<div ng-message="maxlength">O título da solicitação é muito longo</div>
@@ -54,9 +54,9 @@
 				<div class="list-group-item">
 					<span class="label label-info">Descreva qual o problema que o sistema proposto irá solucionar</span>
 					<h4 class="list-group-item-heading">
-						<textarea name="resumo" required ng-minlength="200" ng-model="projeto.resumo" class="form-control" rows="10"></textarea>
+						<textarea name="resumo" required ng-minlength="200" ng-model="ctrl.projeto.resumo" class="form-control" rows="10"></textarea>
 					</h4>
-						<div ng-messages="form.resumo.$error" role="alert">
+						<div ng-messages="form.resumo.$error" ng-if='form.resumo.$dirty' class="text text-danger">
 							<div ng-message="required">Você precisa informar a proposta da proposta do TCC para enviar a solicitação</div>
 							<div ng-message="minlength">A proposta está muito sucinta. Escreva mais.</div>
 						</div>
@@ -71,14 +71,14 @@
 	</div>
 	
 	<!--Botão enviar solicitação do formulário-->
-	<div class="row" ng-show="aguardando">
+	<div class="row">
 		<div class="col-md-10">
 		</div>
 		<div class="col-md-2">				
-			<input ng-click="enviaProposta()" type="button" class="btn btn-success" value="Solicitar Orientação"></input>
+			<input ng-disabled="form.resumo.$invalid"ng-click="ctrl.enviaProposta()" type="button" class="btn btn-success" value="Solicitar Orientação"></input>
 		</div>
 	</div>
 </form>
-	<div ng-show="!aguardando" class="alert alert-success">Solicitação enviada com sucesso. Aguarde o feedback do professor.</div>
+	<div ng-show="ctrl.sucesso" class="alert alert-success">Solicitação enviada com sucesso. Aguarde o feedback do professor.</div>
 </div>
 </html>

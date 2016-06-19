@@ -17,6 +17,11 @@ angular.module('mytcc')
         return $http.post(url+controller+'registrar', area);
     };
     
+    areaFactory.buscaTodasAreasProfessor = function()
+    {
+        return $http.get(url+controller+"listaProfessorPorArea");
+    };
+    
     areaFactory.getAreasProfessor = function()
     {
         return $http.get(url+controller+'listarPorProfessor');

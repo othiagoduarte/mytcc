@@ -31,15 +31,17 @@ class Projetos extends CI_Controller
 		$postData = file_get_contents("php://input");
 		// retira o objeto do formado json
 		$request = json_decode($postData, true);
+
         
+        // var_dump($request['areaInteresse']);
+        // var_dump($request['professor']);
         // insere os dados que vieram do angular nas proriedades da model
         $this->projetoDB->idAluno = $this->session->userdata('id');
-        $this->projetoDB->idProfessor = $request['idProfessor'];
+        $this->projetoDB->idAreaInteresse = $request['areaInteresse']['id'];
+        $this->projetoDB->idProfessor = $request['professor']['idProfessor'];
         $this->projetoDB->titulo = $request['titulo'];        
-        $this->projetoDB->status = 'wait';
-        $this->projetoDB->statusProjeto = 1;
+        $this->projetoDB->status = 1;
         $this->projetoDB->resumo = $request['resumo'];
-        $this->projetoDB->idAreaInteresse = $request['idArea'];
         $this->projetoDB->turno = 'Noite';
         $this->projetoDB->idAluno = $this->session->userdata('id');
         
