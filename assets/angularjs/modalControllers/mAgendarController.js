@@ -4,17 +4,14 @@ angular.module('mytcc')
     $scope.form_aluno = false;
     $scope.form_professor = false;
     $scope.form_validacao = false;
-    $scope.editar = false;
+    $scope.ehRespondivel = false;
     
-    $log.log(items);
-
-
     loginFactory.getCookies()
     .then(function(response)
     {
          $scope.form_aluno = response.data.session_type == "a";
          $scope.form_professor = response.data.session_type == "p";
-         $scope.editar = items.status == "1";
+         $scope.ehRespondivel = items.status == "1";
     });
     
     $scope.form = 
@@ -25,34 +22,49 @@ angular.module('mytcc')
             datahora: items.data,
             local: items.local,
             assunto: items.anotacoesAgendamento,
-            feedback : '',
-            status : ''
+            feedback : items.feedback,
+            status : items.status
         }
     };   
     
     $scope.salvar = function()
     {
-        $log.log("botao salvar clicado.");
-        if(validaForm($scope.form.orientacao))
+        if($scope.form_professor)
+            enviarAgendamento();
+        else if($scope.form_aluno)
+            enviarResposta();
+    }
+    
+    var enviarAgendamento = function()
+    {
+        $log.log("botao salvar clicado");
+        orientacaoFactory.registrar($scope.form.orientacao)
+        .then(function(response)
         {
-            orientacaoFactory.registrar($scope.form.orientacao)
-            .then(function(response)
-            {
-                $log.log("orientacao salva no banco com sucesso");
-                $uibModalInstance.close($scope.form);
-            }),
-            function(error)
-            {
-                $log.warn("houve erro na requisicao");
-                $scope.form_validacao = true;
-                $scope.message = "Desculpe. Erro de validação";
-            };
-        }
-        else
+            $log.log("orientacao agendada com sucesso");
+            $uibModalInstance.close($scope.form);
+        },
+        function(error)
         {
+            $log.warn("houve erro na requisicao");
             $scope.form_validacao = true;
             $scope.message = "Desculpe. Erro de validação";
-        }
+        });
+    };
+
+    var enviarResposta = function()
+    {
+        $log.log("botao enviar resposta clicado");
+        orientacaoFactory.responder($scope.form.orientacao)
+        .then(function(response)
+        {
+            $log.log("resposta enviada com sucesso");
+            $uibModalInstance.close($scope.form);
+        },
+        function(error)
+        {
+            $log.warn("houve erro na requisicao");
+        });
     };
         
     $scope.open1 = function() 
@@ -92,14 +104,4 @@ angular.module('mytcc')
     
     $scope.hstep = 1;
     $scope.mstep = 10;
-
-    var validaForm = function(orientacao)
-    {
-        if(orientacao.idProjeto == 0)
-            return false;
-        if(orientacao.assunto.length == 0)
-            return false;
-
-        return true;
-    }
 });

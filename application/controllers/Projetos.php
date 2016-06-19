@@ -53,6 +53,13 @@ class Projetos extends CI_Controller
 	
 	// metodos chamados pelo front end pra trazer dados
     
+    function meuProjeto()
+    {
+        $idAluno = $this->session->userdata('id');
+
+        echo json_encode($this->projetoDB->meuProjeto($idAluno));
+    }
+    
     public function listarSolicitacoes()
 	{
 		$solicitacoes = $this->projetoDB->get_professor($sessionId);

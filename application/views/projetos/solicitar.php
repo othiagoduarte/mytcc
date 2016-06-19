@@ -1,5 +1,36 @@
 <div ng-controller="solicitacaoController as ctrl">
 
+<div ng-if="!orientado">
+</br>
+	<div class="alert alert-info" ng-click="open()">
+Parabéns, <strong>{{ctrl.projeto.NomeAluno}}</strong>! A sua proposta foi aceita pelo professor <strong>{{ctrl.projeto.NomeProfessor}}</strong>. </br>
+	</div>
+	<div class="modal-body">
+    <div class="row">
+	    <div class="col-md-12">
+		    <div class="list-group">
+			     <a href="#" class="list-group-item active">{{ ctrl.projeto.NomeAluno}}</a>
+			<div class="list-group-item">
+				<div class="form-group">
+					<label for="inputdefault">Título do projeto</label>
+					<input class="form-control" id="inputdefault" type="text" ng-model="ctrl.projeto.titulo" disabled>
+					 <div class="radio">
+						  <label>
+							<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+								Noturno
+						  </label>
+						</div>
+				</div>
+			</div>
+			<div class="list-group-item">
+			 <span class="label label-info">Resumo do projeto</span>
+				<h4 class="list-group-item-heading">				
+					<textarea class="form-control" rows="10" disabled>{{ ctrl.projeto.resumo}}</textarea>
+				</h4>
+            </div>
+</div>
+
+<div ng-if="orientado">
 	<div class="row">
 		<div class="col-md-12">
 			<h3 class="text-primary text-left"> Solicitar Orientação</h3>
@@ -81,4 +112,4 @@
 </form>
 	<div ng-show="ctrl.sucesso" class="alert alert-success">Solicitação enviada com sucesso. Aguarde o feedback do professor.</div>
 </div>
-</html>
+</div>

@@ -12,5 +12,10 @@ angular.module('mytcc')
         return $http.post(url+controller+"insereSolicitacao", solicitacao);
     };
 
+    projetoFactory.meuProjeto = function()
+    {
+        return $http.get(url+controller+"meuProjeto");
+    }
+
     return projetoFactory;
 }]);

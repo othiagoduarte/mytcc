@@ -6,10 +6,28 @@ angular.module('mytcc')
 	
 	vm.projeto = { titulo: '', resumo: '', areaInteresse: {}, professor: {}};
 	vm.sucesso = false;
-						    
+	vm.orientado = false;
+
+	vm.projeto;
+						    	
+	buscaMeuOrientador();
 	buscaProfessorArea(); //busca todas as areas de todos os professores
 	buscaAreas(); // busca todas as areas
 	
+	function buscaMeuOrientador()
+	{
+		projetoFactory.meuProjeto()
+		.then(function(response)
+		{
+			if(response.data.length > 0)
+			{
+				vm.orientado = true;
+				vm.projeto = response.data[0];
+				$log.log(vm.projeto);
+			}
+		});
+	};
+
 	function buscaProfessorArea()
     {		
 		areaFactory.buscaTodasAreasProfessor()

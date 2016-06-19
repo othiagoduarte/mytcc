@@ -28,6 +28,11 @@ angular.module('mytcc')
     {
         return $http.post(url+controller+"registrar", orientacao);
     };
+
+    orientacaoFactory.responder = function(orientacao)
+    {
+        return $http.post(url+controller+"responder", orientacao);
+    };
     
     return orientacaoFactory;
 }]);

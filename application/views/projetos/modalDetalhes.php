@@ -24,10 +24,7 @@
 					<textarea class="form-control" rows="10" disabled>{{projeto.resumo}}</textarea>
 				</h4>
             </div>
-
 <div class="modal-footer">
-    <input type="button" class="btn btn-info" ng-click="back()" value="Anterior" ng-show="!back"/>    
-    <input type="button" class="btn btn-info" ng-click="next()" value="Próximo" ng-show="!next"/>
     <input type="button" class="btn btn-info" ng-click="response()" value="Responder"/> 
 </div>
 </div>
