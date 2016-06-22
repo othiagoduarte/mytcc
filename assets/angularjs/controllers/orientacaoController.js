@@ -1,6 +1,6 @@
 angular.module('mytcc')
 
-.controller('orientacaoController', function($log, $scope, $routeParams,$uibModal, orientacaoFactory,urlService)
+.controller('orientacaoController', function($log, $scope, $routeParams, $uibModal, orientacaoFactory, urlService)
 {
     var projetoId = $routeParams.projetoId;
     var url = urlService.getUrl;
@@ -48,7 +48,6 @@ angular.module('mytcc')
             {
                 response.data[i].data = converteData(response.data[i].data);
             }
-            
             vm.dashboard = response.data;
         },
         function(error)

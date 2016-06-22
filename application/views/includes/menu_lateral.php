@@ -20,7 +20,7 @@
                         <a ng-href="<?php echo base_url('coordenador/importar_alunos') ?>"><i class="fa fa-dashboard fa-fw"></i> Importar alunos</a>
                     </li>
                 </ul>
-            <li class="active" ng-show="login.menu_aluno">
+            <li class="active" ng-if="login.menu_aluno">
                 <a href="#"><i class="glyphicon glyphicon-th-list"></i> Aluno<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">                                
                     <li>
@@ -30,7 +30,7 @@
                         <a ng-href="<?php echo base_url('projetos/solicitar') ?>"><i class="fa fa-dashboard fa-fw"></i> Solicitar orientador</a>
                     </li>                         
                 </ul>
-            <li class="active" ng-show="login.menu_professor">
+            <li class="active" ng-if="login.menu_professor">
                 <a href="#"><i class="glyphicon glyphicon-th-list"></i> Professor<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">                                
                     <li>
@@ -43,7 +43,7 @@
                         <a ng-href="<?php echo base_url('projetos/listar') ?>"><i class="glyphicon glyphicon-pencil"></i> Gerência de solicitações</a>
                     </li>                            
                     <li>
-                        <a ng-href="<?php echo base_url('areainteresses/professor') ?>"><i class="fa fa-dashboard fa-fw"></i> �?reas de Interesse</a>
+                        <a ng-href="<?php echo base_url('areainteresses/professor') ?>"><i class="fa fa-dashboard fa-fw"></i> �?reas de Interesse</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->

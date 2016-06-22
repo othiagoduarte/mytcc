@@ -20,16 +20,16 @@
                         <th>Aluno</th>
                         <th>Compareceu</th>
                         <th>Área de interesse</th>
-                        <th>Data da solicitação	</th>
-                        <th>Agendar</th>
+                        <th>Data da Solicitação</th>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="projeto in aceito">
-                            <td><a ng-href="#/timeline/{{projeto.id}}" class="btn btn-info btn-xs">{{ projeto.NomeAluno }}</a></td>	
+                        <tr ng-repeat="projeto in aceito">               
+                            <td><button type="button" class="btn btn-success btn-xs" ng-click="modalAgendar(projeto)">
+                                <span class="glyphicon glyphicon-plus"></span></button>
+                            <a ng-href="#/timeline/{{projeto.id}}" class="btn btn-primary btn-xs">{{ projeto.NomeAluno }}</a></td>	
                             <td>{{ projeto.numOrientacoes }}</td>
                             <td>{{ projeto.NomeAreaInteresse }}</td>
                             <td>{{ projeto.dataSolicitacao }}</td>
-                            <td><input type="button" ng-click="modalAgendar(projeto)" class="btn btn-success btn-xs" value="Nova orientação"></td>
                         </tr>								
                     </tbody>
                 </table>
