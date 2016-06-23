@@ -1,19 +1,3 @@
-<?php
-
-//session_start();
-//session_name('ci_session');
-//
-//$config['base_url'] = 'http://localhost:8080/mytcc';
-//$config['base_directory'] = 'C:\\xampp\\htdocs\\mytcc\\importacao_alunos\\files_tmp\\';
-//$_SESSION['config'] = $config;
-//print_r(session_name());
-//print_r($_SESSION['config']);
-
-
-function _base_url($concat) {
-    return $_SESSION['config']['base_url'] . $concat;
-}
-?>
 <div>
     <fieldset>
         <legend>Importação de Alunos</legend>
@@ -36,5 +20,5 @@ Gabriel Serafim Lauffer;631320072;gabriel.serafim.lauffer@gmail.com;467890000
 Angela Serafim Lauffer;631020001;angela.serafim.lauffer@gmail.com;467870000
 </pre>
     </fieldset>
-    <a class="btn btn-default" href="<?php echo $_SESSION['config']['base_url'].'\\importacao_alunos\\files_tmp\\alunos_teste.csv'; ?>">Download Exemplo</a>
+    <a class="btn btn-default" href="<?php echo $this->config->item('base_url').'\\importacao_alunos\\files_tmp\\alunos_teste.csv'; ?>">Download Exemplo</a>
 </div>
