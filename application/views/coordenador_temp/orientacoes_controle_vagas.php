@@ -5,6 +5,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">TCC 1
                 <select style="float: right">
+                    <a href="importar_alunos.php"></a>
                     <option>2015/1</option>
                     <option>2015/2</option>
                     <option>2016/1</option>

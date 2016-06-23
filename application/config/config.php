@@ -25,6 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 //$config['base_url'] = 'https://dev-mytcc-othiagoduarte.c9users.io/';
 $config['base_url'] = 'http://localhost:8080/mytcc';
+$config['base_directory'] = 'C:\\xampp\\htdocs\\mytcc\\importacao_alunos\\files_tmp\\';
 
 /*
 |--------------------------------------------------------------------------

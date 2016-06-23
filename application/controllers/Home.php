@@ -13,7 +13,7 @@ class Home extends CI_Controller
 		if($this->session->userdata('tipo') == 'p')
 			redirect('projetos/listar');	
 		if($this->session->userdata('tipo') == 'c')
-			redirect('areainteresses/dashboard');	
+			redirect('coordenador/orientacoes_acompanhamento');	
 	}
     
     function index()
