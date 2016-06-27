@@ -59,9 +59,19 @@ class Orientacoes extends CI_Controller
 	{
 		$postData = file_get_contents("php://input");
 		$request = json_decode($postData, true);
-		
+								
 		// insere os dados que vieram do angular nas proriedades da model
 		$this->orientacaoDB->arrayBuilder($request, '3'); // 3 eh o status agendado
+		
+		$date = new DateTime();
+		$today = $date->format('Y-m-d');
+		
+		$this->orientacaoDB->datahora = $today;
+		$this->orientacaoDB->status = "1";
+				
+		$params = array("c"=>$this->orientacaoDB);
+		$this->load->library('CriaOrientacaoVal', $params);
+		$val = new CriaOrientacaoVal($params);
         
         $this->orientacaoDB->insert();
 	}
