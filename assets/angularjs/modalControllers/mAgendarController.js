@@ -5,13 +5,21 @@ angular.module('mytcc')
     $scope.form_professor = false;
     $scope.form_validacao = false;
     $scope.ehRespondivel = false;
+    $scope.ehEnviavel = false;
     
+    if(items.titulo != null)
+    {
+        $scope.ehRespondivel = true;
+        $log.log("oi");   
+    }
+        
     loginFactory.getCookies()
     .then(function(response)
     {
          $scope.form_aluno = response.data.session_type == "a";
          $scope.form_professor = response.data.session_type == "p";
          $scope.ehRespondivel = items.status == "1";
+         $scope.ehEnviavel = items.status == "1" || items.titulo != null;
     });
     
     $scope.form = 
@@ -38,6 +46,7 @@ angular.module('mytcc')
     var enviarAgendamento = function()
     {
         $log.log("botao salvar clicado");
+        $log.log($scope.form.orientacao);
         orientacaoFactory.registrar($scope.form.orientacao)
         .then(function(response)
         {
@@ -48,7 +57,7 @@ angular.module('mytcc')
         {
             $log.warn("houve erro na requisicao");
             $scope.form_validacao = true;
-            $scope.message = "Desculpe. Erro de validação";
+            $scope.message = error.data.message;           
         });
     };
 

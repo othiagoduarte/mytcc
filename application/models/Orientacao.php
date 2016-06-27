@@ -16,7 +16,7 @@ class Orientacao extends My_Model
     }
 	
 	// metodo com bug ainda, a query 'where' esta se atrapalhando no OU
-	public function orientacaoPorProfessor($idProfessor)
+	function orientacaoPorProfessor($idProfessor)
 	{
 		$date = new DateTime();
 		$today = $date->format('Y-m-d');
@@ -47,7 +47,7 @@ class Orientacao extends My_Model
 		return $this->db->get()->result();
 	}
 	
-	public function orientacaoPorAluno($idAluno)
+	function orientacaoPorAluno($idAluno)
 	{
 		$projetoAceito = '3';
 		
@@ -65,12 +65,12 @@ class Orientacao extends My_Model
 		$this->db->where('projeto.idAluno', $idAluno);
 		$this->db->where('projeto.status', $projetoAceito);
 		
-		$this->db->order_by('orientacao.datahora', 'asc');
+		$this->db->order_by('orientacao.datahora', 'desc');
 		
 		return $this->db->get()->result();
 	}
 	
-	public function orientacaoProjeto($idProjeto)
+	function orientacaoProjeto($idProjeto)
 	{
 		$this->conectarDB();
 						
@@ -91,44 +91,47 @@ class Orientacao extends My_Model
 		return $this->db->get()->result();			
 	}
 	
-	public function get_aluno(){
-				
-		try{
-			
-			$this->load->model('aluno','model');
-			return $model->get_by_id($this->$idAluno);
-			
-		}catch(Exception $e){
-			
-			return null;				
-		}				
-	}
-	
-	public function get_professor(){
+	function orientacaoMesmoDia($idProjeto, $date)
+	{
+		// verifica se ja existe alguma orientacao marcada no mesmo dia
+		$horaInicial = $date->setTime(0,0,0)->add(new DateInterval('P1D'))->format("Y-m-d\TH:i:sP");
+		$horaFinal = $date->setTime(23,59,00)->add(new DateInterval('P1D'))->format("Y-m-d\TH:i:sP");
 		
-		try{
-			
-			$this->load->model('professor','model');
-			return $model->get_by_id($this->$idprofessor);
-			
-		}catch(Exception $e){
-			
-			return null;				
-		}				
+		$this->conectarDB();
+		
+		$this->db->select('*');
+		$this->db->from("orientacao");
+		$this->db->join("projeto", "orientacao.idProjeto = projeto.id");
+				
+		$this->db->where("orientacao.idProjeto", $idProjeto);		
+		$this->db->where("orientacao.datahora >=", $horaInicial);
+		$this->db->where("orientacao.datahora <=", $horaFinal);
+						
+		return $this->db->get()->result();	
 	}
 	
-	public function get_AreaInteresse()
-	{				
-		$this->load->model('AreaInteresse','model');
-		return $model->get_by_id($this->$idAreaInteresse);				
+	function orientacaoEmAberto($idProjeto)
+	{
+		// verifica se ja existe alguma orientacao com status agendada ou enviada
+		$this->conectarDB();
+		
+		$this->db->select('*');
+		$this->db->from("orientacao");
+		$this->db->join("projeto", "orientacao.idProjeto = projeto.id");
+		
+		$this->db->where("orientacao.idProjeto", $idProjeto);
+		$where = "orientacao.status = 1 or orientacao.status = 2";
+		$this->db->where($where);
+		
+		return $this->db->get()->result();
 	}
-	
+		
 	function arrayBuilder($row, $statusId)
 	{
 		$this->idProjeto = $row['idProjeto'];
 		$this->datahora = $row['datahora'];
 		$this->anotacoesAgendamento = $row['assunto'];
-		$this->feedback = $row['feedback'];
+		$this->local = $row['local'];
 		$this->status = $statusId;
 	} 
 }
