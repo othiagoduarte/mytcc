@@ -100,22 +100,11 @@ class Projetos extends CI_Controller
 		$postData = file_get_contents("php://input");
 		// retira o objeto do formado json
 		$request = json_decode($postData, true);
-        
-        $project = $this->projetoDB->get_by_id($request['id']);       
-        
-        $this->projetoDB->id = $project->id;      
-        $this->projetoDB->idAluno = $project->idAluno;
-        $this->projetoDB->idProfessor = $project->idProfessor;
-        $this->projetoDB->titulo = $project->titulo;
-        $this->projetoDB->resumo = $project->resumo;
-        $this->projetoDB->idAreaInteresse = $project->idAreaInteresse;
-        $this->projetoDB->turno = 'Noite';
-        $this->projetoDB->dataSolicitacao = $project->dataSolicitacao;      
-        $this->projetoDB->mensagem = $request['mensagem'];
-        $this->projetoDB->statusProjeto = 2; //respondido        
         $date = new DateTime();
-        $this->projetoDB->dataResposta = $date->format('Y-m-d');             
         
-        $this->projetoDB->update();
+        $where = array('id'=>$request['id']);
+        $data = array('status'=>$request['statusProjeto'], 'mensagem'=>$request['mensagem'], 'dataResposta'=>$date->format('Y-m-d'));       
+                                       
+        $this->projetoDB->updateRowWhere($where,$data);
     }
 }

@@ -1,8 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Projeto extends My_Model {
-
+class Projeto extends My_Model 
+{
     public $idAluno = 0;
 	public $idProfessor = 0;
     public $titulo = "";
@@ -20,46 +20,7 @@ class Projeto extends My_Model {
 	{
 		parent::__construct();
 		$this->set_tabela(get_class($this));        
-    }
-	
-	public function get_aluno(){
-		
-		try {
- 			
-			$this->load->model('aluno','model');
-			
-			return $model->get_by_id($this->$idAluno);
-		
-		}catch (Exception $e) {
-    		return NULL;
-		}		
-	}
-	
-	public function get_professor(){
-		
-		try {
- 			
-			$this->load->model('professor','model');
-			
-			return $model->get_by_id($this->$idprofessor);
-		
-		}catch (Exception $e) {
-    		return NULL;
-		}		
-	}
-	
-	public function get_AreaInteresse(){
-	
-		try {
- 			
-			$this->load->model('AreaInteresse','model');
-			
-			return $model->get_by_id($this->$idAreaInteresse);
-		
-		}catch (Exception $e) {
-    		return NULL;
-		}	
-	}
+    }	
 	
 	public function meuProjeto($idAluno)
 	{

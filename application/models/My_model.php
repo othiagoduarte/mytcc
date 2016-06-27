@@ -53,6 +53,13 @@ class My_Model extends CI_Model {
 		$this->db->update($this->get_table(), $this, array('id' => $this->id ) );
 	}
 	
+	function updateRowWhere($where = array(), $data = array()) 
+	{
+    	$this->conectarDB();
+		$this->db->where($where);
+    	$this->db->update($this->get_table(), $data);
+	}
+	
 	public function delete(){		
 		$this->conectarDB();
 		$this->db->delete($this->get_table(), array('id' => $this->id)); 
