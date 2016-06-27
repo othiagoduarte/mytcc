@@ -93,9 +93,9 @@ class Orientacao extends My_Model
 	
 	function orientacaoMesmoDia($idProjeto, $date)
 	{
-		// verifica se ja existe alguma orientacao marcada no mesmo dia
-		$horaInicial = $date->setTime(0,0,0)->add(new DateInterval('P1D'))->format("Y-m-d\TH:i:sP");
-		$horaFinal = $date->setTime(23,59,00)->add(new DateInterval('P1D'))->format("Y-m-d\TH:i:sP");
+		// verifica se ja existe alguma orientacao marcada no mesmo dia		
+		$horaInicial = $date->setTime(0,0,0)->format("Y-m-d\TH:i:sP");
+		$horaFinal = $date->setTime(23,59,00)->format("Y-m-d\TH:i:sP");
 		
 		$this->conectarDB();
 		
@@ -128,8 +128,10 @@ class Orientacao extends My_Model
 		
 	function arrayBuilder($row, $statusId)
 	{
+		$datetime = new DateTime($row['datahora']);
+				
 		$this->idProjeto = $row['idProjeto'];
-		$this->datahora = $row['datahora'];
+		$this->datahora = $datetime;
 		$this->anotacoesAgendamento = $row['assunto'];
 		$this->local = $row['local'];
 		$this->status = $statusId;

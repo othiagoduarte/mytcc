@@ -105,6 +105,13 @@ class Projetos extends CI_Controller
         $where = array('id'=>$request['id']);
         $data = array('status'=>$request['statusProjeto'], 'mensagem'=>$request['mensagem'], 'dataResposta'=>$date->format('Y-m-d'));       
                                        
+        // insere a resposta do professor, sendo positiva ou negativa
         $this->projetoDB->updateRowWhere($where,$data);
+
+        // procura pelas outras solicitacoes enviadas pelo mesmo aluno e  atualiza elas pra invalidas: status 6
+        $projeto = $this->get_by_id($request['id']);
+        $idAluno = $projeto->idAluno;
+        $projetos = $this->projetoDB->get_by_aluno($idAluno, "1"); // 1 eh enviado
+
     }
 }

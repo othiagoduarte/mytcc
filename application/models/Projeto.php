@@ -73,4 +73,13 @@ class Projeto extends My_Model
 		
 		return $this->db->get()->result();
 	}
+
+	public function get_by_aluno($idAluno, $status)
+	{
+		$this->conectarDB();
+		$query = "SELECT * FROM 'projeto' WHERE 'status' = ".$status;
+		$this->db->query($query);
+		
+		return $this->db->get()->result(); 
+	}
 }

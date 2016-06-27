@@ -11,10 +11,6 @@ class Coordenador extends CI_Controller {
         if (!$this->session->userdata('logado')) {
             redirect('login');
         }
-
-        //$this->load->model('aluno', 'model', TRUE);
-        //$this->load->model('usuario', 'usuarioDB', TRUE);
-        //$this->load->model('aluno', 'alunoDB', TRUE);		
     }
 
     function index() {

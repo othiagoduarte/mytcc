@@ -84,4 +84,22 @@ class Professores extends CI_Controller {
 			echo '{"data": "Exception occurred: '.$e->getMessage().'"}';
 			var_dump($e);
 		}	
+	}
+
+	function desativar()
+	{
+		$postData = file_get_contents("php://input");
+		$request = json_decode($postData, true);
+
+		$this->professorDB->id = $request['id'];
+
+		$params = array("c"=>$this->professorDB);
+		$this->load-library("DesativaProfessorVal", $params);
+		$val = new DesativaProfessorVal($params);
+
+		$where = array('id'=>$request['id']);
+		$data = array('ativo'=>0);
+
+		$this->professorDB->updateRowWhere($where,$data);
+	}
 }
