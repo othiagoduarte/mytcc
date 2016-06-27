@@ -141,6 +141,7 @@ CREATE TABLE IF NOT EXISTS `aluno` (
   `telefone` varchar(11) DEFAULT NULL,
   `cpf` varchar(9) NOT NULL,
   `idUsuario` int(11) NOT NULL,
+  `ativo` boolean default true,
   PRIMARY KEY (`id`),
   UNIQUE KEY `matricula_2` (`matricula`),
   UNIQUE KEY `cpf` (`cpf`),
@@ -251,6 +252,7 @@ CREATE TABLE IF NOT EXISTS `professor` (
   `turnoNoite` bit(1) NOT NULL,
   `cpf` varchar(9) NOT NULL,
   `idUsuario` int(11) NOT NULL,
+  `ativo` boolean default true,
   PRIMARY KEY (`id`),
   UNIQUE KEY `matricula_2` (`matricula`),
   UNIQUE KEY `cpf` (`cpf`),
@@ -411,7 +413,9 @@ INSERT INTO `statusprojeto` (`id`, `statusProjeto`) VALUES
 (1, 'Aguardando'),
 (2, 'Recusado'),
 (3, 'Aceito'),
-(4, 'Rejeitado');
+(4, 'Aprovado'),
+(5, 'Reprovado'),
+(6, 'Invalido');
 
 -- --------------------------------------------------------
 
