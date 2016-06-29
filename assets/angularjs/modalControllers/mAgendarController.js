@@ -1,27 +1,89 @@
 angular.module('mytcc')
 .controller('mAgendarController', function ($scope, $log, items, $uibModalInstance, orientacaoFactory, loginFactory) 
-{
-    $scope.form_aluno = false;
-    $scope.form_professor = false;
-    $scope.form_validacao = false;
+{    
+    $scope.status;
+    
+    $scope.ehAluno = false;
+    
+    $scope.desativaCampos = true;
+    $scope.feedbackInvisivel = false;
+    $scope.feedbackDisponivel = false;
+    $scope.feedbackDesativado = true;
     $scope.ehRespondivel = false;
+    $scope.ehFeedback = false;
     $scope.ehEnviavel = false;
-    
-    if(items.titulo != null)
-    {
-        $scope.ehRespondivel = true;
-        $log.log("oi");   
-    }
         
-    loginFactory.getCookies()
-    .then(function(response)
+    gerenciaComponentes(items.status);
+
+    function gerenciaComponentes(status)
     {
-         $scope.form_aluno = response.data.session_type == "a";
-         $scope.form_professor = response.data.session_type == "p";
-         $scope.ehRespondivel = items.status == "1";
-         $scope.ehEnviavel = items.status == "1" || items.titulo != null;
-    });
+        loginFactory.getCookies()
+        .then(function(response)
+        {
+            console.log(response.data.session_type);
+            response.data.session_type= "p";
+            if(response.data.session_type == "a")
+            {
+                $scope.ehAluno = true;
+                console.log("opa, eh aluno? cookies"+$scope.ehAluno);
+            }
+            switch (status)
+            {
+                case "0":
+                {
+                    $scope.status = "em progresso";
+                    $scope.desativaCampos = false;
+                    $scope.feedbackInvisivel = true;
+                    $scope.ehEnviavel = true;
+
+                    break;
+                }
+                case "1":
+                {
+                    console.log("opa, eh aluno?"+$scope.ehAluno);
+                    if($scope.ehAluno)
+                    {
+                        $scope.ehRespondivel = true;
+                        $scope.ehEnviavel = true;
+                    }
+
+                    $scope.status = "enviada";
+                    $scope.feedbackDisponivel = true;
+                    $scope.feedbackDesativado = false;
+                    break;
+                }
+                case "2":
+                {
+                    if(!$scope.ehAluno)
+                    {
+                        $scope.ehFeedback = true;
+                        $scope.ehEnviavel = true;
+                        $scope.feedbackDesativado = false;
+                        $scope.feedbackDisponivel = true;
+                    }
+                    else
+                    {
+                        $scope.feedbackInvisivel = true;
+                    }
+
+                    $scope.status = "agendada";
+
+                    break;
+                }
+                case "3":
+                    $scope.status = "recusada";
+                    break;
+                case "4":
+                    $scope.status = "completada";
+                    break;
+                case "5":
+                    $scope.status = "ausente";
+                    break;
+            }        
+        })
+    };
     
+            
     $scope.form = 
     { 
         orientacao: 
@@ -37,16 +99,22 @@ angular.module('mytcc')
     
     $scope.salvar = function()
     {
-        if($scope.form_professor)
+        console.log($scope.form.orientacao);
+        if($scope.ehRespondivel)
+        {
+            console.log("eh respondivel");
             enviarAgendamento();
-        else if($scope.form_aluno)
+        }
+        else if($scope.ehFeedback)
+        {
+            console.log("eh feedback");
             enviarResposta();
-    }
+        }
+    };
     
     var enviarAgendamento = function()
     {
         $log.log("botao salvar clicado");
-        $log.log($scope.form.orientacao);
         orientacaoFactory.registrar($scope.form.orientacao)
         .then(function(response)
         {
@@ -56,7 +124,6 @@ angular.module('mytcc')
         function(error)
         {
             $log.warn("houve erro na requisicao");
-            $scope.form_validacao = true;
             $scope.message = error.data.message;           
         });
     };
@@ -64,7 +131,7 @@ angular.module('mytcc')
     var enviarResposta = function()
     {
         $log.log("botao enviar resposta clicado");
-        orientacaoFactory.responder($scope.form.orientacao)
+        orientacaoFactory.atualizar($scope.form.orientacao)
         .then(function(response)
         {
             $log.log("resposta enviada com sucesso");
@@ -92,7 +159,7 @@ angular.module('mytcc')
         var date = data.date,
         mode = data.mode;
         return mode === 'day' && (date.getDay() === 0 || date.getDay() === 7);
-  }
+     }
 
     
     // arrumar a data máxima pra 60 dias 

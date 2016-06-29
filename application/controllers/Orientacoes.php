@@ -70,15 +70,19 @@ class Orientacoes extends CI_Controller
         $this->orientacaoDB->insert();
 	}
 
-	function responder()
+	function atualizar()
 	{
 		$postData = file_get_contents("php://input");
 		$request = json_decode($postData, true);
 
-		// insere os dados que vieram do angular nas proriedades da model
-		$this->orientacaoDB->arrayBuilder($request, $request['status']);
+		echo "<pre>";
+		var_dump($request);
+		echo "</pre>";
 
-		$this->orientacaoDB->update();
+		$where = array('id'=>$request['idProjeto']);
+        $data = array('status'=>$request['status'], 'feedback'=>$request['feedback']);       
+                                       
+        $this->orientacaoDB->updateRowWhere($where,$data);
 	}
 	
 	function orientacaoAluno()
