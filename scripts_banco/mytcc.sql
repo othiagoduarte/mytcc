@@ -208,16 +208,17 @@ CREATE TABLE IF NOT EXISTS `orientacao` (
 --
 
 INSERT INTO `orientacao` (`id`, `idProjeto`, `datahora`, `local`, `anotacoesAgendamento`, `status`, `feedback`) VALUES
-(1, 5, '2016-05-15 13:10:00', NULL, NULL, 4, 'boa orientacao'),
-(2, 5, '2016-05-16 13:10:00', NULL, NULL, 3, NULL),
-(3, 5, '2016-05-17 13:10:00', NULL, NULL, 4, 'boa orientacao'),
-(4, 5, '2016-05-18 13:10:00', NULL, NULL, 4, 'boa orientacao'),
-(5, 5, '2016-05-19 13:10:00', NULL, NULL, 5, NULL),
-(6, 5, '2016-05-20 13:10:00', NULL, NULL, 4, 'boa orientacao'),
-(7, 5, '2016-05-21 13:10:00', NULL, NULL, 5, NULL),
-(8, 6, '2016-05-16 13:10:00', NULL, NULL, 4, 'boa orientacao'),
-(9, 6, '2016-05-17 13:10:00', NULL, NULL, 4, 'boa orientacao'),
-(10, 6, '2016-05-18 13:10:00', NULL, NULL, 4, 'boa orientacao'),
+(1, 5, '2016-05-15 13:10:00', 'sala 318', NULL, 4, 'boa orientacao'),
+(2, 5, '2016-05-16 13:10:00', 'sala 318', NULL, 3, 'nao pude ir'),
+(3, 5, '2016-05-17 13:10:00', 'sala 318', NULL, 4, 'boa orientacao'),
+(4, 5, '2016-05-18 13:10:00', 'sala 318', NULL, 4, 'boa orientacao'),
+(5, 5, '2016-05-19 13:10:00', 'sala 318', NULL, 5, NULL),
+(6, 5, '2016-05-20 13:10:00', 'sala 318', NULL, 4, 'boa orientacao'),
+(7, 5, '2016-05-21 13:10:00', 'sala 318', NULL, 5, NULL),
+
+(8, 6, '2016-05-16 13:10:00', 'sala 318', NULL, 4, 'boa orientacao'),
+(9, 6, '2016-05-17 13:10:00', 'sala 318', NULL, 4, 'boa orientacao'),
+(10, 6, '2016-05-18 13:10:00', 'sala 318', NULL, 4, 'boa orientacao'),
 (11, 12, '2016-05-15 13:10:00', NULL, NULL, 4, 'boa orientacao'),
 (12, 12, '2016-05-16 13:10:00', NULL, NULL, 4, 'boa orientacao'),
 (13, 12, '2016-05-17 13:10:00', NULL, NULL, 5, NULL),
@@ -228,12 +229,13 @@ INSERT INTO `orientacao` (`id`, `idProjeto`, `datahora`, `local`, `anotacoesAgen
 (18, 16, '2016-05-16 13:10:00', NULL, NULL, 4, 'boa orientacao'),
 (19, 16, '2016-05-17 13:10:00', NULL, NULL, 4, 'boa orientacao'),
 (20, 16, '2016-05-18 13:10:00', NULL, NULL, 4, 'boa orientacao'),
-(21, 5, '2016-06-13 13:10:00', NULL, NULL, 1, NULL),
-(22, 5, '2016-06-14 13:10:00', NULL, NULL, 1, NULL),
-(23, 5, '2016-06-15 13:10:00', NULL, NULL, 1, NULL),
-(24, 5, '2016-06-16 13:10:00', NULL, NULL, 1, NULL),
-(25, 5, '2016-06-17 13:10:00', NULL, NULL, 1, NULL);
 
+(21, 5, '2016-06-13 13:10:00', 'sala 318', NULL, 4, 'boa orientacao'),
+(22, 5, '2016-06-14 13:10:00', 'sala 318', NULL, 3, 'nao pude ir'),
+(23, 5, '2016-06-15 13:10:00', 'sala 318', NULL, 4, 'boa orientacao'),
+(24, 5, '2016-06-16 13:10:00', 'sala 318', NULL, 5, NULL),
+(25, 5, '2016-06-17 13:10:00', 'sala 318', NULL, 5, NULL),
+(26, 5, '2016-06-30 19:50:00', 'sala 318', NULL, 2, NULL);
 -- --------------------------------------------------------
 
 --
@@ -346,7 +348,7 @@ INSERT INTO `projeto` (`id`, `idAluno`, `idProfessor`, `titulo`, `resumo`, `idAr
 (2, 1, 2, 'projeto do marcos', 'resumo do projeto do marcos', 1, 'noite', 'nao gostei', NULL, 2, 0, '2016-05-10', '2016-05-11'),
 (3, 1, 3, 'projeto do marcos', 'resumo do projeto do marcos', 1, 'noite', 'nao gostei', NULL, 2, 0, '2016-05-10', '2016-05-11'),
 (4, 1, 4, 'projeto do marcos', 'resumo do projeto do marcos', 1, 'noite', 'nao gostei', NULL, 2, 0, '2016-05-10', '2016-05-11'),
-(5, 1, 5, 'projeto do marcos', 'resumo do projeto do marcos', 1, 'noite', 'gostei', NULL, 3, 0, '2016-05-10', '2016-05-11'),
+(5, 1, 5, 'projeto do marcos', 'resumo do projeto do marcos', 1, 'noite', 'gostei', NULL, 3, 6, '2016-05-10', '2016-05-11'),
 (6, 2, 1, 'projeto do thiago', 'resumo do projeto do thiago', 2, 'n', 'gostei', NULL, 3, 0, '2016-05-10', '2016-05-11'),
 (7, 2, 2, 'projeto do thiago', 'resumo do projeto do thiago', 2, 'n', 'nao gostei', NULL, 2, 0, '2016-05-10', '2016-05-11'),
 (8, 2, 3, 'projeto do thiago', 'resumo do projeto do thiago', 2, 'n', 'nao gostei', NULL, 2, 0, '2016-05-10', '2016-05-11'),
@@ -361,12 +363,7 @@ INSERT INTO `projeto` (`id`, `idAluno`, `idProfessor`, `titulo`, `resumo`, `idAr
 (17, 4, 2, 'projeto do luis', 'resumo do projeto do luis', 4, 'n', NULL, NULL, 1, 0, '2016-05-10', NULL),
 (18, 4, 3, 'projeto do luis', 'resumo do projeto do luis', 4, 'n', 'nao gostei', NULL, 2, 0, '2016-05-10', '2016-05-11'),
 (19, 4, 4, 'projeto do luis', 'resumo do projeto do luis', 4, 'n', 'nao gostei', NULL, 2, 0, '2016-05-10', '2016-05-11'),
-(20, 4, 5, 'projeto do luis', 'resumo do projeto do luis', 4, 'n', 'nao gostei', NULL, 2, 0, '2016-05-10', '2016-05-11'),
-(21, 5, 1, 'projeto da vanessa', 'resumo do projeto da vanessa', 5, 'n', 'nao gostei', NULL, 2, 0, '2016-05-10', '2016-05-11'),
-(22, 5, 2, 'projeto da vanessa', 'resumo do projeto da vanessa', 5, 'n', 'nao gostei', NULL, 2, 0, '2016-05-10', '2016-05-11'),
-(23, 5, 3, 'projeto da vanessa', 'resumo do projeto da vanessa', 5, 'n', 'nao gostei', NULL, 2, 0, '2016-05-10', '2016-05-11'),
-(24, 5, 4, 'projeto da vanessa', 'resumo do projeto da vanessa', 5, 'n', 'gostei', NULL, 3, 0, '2016-05-10', '2016-05-11'),
-(25, 5, 5, 'projeto da vanessa', 'resumo do projeto da vanessa', 5, 'n', 'nao gostei', NULL, 1, 0, '2016-05-10', '2016-05-11');
+(20, 4, 5, 'projeto do luis', 'resumo do projeto do luis', 4, 'n', 'nao gostei', NULL, 2, 0, '2016-05-10', '2016-05-11');
 
 -- --------------------------------------------------------
 
