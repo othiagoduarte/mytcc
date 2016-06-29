@@ -72,6 +72,7 @@ angular.module('mytcc')
         $log.log('abrindo modal agendar orientação');
 
         projeto.status = "0";
+        projeto.feedback = "";
         var modalInstance = $uibModal.open
         ({
             animation: true,

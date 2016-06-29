@@ -117,10 +117,8 @@ class Orientacao extends My_Model
 		
 		$this->db->select('*');
 		$this->db->from("orientacao");
-		$this->db->join("projeto", "orientacao.idProjeto = projeto.id");
-		
-		$this->db->where("orientacao.idProjeto", $idProjeto);
-		$where = "orientacao.status = 1 or orientacao.status = 2";
+		$this->db->join("projeto", "orientacao.idProjeto = projeto.id");		;
+		$where = "(orientacao.idProjeto = 26) AND (orientacao.status = 2 OR orientacao.status = 1)";
 		$this->db->where($where);
 		
 		return $this->db->get()->result();

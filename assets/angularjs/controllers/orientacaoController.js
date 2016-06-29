@@ -109,7 +109,37 @@ angular.module('mytcc')
     vm.modalAgendamento = function (projeto) 
     {
         $log.log('abrindo modal agendar orientação');
-        $log.log(projeto);
+        console.log(projeto);
+        
+        var modalInstance = $uibModal.open
+        ({
+            animation: true,
+            templateUrl: url+'orientacoes/agendarOrientacao',
+            controller: 'mAgendarController',
+            resolve: 
+            {
+                items: function () 
+                {
+                    return projeto;
+                }
+            }
+        });
+
+        modalInstance.result
+        .then(function (selectedItem) 
+        {
+
+        }, 
+        function () 
+        {
+
+        });
+     };
+         // abre a modal de 'agendar'
+    $scope.modalAgendamento = function (projeto) 
+    {
+        $log.log('abrindo modal agendar orientação');
+        console.log(projeto);
         
         var modalInstance = $uibModal.open
         ({

@@ -20,12 +20,9 @@ angular.module('mytcc')
         loginFactory.getCookies()
         .then(function(response)
         {
-            console.log(response.data.session_type);
-            response.data.session_type= "p";
             if(response.data.session_type == "a")
             {
                 $scope.ehAluno = true;
-                console.log("opa, eh aluno? cookies"+$scope.ehAluno);
             }
             switch (status)
             {
@@ -40,11 +37,14 @@ angular.module('mytcc')
                 }
                 case "1":
                 {
-                    console.log("opa, eh aluno?"+$scope.ehAluno);
                     if($scope.ehAluno)
                     {
                         $scope.ehRespondivel = true;
                         $scope.ehEnviavel = true;
+                    }
+                    else
+                    {   
+                        $scope.feedbackInvisivel = true;
                     }
 
                     $scope.status = "enviada";
@@ -67,7 +67,6 @@ angular.module('mytcc')
                     }
 
                     $scope.status = "agendada";
-
                     break;
                 }
                 case "3":
@@ -93,22 +92,22 @@ angular.module('mytcc')
             local: items.local,
             assunto: items.anotacoesAgendamento,
             feedback : items.feedback,
-            status : items.status
+            status : items.status,
+            valor: items.idProjeto
         }
     };   
     
     $scope.salvar = function()
     {
-        console.log($scope.form.orientacao);
-        if($scope.ehRespondivel)
+        if($scope.ehFeedback || $scope.ehRespondivel)
         {
-            console.log("eh respondivel");
-            enviarAgendamento();
-        }
-        else if($scope.ehFeedback)
-        {
-            console.log("eh feedback");
+            console.log("enviando resposta");
             enviarResposta();
+        }
+        else if($scope.ehEnviavel) 
+        {
+            console.log("enviando orientacao");
+            enviarAgendamento();
         }
     };
     
@@ -140,6 +139,7 @@ angular.module('mytcc')
         function(error)
         {
             $log.warn("houve erro na requisicao");
+            $scope.message = error.data.message;     
         });
     };
         
@@ -159,7 +159,7 @@ angular.module('mytcc')
         var date = data.date,
         mode = data.mode;
         return mode === 'day' && (date.getDay() === 0 || date.getDay() === 7);
-     }
+    };
 
     
     // arrumar a data máxima pra 60 dias 

@@ -66,6 +66,7 @@
                 </div>
             </div>
         </div>
+        <div class="text text-danger">{{ message }}</div>
     </form>
 </div>
 <div class="modal-footer" ng-if="ehEnviavel">

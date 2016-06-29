@@ -10,7 +10,7 @@
             <tr ng-repeat="orien in timeline">
                 <td> {{ orien.data | date:"dd/MM/yyyy" }}</td>
                 <td> {{ orien.data | date:"HH:mm" }}</td>
-                <td> {{ orien.statusOrientacao }}</td>
+                <td> <a ng-click= "modalAgendamento(orien)" class="">{{ orien.statusOrientacao }}</a></td>
             </tr>
     </table>
 </div>
