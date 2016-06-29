@@ -18,11 +18,8 @@ class Home extends CI_Controller
     
     function index()
     {
-        $this->load->view('includes/header');
-        $this->load->view('home/main');
-		$this->load->view('includes/body');
-	    $this->load->view('includes/footer');
-    }
+    	$this->load->view('home/home');
+	}
 	    
     function testarSession(){
 
@@ -45,9 +42,5 @@ class Home extends CI_Controller
 	function registrarProfessor()
 	{
 		$this->load->view('registros/modalRegistrarProfessor');
-	}
-	function apresentacao(){
-		$this->load->view('includes/header');
-		$this->load->view('home/home');
 	}
 }
