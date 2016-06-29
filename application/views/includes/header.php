@@ -42,11 +42,13 @@
 
 <script src="<?php echo base_url("/assets/angularjs/app.js") ?>"></script>
 <script src="<?php echo base_url("/assets/angularjs/config.js") ?>"></script>
+<script src="<?php echo base_url("/assets/angularjs/services/url.js") ?>"></script>
 
 <script src="<?php echo base_url("/assets/angularjs/factories/areaFactory.js") ?>"></script>
 <script src="<?php echo base_url("/assets/angularjs/factories/orientacaoFactory.js") ?>"></script>
 <script src="<?php echo base_url("/assets/angularjs/factories/loginFactory.js") ?>"></script>
 <script src="<?php echo base_url("/assets/angularjs/factories/projetoFactory.js") ?>"></script>
+<script src="<?php echo base_url("/assets/angularjs/factories/relatorioFactory.js") ?>"></script>
 
 <script src="<?php echo base_url("/assets/angularjs/controllers/alunoController.js") ?>"></script>
 <script src="<?php echo base_url("/assets/angularjs/controllers/solicitacaoController.js") ?>"></script>
@@ -56,12 +58,12 @@
 <script src="<?php echo base_url("/assets/angularjs/controllers/professorController.js") ?>"></script>
 <script src="<?php echo base_url("/assets/angularjs/controllers/projetoController.js") ?>"></script>
 <script src="<?php echo base_url("/assets/angularjs/controllers/orientacaoController.js") ?>"></script>
+<script src="<?php echo base_url("/assets/angularjs/controllers/relatorioController.js") ?>"></script>
 <script src="<?php echo base_url("/assets/angularjs/modalControllers/mAlunoController.js") ?>"></script>
 <script src="<?php echo base_url("/assets/angularjs/modalControllers/mProfessorController.js") ?>"></script>
 <script src="<?php echo base_url("/assets/angularjs/modalControllers/mUsuarioController.js") ?>"></script>
 <script src="<?php echo base_url("/assets/angularjs/modalControllers/mDetalheController.js") ?>"></script>
 <script src="<?php echo base_url("/assets/angularjs/modalControllers/mRespostaController.js") ?>"></script>
 <script src="<?php echo base_url("/assets/angularjs/modalControllers/mAgendarController.js") ?>"></script>
-<script src="<?php echo base_url("/assets/angularjs/services/url.js") ?>"></script>
 </head>
 <body>

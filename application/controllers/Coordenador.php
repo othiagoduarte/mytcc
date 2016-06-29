@@ -1,16 +1,19 @@
 <?php
-
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Coordenador extends CI_Controller {
-
-    function __construct() {
+class Coordenador extends CI_Controller 
+{
+    function __construct() 
+    {
         parent::__construct();
 
-        if (!$this->session->userdata('logado')) {
+        if (!$this->session->userdata('logado'))
+        {
             redirect('login');
         }
+
+        $this->load->model("projeto", "projetoDB",true);
     }
 
     function index() {
@@ -36,8 +39,15 @@ class Coordenador extends CI_Controller {
         $this->load->view('includes/prototipo_footer');
     }
 
-    public function listar() {
-        echo json_encode($this->model->get_all());
+    function orientacoes_por_area()
+    {
+        $this->load->view('includes/prototipo_header');
+        $this->load->view('coordenador_temp/orientacoes_por_area');
+        $this->load->view('includes/prototipo_footer');
     }
 
+    function relatorio_por_area()
+    {
+        echo json_encode($this->projetoDB->projetoPorArea(), JSON_NUMERIC_CHECK);
+    }
 }

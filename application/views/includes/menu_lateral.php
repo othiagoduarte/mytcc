@@ -11,6 +11,9 @@
                         <a ng-href="<?php echo base_url('coordenador/orientacoes_controle_vagas') ?>"><i class="fa fa-dashboard fa-fw"></i> Controle de vagas de Orientação</a>
                     </li>
                     <li>
+                        <a ng-href="<?php echo base_url('coordenador/orientacoes_por_area') ?>"><i class="fa fa-dashboard fa-fw"></i> Projeto por Areas</a>
+                    </li>
+                    <li>
                         <a ng-href="<?php echo base_url('areainteresses') ?>"><i class="fa fa-dashboard fa-fw"></i> Areas de Interesse</a>
                     </li>
                     <li>
@@ -40,7 +43,7 @@
                         <a ng-href="<?php echo base_url('projetos/listar') ?>"><i class="glyphicon glyphicon-pencil"></i> Gerência de solicitações</a>
                     </li>                            
                     <li>
-                        <a ng-href="<?php echo base_url('areainteresses/professor') ?>"><i class="fa fa-dashboard fa-fw"></i> �?reas de Interesse</a>
+                        <a ng-href="<?php echo base_url('areainteresses/professor') ?>"><i class="fa fa-dashboard fa-fw"></i> Areas de Interesse</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
