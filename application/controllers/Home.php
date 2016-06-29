@@ -46,4 +46,8 @@ class Home extends CI_Controller
 	{
 		$this->load->view('registros/modalRegistrarProfessor');
 	}
+	function apresentacao(){
+		$this->load->view('includes/header');
+		$this->load->view('home/home');
+	}
 }

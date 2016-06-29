@@ -78,12 +78,12 @@ $db['default'] = array(
 	'hostname' => 'localhost',
 	
 	//Config: Cristiano
-	'username' => 'root',
-	'password' => '',
+	//'username' => 'root',
+	//'password' => '',
 	
 	//Config: phpmyadmin default
-	//'username' => 'root',
-	//'password' => 'usbw',
+	'username' => 'root',
+	'password' => 'usbw',
 		
 	//Config: USB WEBSERVER
 	// 'username' => 'm@ster',
