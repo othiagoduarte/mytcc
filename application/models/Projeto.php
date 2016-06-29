@@ -77,9 +77,31 @@ class Projeto extends My_Model
 	public function get_by_aluno($idAluno, $status)
 	{
 		$this->conectarDB();
+		
 		$query = "SELECT * FROM 'projeto' WHERE 'status' = ".$status;
 		$this->db->query($query);
 		
-		return $this->db->get()->result(); 
+		return $this->db->get()->result();
 	}
+
+	public function increment($idProjeto)
+	{
+		$this->conectarDB();
+
+		$this->db->set('numOrientacoes', 'numOrientacoes + 1', FALSE);
+		$this->db->where('id', $idProjeto);
+
+		$this->db->update('projeto');
+	}
+
+	public function projetoPorArea()
+    {
+		$this->conectarDB();
+		$this->db->select("areainteresse.nomeArea as descricao, COUNT(idAreaInteresse) as total");
+		$this->db->from("projeto");
+		$this->db->join("areainteresse","projeto.idAreaInteresse = areainteresse.id");
+		$this->db->group_by("projeto.idAreaInteresse");
+        
+		return $this->db->get()->result();
+    }	
 }

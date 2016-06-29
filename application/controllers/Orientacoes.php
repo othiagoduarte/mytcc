@@ -75,9 +75,11 @@ class Orientacoes extends CI_Controller
 		$postData = file_get_contents("php://input");
 		$request = json_decode($postData, true);
 
-		echo "<pre>";
-		var_dump($request);
-		echo "</pre>";
+		// aumentar o contador de orientacoes confirmadas
+		if($request["status"] = "4")
+		{
+			$this->projetoDB->increment($request["valor"]);
+		}
 
 		$where = array('id'=>$request['idProjeto']);
         $data = array('status'=>$request['status'], 'feedback'=>$request['feedback']);       
