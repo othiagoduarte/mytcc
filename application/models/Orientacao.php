@@ -133,6 +133,7 @@ class Orientacao extends My_Model
 		$this->idProjeto = $row['idProjeto'];
 		$this->datahora = $datetime;
 		$this->anotacoesAgendamento = $row['assunto'];
+		$this->feedback = $row['feedback'];
 		$this->local = $row['local'];
 		$this->status = $statusId;
 	} 

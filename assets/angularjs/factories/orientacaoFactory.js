@@ -29,9 +29,9 @@ angular.module('mytcc')
         return $http.post(url+controller+"registrar", orientacao);
     };
 
-    orientacaoFactory.responder = function(orientacao)
+    orientacaoFactory.atualizar = function(orientacao)
     {
-        return $http.post(url+controller+"responder", orientacao);
+        return $http.post(url+controller+"atualizar", orientacao);
     };
     
     return orientacaoFactory;
